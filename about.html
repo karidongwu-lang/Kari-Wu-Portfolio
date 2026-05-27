@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Kari Wu</title>
+  <meta name="description" content="About Kari Wu — BFA Design student at USC, community builder, and multidisciplinary creative." />
+  <meta property="og:title"       content="About — Kari Wu" />
+  <meta property="og:description" content="About Kari Wu — BFA Design student at USC, community builder, and multidisciplinary creative." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/nav.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .about-page {
+      flex: 1;
+      min-height: 0;
+      padding-top: var(--space-8);
+      padding-bottom: var(--space-4);
+      overflow: hidden;
+    }
+
+    #footer-placeholder {
+      flex-shrink: 0;
+    }
+
+    .site-footer {
+      margin-top: 0;
+    }
+
+    /* ── Two-column layout ───────────────────────────────────────────────── */
+
+    .about-cols {
+      display: grid;
+      grid-template-columns: 1fr 46%;
+      gap: var(--space-16);
+      align-items: start;
+      width: 100%;
+    }
+
+    /* ── Left: text ──────────────────────────────────────────────────────── */
+
+    .about-text {
+      max-width: 480px;
+    }
+
+    .about-greeting {
+      font-family: 'Nothing You Could Do', cursive;
+      font-size: clamp(1.2rem, 2.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--color-accent);
+      white-space: nowrap;
+      line-height: 1.2;
+      margin-bottom: var(--space-12);
+    }
+
+    .about-bio p {
+      font-size: 0.78rem;
+      line-height: 1.75;
+      color: var(--color-ink);
+    }
+
+    .about-bio p + p {
+      margin-top: var(--space-4);
+    }
+
+    .about-section {
+      margin-top: var(--space-8);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .about-section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .about-contact-note {
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+
+    .about-contact-note a {
+      color: var(--color-ink);
+      border-bottom: 1px solid var(--color-border);
+      transition: color var(--trans-fast), border-color var(--trans-fast);
+    }
+
+    .about-contact-note a:hover {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2vw, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      transition: color var(--trans-fast);
+      margin-bottom: var(--space-4);
+    }
+
+    .contact-email:hover { color: var(--color-accent); }
+
+    .social-links {
+      display: flex;
+      gap: var(--space-6);
+    }
+
+    .social-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      transition: color var(--trans-fast);
+    }
+
+    .social-link:hover { color: var(--color-ink); }
+
+    /* ── Right: horizontal image strip ──────────────────────────────────── */
+
+    .about-images-wrap {
+      overflow: hidden;
+      width: 100%;
+      padding-bottom: var(--space-8);
+      align-self: center;
+    }
+
+    .about-img-strip {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      will-change: transform;
+    }
+
+    .about-img-strip img {
+      flex-shrink: 0;
+      width: calc(50% - 5px);
+      height: auto;
+      display: block;
+    }
+
+    .about-img-strip .about-img-doodle {
+      width: calc((50% - 5px) * 1.2);
+      align-self: flex-end;
+    }
+
+    /* ── Responsive: mobile swipe ────────────────────────────────────────── */
+
+    @media (max-width: 860px) {
+      body { overflow: auto; height: auto; }
+
+      .about-page {
+        height: auto;
+        margin-top: 0;
+        padding: calc(var(--nav-height) + var(--space-8)) 0 var(--space-16);
+        align-items: start;
+      }
+
+      .about-cols { grid-template-columns: 1fr; }
+
+      .about-images-wrap {
+        order: -1;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .about-img-strip {
+        transform: none !important;
+      }
+
+      .about-img-strip img {
+        width: 80vw;
+        scroll-snap-align: start;
+      }
+
+      .about-img-strip .about-img-doodle {
+        width: calc(80vw * 1.2);
+      }
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <main class="about-page">
+    <div class="container">
+      <h1 class="about-greeting reveal">hello! i'm kari, nice to meet you :)</h1>
+      <div class="about-cols">
+
+        <!-- ── Left: text ──────────────────────────────────────────────────── -->
+        <div class="about-text">
+
+          <div class="about-bio reveal">
+            <p>I'm a designer and illustrator drawn to the space between visual storytelling and product design. My work began with art, music, and making things for the people around me.</p>
+
+            <p>Since then, I've been constantly seeking out new experiences to learn from and new skills to refine — from design and entrepreneurship to teaching, making, and building.</p>
+
+            <p>My practice focuses on creating digital experiences that feel intuitive, thoughtful, and human. I care about beautiful details, but also the thinking behind them: understanding how people move through systems, simplifying complexity, and shaping ideas into experiences people can connect with.</p>
+
+            <p>I may be a designer, but I'm also a piercing apprentice, an art teacher, and a cafe hopper. If any of those interest you, I'd love to chat — especially over coffee :)</p>
+          </div>
+
+          <div class="about-section reveal">
+            <p class="about-contact-note">Say hello on <a href="https://www.linkedin.com/in/kari-wu-a3a1a4380/" target="_blank" rel="noopener">LinkedIn</a> or <a href="mailto:kdwu@usc.edu">email me</a></p>
+          </div>
+
+        </div>
+
+        <!-- ── Right: image strip driven by wheel ──────────────────────────── -->
+        <div class="about-images-wrap" id="about-images-wrap">
+          <div class="about-img-strip" id="about-img-strip">
+            <img src="images/about/karipic.JPG"      alt="Kari Wu" />
+            <img src="images/about/IMG_3559 1.jpg"   alt="Kari Wu" />
+            <img src="images/about/IMG_7701 1.jpg"   alt="Kari Wu" />
+            <img src="images/about/IMG_8396 2 1.jpg" alt="Kari Wu" />
+            <img src="images/doodles/afterimagedoodle.png" alt="" class="about-img-doodle" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/projects.js"></script>
+  <script src="js/art-data.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function initWheelScroll() {
+      var wrap  = document.getElementById('about-images-wrap');
+      var strip = document.getElementById('about-img-strip');
+      if (!wrap || !strip) return;
+
+      /* Only run on non-touch layouts */
+      if (window.innerWidth <= 860) return;
+
+      var targetX  = 0;
+      var currentX = 0;
+      var rafId    = null;
+
+      function getMaxShift() {
+        var imgs = strip.querySelectorAll('img');
+        if (!imgs.length) return 0;
+        return (imgs.length - 1) * (imgs[0].offsetWidth + 10);
+      }
+
+      /* Wheel drives the target position */
+      window.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        var max = getMaxShift();
+        targetX = Math.max(0, Math.min(max, targetX + e.deltaY * 0.8));
+        if (!rafId) rafId = requestAnimationFrame(animate);
+      }, { passive: false });
+
+      /* Smooth lerp toward target */
+      function animate() {
+        currentX += (targetX - currentX) * 0.12;
+        strip.style.transform = 'translateX(' + (-currentX) + 'px)';
+
+        if (Math.abs(targetX - currentX) > 0.2) {
+          rafId = requestAnimationFrame(animate);
+        } else {
+          currentX = targetX;
+          strip.style.transform = 'translateX(' + (-currentX) + 'px)';
+          rafId = null;
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initWheelScroll);
+  </script>
+</body>
+</html>

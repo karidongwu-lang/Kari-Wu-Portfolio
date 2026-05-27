@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art — Kari Wu</title>
+  <meta name="description" content="Illustrations and personal art by Kari Wu — Scholastic Award winner and public artist." />
+  <meta property="og:title"       content="Art — Kari Wu" />
+  <meta property="og:description" content="Illustrations and personal art by Kari Wu — Scholastic Award winner and public artist." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/nav.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <link rel="stylesheet" href="styles/cards.css" />
+
+  <style>
+    .art-page-header {
+      padding-top: var(--space-6);
+      padding-bottom: var(--space-12);
+    }
+
+    .art-page-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--color-muted);
+      margin-bottom: var(--space-6);
+    }
+
+    .art-page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    .art-section {
+      padding-bottom: var(--space-32);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <main>
+    <div class="container">
+
+      <header class="art-page-header reveal">
+        <p class="art-page-label">( art )</p>
+        <h1>my illustrations and experiments</h1>
+      </header>
+
+      <section class="art-section">
+        <div class="art-grid reveal-stagger" id="art-grid"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+    <button class="lightbox-close" id="lb-close" aria-label="Close lightbox">✕</button>
+    <button class="lightbox-arrow lightbox-arrow--prev" id="lb-prev" aria-label="Previous image">←</button>
+    <button class="lightbox-arrow lightbox-arrow--next" id="lb-next" aria-label="Next image">→</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lb-img" src="" alt="" />
+      <div class="lightbox-caption">
+        <p class="lightbox-title" id="lb-title"></p>
+        <p class="lightbox-meta"  id="lb-meta"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- ── Scripts ─────────────────────────────────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/roughjs/bundled/rough.min.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/art-data.js"></script>
+  <script src="js/rough-accents.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    var currentIndex = 0;
+    var pieces = [];
+
+    /* ── Render gallery ── */
+    function renderArt() {
+      var grid = document.getElementById('art-grid');
+      if (!grid || !window.ART_PIECES) return;
+
+      pieces = window.ART_PIECES;
+
+      pieces.forEach(function (piece, i) {
+        var tile = document.createElement('div');
+        tile.className = 'art-tile sketch-hover';
+        tile.dataset.index = i;
+        tile.setAttribute('role', 'button');
+        tile.setAttribute('tabindex', '0');
+        tile.setAttribute('aria-label', 'View ' + piece.title);
+
+        tile.innerHTML =
+          '<img src="' + piece.filename + '" alt="' + piece.title + '" loading="lazy" />' +
+          '<div class="art-tile__overlay">' +
+            '<p class="art-tile__title">' + piece.title + '</p>' +
+            '<p class="art-tile__meta">' + piece.medium + ' · ' + piece.year + '</p>' +
+          '</div>';
+
+        tile.addEventListener('click', function () {
+          openLightbox(i);
+        });
+
+        tile.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(i);
+          }
+        });
+
+        grid.appendChild(tile);
+      });
+
+      document.fonts.ready.then(function () {
+        if (typeof initAccents !== 'undefined') initAccents();
+      });
+    }
+
+    /* ── Lightbox ── */
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lb-close').focus();
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightbox() {
+      var piece = pieces[currentIndex];
+      if (!piece) return;
+
+      var img = document.getElementById('lb-img');
+      img.classList.remove('lightbox-img');
+      void img.offsetWidth; /* reflow to restart animation */
+      img.classList.add('lightbox-img');
+
+      img.src             = piece.filename;
+      img.alt             = piece.title;
+      document.getElementById('lb-title').textContent = piece.title;
+      document.getElementById('lb-meta').textContent  = piece.medium + ' · ' + piece.year;
+    }
+
+    function prevPiece() {
+      currentIndex = (currentIndex - 1 + pieces.length) % pieces.length;
+      updateLightbox();
+    }
+
+    function nextPiece() {
+      currentIndex = (currentIndex + 1) % pieces.length;
+      updateLightbox();
+    }
+
+    /* ── Event wiring ── */
+    document.addEventListener('DOMContentLoaded', function () {
+      renderArt();
+
+      document.getElementById('lb-close').addEventListener('click', closeLightbox);
+      document.getElementById('lb-prev').addEventListener('click', prevPiece);
+      document.getElementById('lb-next').addEventListener('click', nextPiece);
+
+      /* Close on overlay click */
+      document.getElementById('lightbox').addEventListener('click', function (e) {
+        if (e.target === this) closeLightbox();
+      });
+
+      /* Keyboard navigation */
+      document.addEventListener('keydown', function (e) {
+        var lb = document.getElementById('lightbox');
+        if (!lb.classList.contains('is-open')) return;
+
+        if (e.key === 'ArrowLeft')  prevPiece();
+        if (e.key === 'ArrowRight') nextPiece();
+        if (e.key === 'Escape')     closeLightbox();
+      });
+    });
+  </script>
+</body>
+</html>

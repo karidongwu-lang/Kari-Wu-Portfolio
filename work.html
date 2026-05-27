@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Kari Wu</title>
+  <meta name="description" content="Selected work by Kari Wu — UI projects, product design, and branding concepts." />
+  <meta property="og:title"       content="Work — Kari Wu" />
+  <meta property="og:description" content="Selected work by Kari Wu — UI projects, product design, and branding concepts." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/nav.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <link rel="stylesheet" href="styles/cards.css" />
+
+  <style>
+    .work-page-header {
+      padding-block: var(--space-16) var(--space-8);
+    }
+
+    .work-page-header h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1;
+    }
+
+    .work-page-header p {
+      color: var(--color-muted);
+      font-style: italic;
+      margin-top: var(--space-3);
+      max-width: 480px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <main>
+    <div class="container">
+
+      <!-- ── Page Header ──────────────────────────────────────────────────── -->
+      <header class="work-page-header reveal">
+        <h1 class="sketch-underline">Work</h1>
+        <p>UI design, product design, and branding projects from 2021 to present.</p>
+      </header>
+
+      <!-- ── Filter Bar ────────────────────────────────────────────────────── -->
+      <div class="filter-bar reveal" id="filter-bar">
+        <button class="filter-btn active sketch-underline" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ui-projects">UI Projects</button>
+        <button class="filter-btn" data-filter="product-design">Product Design</button>
+        <button class="filter-btn" data-filter="branding-concepts">Branding Concepts</button>
+      </div>
+
+      <!-- ── Project Grid ──────────────────────────────────────────────────── -->
+      <div class="work-grid reveal-stagger" id="work-grid"></div>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- ── Scripts ─────────────────────────────────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/roughjs/bundled/rough.min.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/art-data.js"></script>
+  <script src="js/rough-accents.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    var activeFilter = 'all';
+
+    function renderWorkGrid(filter) {
+      var grid = document.getElementById('work-grid');
+      if (!grid || !window.PROJECTS) return;
+
+      grid.innerHTML = '';
+
+      var projects = filter === 'all'
+        ? window.PROJECTS
+        : window.PROJECTS.filter(function (p) { return p.category === filter; });
+
+      projects.forEach(function (p, i) {
+        var wrap = document.createElement('div');
+        wrap.className = 'reveal';
+        wrap.style.transitionDelay = (i % 6 * 60) + 'ms';
+
+        var card = document.createElement('a');
+        card.href = 'case-study.html?id=' + p.id;
+        card.className = 'card card-tilt sketch-hover';
+
+        card.innerHTML =
+          '<div class="card__thumbnail-wrap">' +
+            '<img class="card__thumbnail" src="' + p.thumbnailImage + '" alt="' + p.title + '" loading="lazy" />' +
+          '</div>' +
+          '<div class="card__info">' +
+            '<div class="card__meta">' +
+              '<span>' + p.year + '</span>' +
+              '<span class="card__meta-dot"></span>' +
+              '<span>' + p.duration + '</span>' +
+            '</div>' +
+            '<h3 class="card__title">' + p.title + '</h3>' +
+            '<p class="card__blurb">' + p.blurb + '</p>' +
+          '</div>';
+
+        wrap.appendChild(card);
+        grid.appendChild(wrap);
+      });
+
+      /* Trigger reveal for newly added elements */
+      requestAnimationFrame(function () {
+        document.querySelectorAll('#work-grid .reveal').forEach(function (el) {
+          el.classList.add('is-revealed');
+        });
+        document.fonts.ready.then(function () {
+          if (typeof initAccents !== 'undefined') initAccents();
+        });
+      });
+    }
+
+    function initFilters() {
+      var btns = document.querySelectorAll('.filter-btn');
+
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          btns.forEach(function (b) {
+            b.classList.remove('active');
+            /* clear sketch-underline canvas */
+            var c = b.querySelector('canvas.rough-underline');
+            if (c) c.remove();
+          });
+
+          btn.classList.add('active');
+          activeFilter = btn.dataset.filter;
+          renderWorkGrid(activeFilter);
+
+          /* Redraw underline on active button */
+          document.fonts.ready.then(function () {
+            if (typeof drawUnderline !== 'undefined') drawUnderline(btn);
+          });
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderWorkGrid('all');
+      initFilters();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Case Study — Kari Wu</title>
+  <meta name="description"       id="page-desc"    content="Case study by Kari Wu — UX Designer." />
+  <meta property="og:title"      id="page-og-title" content="Case Study — Kari Wu" />
+  <meta property="og:description" id="page-og-desc" content="Case study by Kari Wu — UX Designer." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/nav.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <link rel="stylesheet" href="styles/cards.css" />
+  <link rel="stylesheet" href="styles/case-study.css" />
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <main id="cs-main">
+    <!-- Rendered dynamically by JS below -->
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- ── Scripts ─────────────────────────────────────────────────────────── -->
+  <script src="js/projects.js"></script>
+  <script src="js/art-data.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    function esc(str) {
+      var d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function renderCaseStudy(p) {
+      /* Update meta */
+      document.getElementById('page-title').textContent      = p.title + ' — Kari Wu';
+      document.getElementById('page-desc').content           = p.title + ': ' + p.blurb;
+      document.getElementById('page-og-title').content       = p.title + ' — Kari Wu';
+      document.getElementById('page-og-desc').content        = p.title + ': ' + p.blurb;
+
+      var s = p.sections || {};
+      var skillsStr = (p.skills || []).join(', ');
+      var toolsStr  = (p.tools  || []).join(', ');
+
+      /* ── Header ── */
+      var headerHTML =
+        '<div class="container">' +
+          '<header class="cs-header">' +
+            '<h1 class="cs-title">' + esc(p.title) + '</h1>' +
+            '<div class="cs-badges">' +
+              '<div class="cs-badge"><span class="cs-badge__label">Role</span><span class="cs-badge__value">' + esc(p.role) + '</span></div>' +
+              '<div class="cs-badge"><span class="cs-badge__label">Timeline</span><span class="cs-badge__value">' + esc(p.timeline) + '</span></div>' +
+              '<div class="cs-badge"><span class="cs-badge__label">Skills</span><span class="cs-badge__value">' + esc(skillsStr) + '</span></div>' +
+              '<div class="cs-badge"><span class="cs-badge__label">Tools</span><span class="cs-badge__value">' + esc(toolsStr) + '</span></div>' +
+            '</div>' +
+          '</header>' +
+        '</div>';
+
+      /* ── Hero Image ── */
+      var heroHTML =
+        '<img class="cs-hero-image" src="' + p.heroImage + '" alt="' + esc(p.title) + ' hero" />';
+
+      /* ── Content Sections ── */
+      function section(label, contentHTML) {
+        if (!contentHTML) return '';
+        return (
+          '<div class="cs-section reveal">' +
+            '<div class="cs-section__label">' + label + '</div>' +
+            '<div class="cs-section__content">' + contentHTML + '</div>' +
+          '</div>'
+        );
+      }
+
+      function paras(str) {
+        if (!str) return '';
+        return str.split('\n\n').map(function(p) {
+          var t = p.trim();
+          return t ? '<p>' + esc(t) + '</p>' : '';
+        }).join('');
+      }
+
+      var contextHTML  = paras(s.context);
+      var problemHTML  = paras(s.problem);
+      var solutionHTML = '';
+      if (s.solution) {
+        var solutionText = paras(s.solution);
+        if (p.demoVideo) {
+          solutionHTML =
+            '<div class="cs-solution-wrap">' +
+              solutionText +
+              '<video class="cs-solution-video" src="' + p.demoVideo + '" autoplay muted loop playsinline controls></video>' +
+            '</div>';
+        } else {
+          solutionHTML = solutionText;
+        }
+      }
+
+      var processHTML = '';
+      if (s.process) {
+        var imgGrid = '';
+        if (s.process.images && s.process.images.length) {
+          var gridClass = s.process.layout === 'row' ? 'cs-process-row cs-process-row--full' : 'cs-process-grid';
+          imgGrid = '<div class="' + gridClass + '">';
+          s.process.images.forEach(function (img) {
+            imgGrid +=
+              '<figure class="cs-process-item">' +
+                '<img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" />' +
+              '</figure>';
+          });
+          imgGrid += '</div>';
+        }
+        processHTML = paras(s.process.text) + imgGrid;
+      }
+
+      var resultsHTML = '';
+      if (s.results && s.results.length) {
+        resultsHTML = '<div class="cs-results-grid">';
+        s.results.forEach(function (r) {
+          resultsHTML +=
+            '<div class="cs-result-card">' +
+              '<img src="' + r.image + '" alt="' + esc(r.title) + '" loading="lazy" />' +
+              '<p class="cs-result-card__title">' + esc(r.title) + '</p>' +
+              '<p class="cs-result-card__caption">' + esc(r.caption) + '</p>' +
+            '</div>';
+        });
+        resultsHTML += '</div>';
+      }
+
+      var takeawaysHTML = paras(s.takeaways);
+
+      /* ── Multi-project sections (e.g. BOBA) ── */
+      function buildSections(proj, demoVideo) {
+        var pProblem = paras(proj.problem);
+        var pSolution = '';
+        if (proj.solution) {
+          var st = paras(proj.solution);
+          if (demoVideo) {
+            pSolution = '<div class="cs-solution-wrap">' + st +
+              '<video class="cs-solution-video" src="' + demoVideo + '" autoplay muted loop playsinline controls></video>' +
+              '</div>';
+          } else {
+            pSolution = st;
+          }
+        }
+        var pProcess = '';
+        if (proj.process) {
+          var brandHTML = '';
+          if (proj.process.brandImages && proj.process.brandImages.length) {
+            brandHTML = '<div class="cs-brand-images cs-process-row--full">';
+            proj.process.brandImages.forEach(function (img) {
+              brandHTML += '<figure class="cs-process-item">' +
+                '<img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" />' +
+                (img.caption ? '<figcaption class="cs-brand-item__label">' + esc(img.caption) + '</figcaption>' : '') +
+                '</figure>';
+            });
+            brandHTML += '</div>';
+          }
+          var colorHTML = '';
+          var screenGrid = '';
+          if (proj.process.screenImages && proj.process.screenImages.length) {
+            screenGrid = '<div class="cs-process-row cs-process-row--full">';
+            proj.process.screenImages.forEach(function (img) {
+              screenGrid += '<figure class="cs-process-item"><img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" /></figure>';
+            });
+            screenGrid += '</div>';
+          }
+          var grid = '';
+          if (proj.process.planningImage) {
+            grid += '<div class="cs-planning-wrap cs-process-row--full"><img src="' + proj.process.planningImage + '" alt="Planning" loading="lazy" /></div>';
+          }
+          if (proj.process.images && proj.process.images.length) {
+            var gridClass = proj.process.layout === 'row' ? 'cs-process-row cs-process-row--full' : 'cs-process-grid';
+            var imageGrid = '<div class="' + gridClass + '">';
+            proj.process.images.forEach(function (img) {
+              imageGrid += '<figure class="cs-process-item"><img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" /></figure>';
+            });
+            imageGrid += '</div>';
+            grid += imageGrid;
+          }
+          pProcess = paras(proj.process.text) + brandHTML + colorHTML + screenGrid + grid;
+        }
+        var pTakeaways = paras(proj.takeaways);
+        return section('Problem',   pProblem) +
+               section('Solution',  pSolution) +
+               section('Process',   pProcess) +
+               section('Takeaways', pTakeaways);
+      }
+
+      var contentHTML = '';
+      if (p.projects && p.projects.length) {
+        p.projects.forEach(function (proj, i) {
+          contentHTML +=
+            '<div class="cs-project-divider' + (i === 0 ? ' cs-project-divider--first' : '') + '">' +
+              '<span class="cs-project-label">' + esc(proj.label) + '</span>' +
+            '</div>' +
+            buildSections(proj, null);
+        });
+      } else {
+        var customSectionsHTML = '';
+        if (s.customSections && s.customSections.length) {
+          s.customSections.forEach(function (cs) {
+            var cls = cs.layout === 'row' ? 'cs-process-row' : 'cs-process-grid';
+            var imgsHTML = '<div class="' + cls + '">';
+            cs.images.forEach(function (img) {
+              imgsHTML += '<figure class="cs-process-item"><img src="' + img.src + '" alt="" loading="lazy" /></figure>';
+            });
+            imgsHTML += '</div>';
+            if (cs.subRow && cs.subRow.length) {
+              imgsHTML += '<div class="cs-process-grid-2">';
+              cs.subRow.forEach(function (img) {
+                imgsHTML += '<figure class="cs-process-item"><img src="' + img.src + '" alt="" loading="lazy" /></figure>';
+              });
+              imgsHTML += '</div>';
+            }
+            customSectionsHTML += section(cs.label, imgsHTML);
+          });
+        }
+
+        contentHTML =
+          section('Problem',   problemHTML)  +
+          section('Solution',  solutionHTML) +
+          (s.customSections && s.customSections.length ? customSectionsHTML : section('Process', processHTML)) +
+          section('Takeaways', takeawaysHTML);
+      }
+
+      /* ── Next Project ── */
+      var allProjects   = window.PROJECTS || [];
+      var currentIndex  = allProjects.findIndex(function (x) { return x.id === p.id; });
+      var nextProject   = allProjects[(currentIndex + 1) % allProjects.length];
+
+      var nextHTML = nextProject
+        ? '<div class="cs-next reveal">' +
+            '<div>' +
+              '<p class="cs-next__label">Next project</p>' +
+              '<a href="case-study.html?id=' + nextProject.id + '" class="cs-next__link">' +
+                esc(nextProject.title) +
+                '<span class="cs-next__arrow">↗</span>' +
+              '</a>' +
+            '</div>' +
+          '</div>'
+        : '';
+
+      var main = document.getElementById('cs-main');
+      main.innerHTML =
+        headerHTML +
+        heroHTML +
+        '<div class="container">' +
+          '<div class="cs-content">' +
+            section('Context', contextHTML) +
+            contentHTML +
+          '</div>' +
+          nextHTML +
+        '</div>';
+
+      /* Init accents after render */
+      document.fonts.ready.then(function () {
+        if (typeof initScrollReveal !== 'undefined') initScrollReveal();
+      });
+    }
+
+    function notFound() {
+      document.getElementById('cs-main').innerHTML =
+        '<div style="padding:var(--space-32) var(--container-padding);text-align:center;">' +
+          '<h1 style="font-family:var(--font-display);font-size:var(--size-xl);margin-bottom:var(--space-8);">Project not found.</h1>' +
+          '<a href="work.html" style="color:var(--color-accent);text-decoration:underline;">← Back to Work</a>' +
+        '</div>';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var params  = new URLSearchParams(window.location.search);
+      var id      = params.get('id');
+      var project = (window.PROJECTS || []).find(function (p) { return p.id === id; });
+
+      if (project) {
+        renderCaseStudy(project);
+      } else {
+        notFound();
+      }
+    });
+  </script>
+</body>
+</html>

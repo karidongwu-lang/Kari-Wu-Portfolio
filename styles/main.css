@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+/* ─── TOKENS ──────────────────────────────────────────────────────────────── */
+
+:root {
+  --color-bg:           #ffffff;
+  --color-ink:          #0f0f0f;
+  --color-accent:       #c8392b;
+  --color-accent-light: #fde8e7;
+  --color-muted:        #9a9690;
+  --color-border:       #e2dfd8;
+  --color-faint:        #f0ede7;
+  --color-overlay:      rgba(0, 0, 0, 0.88);
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Mono', monospace;
+  --font-mono:    'DM Mono', monospace;
+
+  --size-xs:   0.5rem;
+  --size-sm:   0.875rem;
+  --size-base: 1.125rem;
+  --size-md:   1.5rem;
+  --size-lg:   2.25rem;
+  --size-xl:   3.5rem;
+  --size-2xl:  5.5rem;
+  --size-hero: clamp(5rem, 15vw, 13rem);
+
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --nav-height:       96px;
+  --nav-height-small: 68px;
+
+  --radius-sm:   3px;
+  --radius-md:   6px;
+  --radius-full: 999px;
+
+  --trans-fast:   150ms ease;
+  --trans-normal: 200ms ease;
+  --trans-slow:   350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container:         1200px;
+  --container-padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* ─── RESET ───────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@media (pointer: coarse) {
+  body { cursor: auto; }
+}
+
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+@media (pointer: coarse) {
+  button { cursor: pointer; }
+}
+
+/* ─── CUSTOM CURSOR ───────────────────────────────────────────────────────── */
+
+@media (hover: hover) {
+  * { cursor: none !important; }
+}
+
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid #0f0f0f;
+  background: transparent;
+  opacity: 0;
+  will-change: transform;
+  transition:
+    width 0.15s ease-out,
+    height 0.15s ease-out,
+    background-color 0.15s ease-out,
+    border-color 0.15s ease-out,
+    border-radius 0.15s ease-out,
+    opacity 0.15s ease-out;
+}
+
+#cursor[data-state="hover"] {
+  width: 20px;
+  height: 20px;
+  background: #c8392b;
+  border-color: #c8392b;
+}
+
+#cursor[data-state="text"] {
+  width: 2px;
+  height: 28px;
+  background: #0f0f0f;
+  border-color: transparent;
+  border-radius: 2px;
+}
+
+/* ─── LAYOUT ──────────────────────────────────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+.section {
+  padding-block: var(--space-24);
+}
+
+/* ─── TYPOGRAPHY ──────────────────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--size-xl); }
+h2 { font-size: var(--size-lg); }
+h3 { font-size: var(--size-md); }
+h4 { font-size: var(--size-base); font-weight: 700; }
+
+p {
+  font-size: var(--size-base);
+  line-height: 1.75;
+  color: var(--color-ink);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-size: var(--size-hero);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.text-muted  { color: var(--color-muted); }
+.text-accent { color: var(--color-accent); }
+.text-small  { font-size: var(--size-sm); }
+.italic      { font-style: italic; }
+
+/* ─── SKETCH ACCENT WRAPPERS ─────────────────────────────────────────────── */
+
+.sketch-underline,
+.sketch-circle,
+.sketch-box,
+.sketch-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.sketch-underline canvas,
+.sketch-circle  canvas,
+.sketch-box     canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: visible;
+}
+
+.rough-hover-svg {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* ─── SECTION HEADINGS ───────────────────────────────────────────────────── */
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: var(--size-lg);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  margin-bottom: var(--space-12);
+}
+
+/* ─── FOOTER ──────────────────────────────────────────────────────────────── */
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-8);
+  margin-top: var(--space-32);
+}
+
+.site-footer .container {
+  max-width: none;
+  padding-inline:80px ;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.footer-logo {
+  height: 48px;
+  width: auto;
+  display: block;
+  opacity: 0.6;
+}
+
+.footer-copy {
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  line-height: 1;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.footer-link {
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  transition: color var(--trans-fast);
+}
+
+.footer-link:hover {
+  color: var(--color-ink);
+}
+
+/* ─── UTILITY ────────────────────────────────────────────────────────────── */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .section { padding-block: var(--space-16); }
+  h1       { font-size: var(--size-lg); }
+  h2       { font-size: var(--size-md); }
+}

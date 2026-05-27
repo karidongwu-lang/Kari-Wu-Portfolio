@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kari Wu — UX Designer & Artist</title>
+  <meta name="description" content="Kari Wu — UX Designer and artist. Portfolio of UI design, product design, branding, and illustration." />
+  <meta property="og:title"       content="Kari Wu — UX Designer & Artist" />
+  <meta property="og:description" content="Kari Wu — UX Designer and artist. Portfolio of UI design, product design, branding, and illustration." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/nav.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+
+  <style>
+    /* ─── HERO ───────────────────────────────────────────────────────────────── */
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      padding-top: calc(var(--nav-height) + var(--space-16));
+      padding-bottom: 180px;
+    }
+
+    .hero-line1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      max-width: 42vw;
+      opacity: 0;
+      animation: fadeIn 0.7s ease 0.1s forwards;
+    }
+
+    .hero-kari {
+      font-family: 'Nothing You Could Do', cursive;
+      color: var(--color-accent);
+      font-size: 1.15em;
+    }
+
+    .hero-line2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      max-width: 42vw;
+      margin-top: 0;
+      opacity: 0;
+      animation: fadeIn 0.7s ease 0.3s forwards;
+    }
+
+    .hero-doodle {
+      position: absolute;
+      right: 100px;
+      top: calc(var(--nav-height) + var(--space-12));
+      width: clamp(380px, 80vw, 820px);
+      aspect-ratio: 1920 / 1080;
+      pointer-events: none;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.5s forwards;
+    }
+
+    .hero-doodle > img:first-child {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* lightbulb overlay */
+    .hero-lightbulb {
+      position: absolute;
+      left: 79.88%;
+      top: 17.94%;
+      width: 7.23%;
+      height: auto;
+      pointer-events: all;
+      cursor: pointer;
+      transform-origin: center center;
+      transition: transform 0.25s ease;
+    }
+
+    .hero-lightbulb:hover {
+      transform: scale(1.18);
+    }
+    @media (max-width: 700px) {
+      .hero-doodle { display: none; }
+      .hero-line1, .hero-line2 { max-width: 100%; }
+    }
+
+    /* ─── DARK TOGGLE ────────────────────────────────────────────────────────── */
+
+    body.is-dark {
+      --color-bg:     #3c3a51;
+      --color-ink:    #f0ede7;
+      --color-muted:  #9a96b8;
+      --color-border: #504e68;
+      --color-faint:  #464460;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .hero-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      margin-top: var(--space-8);
+      opacity: 0;
+      animation: fadeIn 0.7s ease 0.8s forwards;
+    }
+
+    .hero-scroll-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    .hero-scroll-arrow {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      display: inline-block;
+      animation: scrollBounce 2s ease-in-out 1.5s infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(4px); }
+    }
+
+    /* ─── MARQUEE ────────────────────────────────────────────────────────────── */
+
+    .marquee-band {
+      overflow: hidden;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding-block: var(--space-3);
+      user-select: none;
+      margin-top: var(--space-16);
+    }
+
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      width: max-content;
+      animation: marqueeRoll 40s linear infinite;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    .marquee-item {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+      padding-inline: var(--space-4);
+      flex-shrink: 0;
+    }
+
+    .marquee-sep {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      padding-inline: var(--space-1);
+      font-size: 0.7rem;
+    }
+
+    @keyframes marqueeRoll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION LABEL ──────────────────────────────────────────────────────── */
+
+    .sec-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--space-8);
+      padding-top: var(--space-16);
+    }
+
+    /* ─── PROJECT LIST ───────────────────────────────────────────────────────── */
+
+    .proj-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proj-row {
+      display: flex;
+      align-items: stretch;
+      gap: var(--space-8);
+      padding: var(--space-12) 0;
+      border-top: 1px solid var(--color-border);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      z-index: 1;
+    }
+
+    .proj-row:hover {
+      z-index: 2;
+    }
+
+    .proj-row:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .proj-row-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3) 0;
+      align-items: start;
+      align-self: center;
+      min-width: 0;
+    }
+
+    .proj-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      padding-top: 0.35em;
+      grid-row: 1 / 3;
+      align-self: start;
+    }
+
+    .proj-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      transition: color 0.15s ease;
+    }
+
+    .proj-row:hover .proj-title { color: var(--color-accent); }
+
+    .proj-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .proj-year {
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+    }
+
+    .proj-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      border: 1px solid var(--color-border);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .proj-desc {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+      margin-top: var(--space-3);
+      max-width: 48ch;
+    }
+
+    .proj-thumb {
+      flex-shrink: 0;
+      width: 320px;
+      overflow: hidden;
+      background: var(--color-faint);
+      margin-block: calc(-1 * var(--space-12) + var(--space-3));
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .proj-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .proj-row:hover .proj-thumb { transform: scale(1.12); }
+    .proj-row:hover .proj-thumb img { transform: scale(1.0); }
+
+    /* Alternate: even rows flip thumb to left, arrow moves between thumb and text */
+    .proj-row:nth-child(even) .proj-thumb { order: -2; }
+    .proj-row:nth-child(even) .proj-arrow { order: -1; }
+
+    .proj-arrow {
+      font-size: 1rem;
+      color: var(--color-muted);
+      flex-shrink: 0;
+      align-self: flex-start;
+      transition: transform 0.2s ease, color 0.15s ease;
+    }
+
+    .proj-row:hover .proj-arrow {
+      transform: translate(3px, -3px);
+      color: var(--color-accent);
+    }
+
+    .proj-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .proj-row:hover .proj-bar { transform: scaleX(1); }
+
+    /* ─── ART / PLAY LIST ────────────────────────────────────────────────────── */
+
+    .play-section {
+      padding-bottom: var(--space-32);
+    }
+
+    .play-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-8);
+      padding: var(--space-12) 0;
+      border-top: 1px solid var(--color-border);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .play-row:last-child { border-bottom: 1px solid var(--color-border); }
+
+    .play-row-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: var(--space-2) var(--space-4);
+      align-items: center;
+      min-width: 0;
+    }
+
+    .play-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+    }
+
+    .play-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      transition: color 0.15s ease;
+    }
+
+    .play-row:hover .play-title { color: var(--color-accent); }
+
+    .play-medium {
+      grid-column: 2;
+      font-size: 0.65rem;
+      color: var(--color-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .play-thumb {
+      flex-shrink: 0;
+      width: 120px;
+      height: 84px;
+      overflow: hidden;
+      background: var(--color-faint);
+    }
+
+    .play-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .play-row:hover .play-thumb img { transform: scale(1.06); }
+
+    .play-arrow {
+      font-size: 1rem;
+      color: var(--color-muted);
+      flex-shrink: 0;
+      align-self: flex-start;
+      transition: transform 0.2s ease, color 0.15s ease;
+    }
+
+    .play-row:hover .play-arrow {
+      transform: translate(3px, -3px);
+      color: var(--color-accent);
+    }
+
+    .play-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .play-row:hover .play-bar { transform: scaleX(1); }
+
+    /* ─── VIEW ALL LINK ──────────────────────────────────────────────────────── */
+
+    .view-all-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-top: var(--space-6);
+      transition: color var(--trans-fast);
+    }
+
+    .view-all-link:hover { color: var(--color-ink); }
+
+    .view-all-link span {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .view-all-link:hover span { transform: translate(3px, -3px); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+
+    @media (max-width: 700px) {
+      .proj-desc { display: none; }
+      .proj-thumb { width: 140px; }
+      .play-thumb { width: 84px; height: 60px; }
+      .proj-row-body { grid-template-columns: 1.5rem 1fr; }
+      .play-row-body { grid-template-columns: 1.5rem 1fr; }
+      .proj-row:nth-child(even) .proj-thumb { order: unset; }
+    }
+
+    @media (max-width: 480px) {
+      .proj-thumb, .play-thumb { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <main>
+
+    <!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-line1">Hello! I'm <span class="hero-kari">Kari</span></p>
+        <p class="hero-line2">– a designer and illustrator<br>making digital spaces feel a<br>little more personal</p>
+        <div class="hero-scroll-hint">
+          <span class="hero-scroll-label">scroll for more :)</span>
+          <span class="hero-scroll-arrow">↓</span>
+        </div>
+        <div class="hero-doodle" aria-hidden="true">
+          <img src="images/doodles/frontpagedoodle.svg" alt="" />
+          <img src="images/doodles/lightbulb.svg" class="hero-lightbulb" id="lightbulb-btn" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MARQUEE ───────────────────────────────────────────────────────────── -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">ui/ux</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">illustration</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">product design</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">startups</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">branding</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">community</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">accessibility</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">public art</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">figma</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">usc '29</span><span class="marquee-sep">&middot;</span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee-item">ui/ux</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">illustration</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">product design</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">startups</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">branding</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">community</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">accessibility</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">public art</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">figma</span><span class="marquee-sep">&middot;</span>
+        <span class="marquee-item">usc '29</span><span class="marquee-sep">&middot;</span>
+      </div>
+    </div>
+
+    <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
+    <section id="work">
+      <div class="container">
+        <p class="sec-label reveal">(selected work)</p>
+        <div class="proj-list" id="proj-list"></div>
+        <a href="art.html" class="view-all-link">check out some of my art <span>&#8599;</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- ─── Scripts ──────────────────────────────────────────────────────────────── -->
+  <script src="js/projects.js"></script>
+  <script src="js/art-data.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    /* ── Category label ─────────────────────────────────────────────────────── */
+    function fmtCat(cat) {
+      if (cat === 'ui-projects')       return 'UI Design';
+      if (cat === 'product-design')    return 'Product Design';
+      if (cat === 'branding-concepts') return 'Branding';
+      return cat;
+    }
+
+    /* ── Render project list ────────────────────────────────────────────────── */
+    function renderProjects() {
+      var list = document.getElementById('proj-list');
+      if (!list || !window.PROJECTS) return;
+
+      var ids = ['previa', 'build-our-bridges', 'smart-pill-dispenser', '3miu', 'blink'];
+      var selected = ids.map(function (id) {
+        return window.PROJECTS.find(function (p) { return p.id === id; });
+      }).filter(Boolean);
+
+      selected.forEach(function (p, i) {
+        var row = document.createElement('a');
+        row.href      = 'case-study.html?id=' + p.id;
+        row.className = 'proj-row';
+        row.setAttribute('data-cursor', 'hover');
+
+        row.innerHTML =
+          '<div class="proj-row-body">' +
+            '<span class="proj-title">' + p.title + '</span>' +
+            '<div class="proj-meta">' +
+              '<span class="proj-year">' + p.year + '</span>' +
+              '<span class="proj-tag">' + fmtCat(p.category) + '</span>' +
+            '</div>' +
+            '<p class="proj-desc">' + (p.blurb || '') + '</p>' +
+          '</div>' +
+          '<div class="proj-thumb">' +
+            '<img src="' + p.thumbnailImage + '" alt="' + p.title + '" />' +
+          '</div>' +
+          '<span class="proj-arrow">&#8599;</span>' +
+          '<div class="proj-bar"></div>';
+
+        list.appendChild(row);
+      });
+    }
+
+    /* ── Render art/play list ───────────────────────────────────────────────── */
+    function renderPlay() {
+      var list = document.getElementById('play-list');
+      if (!list || !window.ART_PIECES) return;
+
+      window.ART_PIECES.slice(0, 2).forEach(function (a, i) {
+        var row = document.createElement('a');
+        row.href      = 'art.html';
+        row.className = 'play-row';
+        row.setAttribute('data-cursor', 'hover');
+
+        row.innerHTML =
+          '<div class="play-row-body">' +
+            '<span class="play-num">0' + (i + 1) + '</span>' +
+            '<span class="play-title">' + a.title + '</span>' +
+            '<span class="play-medium">' + a.medium + ' &middot; ' + a.year + '</span>' +
+          '</div>' +
+          '<div class="play-thumb">' +
+            '<img src="' + a.filename + '" alt="' + a.title + '" />' +
+          '</div>' +
+          '<span class="play-arrow">&#8599;</span>' +
+          '<div class="play-bar"></div>';
+
+        list.appendChild(row);
+      });
+    }
+
+    /* ── Boot ───────────────────────────────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function () {
+      renderProjects();
+      renderPlay();
+
+      document.getElementById('lightbulb-btn').addEventListener('click', function () {
+        document.body.classList.toggle('is-dark');
+      });
+    });
+  </script>
+</body>
+</html>
