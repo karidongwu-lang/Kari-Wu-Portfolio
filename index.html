@@ -104,11 +104,6 @@
     body.is-dark .hero-doodle       { display: none; }
     body.is-dark .hero-doodle-night { display: block; }
 
-    @keyframes lightbulb-pulse {
-      0%, 100% { transform: scale(1) rotate(-4deg); opacity: 1; }
-      50%       { transform: scale(1.18) rotate(4deg); opacity: 0.75; }
-    }
-
     /* lightbulb overlay — day */
     .hero-lightbulb {
       position: absolute;
@@ -119,7 +114,6 @@
       pointer-events: all;
       cursor: pointer;
       transform-origin: center center;
-      animation: lightbulb-pulse 2.2s ease-in-out infinite;
       transition: transform 0.25s ease;
     }
 
@@ -136,7 +130,6 @@
     }
 
     .hero-lightbulb:hover {
-      animation: none;
       transform: scale(1.1);
     }
 
@@ -541,11 +534,13 @@
       66%      { filter: url(#boil-a); }
     }
 
-    .hero-doodle > img:first-child {
+    .hero-doodle > img:first-child,
+    .hero-lightbulb {
       animation: boil-seed-1 0.5s steps(1) infinite;
     }
 
-    .hero-doodle-night > img:first-child {
+    .hero-doodle-night > img:first-child,
+    .hero-lightbulb-night {
       animation: boil-seed-2 0.5s steps(1) infinite;
     }
   </style>
