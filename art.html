@@ -155,44 +155,73 @@
       grid.innerHTML = '';
       pieces = data || [];
 
-      /* Determine column count from CSS */
       var colCount = window.innerWidth <= 480 ? 1 : window.innerWidth <= 960 ? 2 : 3;
 
-      /* Create column divs */
-      var cols = [];
-      for (var c = 0; c < colCount; c++) {
-        var col = document.createElement('div');
-        col.className = 'art-grid-col';
-        grid.appendChild(col);
-        cols.push(col);
-      }
-
-      /* Distribute tiles evenly across columns */
-      pieces.forEach(function (piece, i) {
+      /* Build tiles (hidden until placed) */
+      var tiles = pieces.map(function (piece, i) {
         var tile = document.createElement('div');
         tile.className = 'art-tile sketch-hover';
         tile.dataset.index = i;
         tile.setAttribute('role', 'button');
         tile.setAttribute('tabindex', '0');
         tile.setAttribute('aria-label', 'View ' + piece.title);
-
         tile.innerHTML =
-          '<img src="' + piece.filename + '" alt="' + piece.title + '" loading="lazy" />' +
+          '<img src="' + piece.filename + '" alt="' + piece.title + '" loading="eager" />' +
           '<div class="art-tile__overlay">' +
             '<p class="art-tile__title">' + piece.title + '</p>' +
             '<p class="art-tile__meta">' + piece.medium + ' · ' + piece.year + '</p>' +
           '</div>';
-
         tile.addEventListener('click', function () { openLightbox(i); });
         tile.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
         });
-
-        cols[i % colCount].appendChild(tile);
+        return tile;
       });
 
-      document.fonts.ready.then(function () {
-        if (typeof initAccents !== 'undefined') initAccents();
+      /* Preload all image dimensions, then place using shortest-column-first */
+      var colWidth = (grid.offsetWidth - (colCount - 1) * 16) / colCount;
+      var loaded = 0;
+      var ratios = new Array(pieces.length).fill(1);
+
+      function place() {
+        grid.innerHTML = '';
+        var cols = [];
+        var heights = [];
+        for (var c = 0; c < colCount; c++) {
+          var col = document.createElement('div');
+          col.className = 'art-grid-col';
+          grid.appendChild(col);
+          cols.push(col);
+          heights.push(0);
+        }
+
+        tiles.forEach(function (tile, i) {
+          /* Find shortest column */
+          var shortest = 0;
+          for (var c = 1; c < colCount; c++) {
+            if (heights[c] < heights[shortest]) shortest = c;
+          }
+          cols[shortest].appendChild(tile);
+          heights[shortest] += colWidth * ratios[i] + 16; /* image height + gap */
+        });
+
+        document.fonts.ready.then(function () {
+          if (typeof initAccents !== 'undefined') initAccents();
+        });
+      }
+
+      if (pieces.length === 0) { place(); return; }
+
+      pieces.forEach(function (piece, i) {
+        var img = new Image();
+        img.onload = img.onerror = function () {
+          if (img.naturalWidth && img.naturalHeight) {
+            ratios[i] = img.naturalHeight / img.naturalWidth;
+          }
+          loaded++;
+          if (loaded === pieces.length) place();
+        };
+        img.src = piece.filename;
       });
     }
 
