@@ -752,6 +752,8 @@
         el.addEventListener('mouseenter', function () {
           el.style.display = 'inline-block';
           el.style.width = el.offsetWidth + 'px';
+          idx = (idx + 1) % fonts.length;
+          el.style.fontFamily = fonts[idx];
           interval = setInterval(function () {
             idx = (idx + 1) % fonts.length;
             el.style.fontFamily = fonts[idx];
