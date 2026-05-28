@@ -16,8 +16,8 @@ window.PROJECTS = [
     timeline: '12 weeks',
     skills: ['User Research', 'Interaction Design', 'Prototyping', 'Systems Thinking'],
     tools: ['Figma', 'Claude Code', 'VS Code'],
-    thumbnailImage: 'images/work/UI projects/Preva/prevabanner.jpg',
-    heroImage:      'images/work/UI projects/Preva/prevabanner.jpg',
+    thumbnailImage: 'images/work/UI projects/Preva/prevabanner.webp',
+    heroImage:      'images/work/UI projects/Preva/prevabanner.webp',
     demoVideo:      'images/work/UI projects/Preva/prevademo.mp4',
     sections: {
       context:
@@ -31,8 +31,8 @@ window.PROJECTS = [
           'Discovery → validation → pilot.\n\nCustomer discovery → identified prior auth as the core pain point → validated with clinic owners → built browser-agent architecture to avoid lengthy EMR integration → launched first pilot with Vargo Physical Therapy, with 4 partner clinics and 37 PTs onboarded.',
         layout: 'row',
         images: [
-          { src: 'images/work/UI projects/Preva/clinicflow.jpg' },
-          { src: 'images/work/UI projects/Preva/agentflow.jpg' }
+          { src: 'images/work/UI projects/Preva/clinicflow.webp' },
+          { src: 'images/work/UI projects/Preva/agentflow.webp' }
         ]
       },
       results: [
@@ -42,7 +42,7 @@ window.PROJECTS = [
       ],
       takeaways:
         'Designing for async, agent-driven workflows required rethinking visibility and failure states from the ground up.\n\nDesigning for a browser-agent workflow introduced constraints I hadn\'t encountered before. Unlike typical SaaS products, Previa\'s core actions happen asynchronously in the background — which forced me to rethink how to surface status, progress, and errors to users who aren\'t watching the agent work in real time. A lot of my early wireframes assumed too much user visibility into the process, and I had to strip those back significantly.\n\nThe other challenge was designing around incomplete data. Because the agent sometimes hits missing clinical information mid-submission, I had to map out every failure state and design an interruption flow that pulled the therapist in at exactly the right moment — specific enough to be actionable, without overwhelming someone mid-session with a patient. Getting that interaction right required diagramming the full agent decision tree before touching any UI.',
-      takeawayImage: 'images/work/UI projects/Preva/demoday.jpg',
+      takeawayImage: 'images/work/UI projects/Preva/demoday.webp',
       takeawayImageCaption: 'shoutout to my co-founder marcus'
     }
   },
@@ -61,8 +61,8 @@ window.PROJECTS = [
     timeline: '3 weeks',
     skills: ['3D Product Design', 'UX Research', 'Caregiver-Centered Design', 'Prototyping'],
     tools: ['CAD / 3D Modeling', 'Figma', 'Physical Prototyping'],
-    thumbnailImage: 'images/work/Product Design/pillbanner.jpg',
-    heroImage:      'images/work/Product Design/pillbanner.jpg',
+    thumbnailImage: 'images/work/Product Design/pillbanner.webp',
+    heroImage:      'images/work/Product Design/pillbanner.webp',
     sections: {
       context:
         'A 7-week human-centered design project spanning research, industrial design, and prototyping.\n\nInspired by watching my grandmother struggle with pill bottles and rely on her daughter for weekly sorting, I designed a smart pill dispenser for older adults and their caregivers — built from scratch using interviews, paper prototyping, and 3D modeling in Rhino.',
@@ -79,23 +79,23 @@ window.PROJECTS = [
           label: 'Iteration',
           layout: 'row',
           images: [
-            { src: 'images/work/Product Design/pilliteration.jpg' }
+            { src: 'images/work/Product Design/pilliteration.webp' }
           ]
         },
         {
           label: 'Prototypes',
           layout: 'row',
           images: [
-            { src: 'images/work/Product Design/pillv1.jpg', caption: 'Prototype 1' },
-            { src: 'images/work/Product Design/pillv2.jpg', caption: 'Prototype 2' },
-            { src: 'images/work/Product Design/pillv3.jpg', caption: 'Prototype 3' }
+            { src: 'images/work/Product Design/pillv1.webp', caption: 'Prototype 1' },
+            { src: 'images/work/Product Design/pillv2.webp', caption: 'Prototype 2' },
+            { src: 'images/work/Product Design/pillv3.webp', caption: 'Prototype 3' }
           ]
         },
         {
           label: 'Final',
           layout: 'row',
           images: [
-            { src: 'images/work/Product Design/pillfinal.jpg' }
+            { src: 'images/work/Product Design/pillfinal.webp' }
           ]
         }
       ],
@@ -123,8 +123,8 @@ window.PROJECTS = [
     timeline: '4 weeks',
     skills: ['Brand Identity', 'Curriculum Design', 'Art Direction', 'Community Engagement'],
     tools: ['Figma', 'Illustrator', 'Photoshop'],
-    thumbnailImage: 'images/work/UI projects/BOBA/bobabanner.jpg',
-    heroImage:      'images/work/UI projects/BOBA/bobabanner.jpg',
+    thumbnailImage: 'images/work/UI projects/BOBA/bobabanner.webp',
+    heroImage:      'images/work/UI projects/BOBA/bobabanner.webp',
     sections: {
       context: 'Two separate design projects for a nonprofit I co-lead.\n\nAs co-president of Build Our Bridges Tutoring — a global nonprofit partnering with care centers worldwide to deliver supplies and lessons — I identified two distinct gaps in our digital presence and tackled them as separate projects over the course of a semester.'
     },
@@ -135,19 +135,19 @@ window.PROJECTS = [
         solution: 'A dedicated app letting parents book sessions, browse tutor profiles, contact staff, and track progress — all from their phone.',
         process: {
           layout: 'row',
-          planningImage: 'images/work/UI projects/BOBA/BOBAmobile/BOBAplanning.JPEG',
+          planningImage: 'images/work/UI projects/BOBA/BOBAmobile/BOBAplanning.webp',
           text: 'Insider intuition backed by user research.\n\nRunning the org gave me a strong baseline, supplemented by interviews and observation to catch assumptions — especially around first-time users navigating the booking flow cold.',
           images: [
-            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-1.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-2.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-3.png', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-4.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-5.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-6.jpg', caption: '' }
+            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-1.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-2.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-3.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-4.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-5.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-6.webp', caption: '' }
           ]
         },
         results: [
-          { image: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-2.jpg', title: 'Booking + Progress Tracking', caption: 'Parents book sessions, browse tutors, and track their child\'s progress from their phone.' }
+          { image: 'images/work/UI projects/BOBA/BOBAmobile/BOBA-2.webp', title: 'Booking + Progress Tracking', caption: 'Parents book sessions, browse tutors, and track their child\'s progress from their phone.' }
         ],
         takeaways: 'Designing from the inside accelerates decisions, but demands extra scrutiny.\n\nDeep organizational context sped up early decisions but made it harder to spot where I was designing for myself rather than a parent encountering the platform for the first time. Formal research was essential for catching those blind spots.'
       },
@@ -158,15 +158,15 @@ window.PROJECTS = [
         process: {
           text: 'Heuristic evaluation informed by co-president context.\n\nWith firsthand knowledge of where users got stuck, I conducted a structured audit of the existing site before moving into redesign, using both my organizational perspective and user feedback to prioritize changes.',
           brandImages: [
-            { src: 'images/work/UI projects/BOBA/BOBAold.png', caption: 'Original' },
-            { src: 'images/work/UI projects/BOBA/BOBAlogo.png',    caption: 'Redesign' }
+            { src: 'images/work/UI projects/BOBA/BOBAold.webp', caption: 'Original' },
+            { src: 'images/work/UI projects/BOBA/BOBAlogo.webp',    caption: 'Redesign' }
           ],
           screenImages: [
-            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-1.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-2.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-4.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-5.jpg', caption: '' },
-            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-6.jpg', caption: '' }
+            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-1.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-2.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-4.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-5.webp', caption: '' },
+            { src: 'images/work/UI projects/BOBA/BOBAdesktop/BOBAsite-6.webp', caption: '' }
           ]
         },
         results: [],
@@ -187,8 +187,8 @@ window.PROJECTS = [
     timeline: '2 weeks',
     skills: ['Brand Identity', 'Visual Design', 'Typography'],
     tools: ['Procreate', 'Illustrator', 'Photoshop'],
-    thumbnailImage: 'images/work/Branding Concepts/3miu/3miubanner.jpg',
-    heroImage:      'images/work/Branding Concepts/3miu/3miubanner.jpg',
+    thumbnailImage: 'images/work/Branding Concepts/3miu/3miubanner.webp',
+    heroImage:      'images/work/Branding Concepts/3miu/3miubanner.webp',
     sections: {
       context: 'Redesigning an everyday object to change how it feels, not just how it looks.\n\nThe brief was to redesign a common object. I chose Cup Noodles — not because the packaging was broken, but because it was missing an opportunity. The existing design signals speed and disposability, but the people eating it at 2am during finals deserve something that feels like a small act of care.',
       problem: 'The original design does function well — but warmth is completely absent.\n\nThe red band and fork icon communicate speed efficiently. But the beige cup body reads as accidental nostalgia, the side panels repeat without purpose, the lid and steam vents are ignored as design real estate, and the white label area feels sterile. Nothing about it acknowledges the ritual of the person eating it.',
@@ -199,28 +199,28 @@ window.PROJECTS = [
           label: 'Branding',
           layout: 'row',
           images: [
-            { src: 'images/work/Branding Concepts/3miu/3miubranding1.jpg' },
-            { src: 'images/work/Branding Concepts/3miu/3miubranding2.jpg' }
+            { src: 'images/work/Branding Concepts/3miu/3miubranding1.webp' },
+            { src: 'images/work/Branding Concepts/3miu/3miubranding2.webp' }
           ]
         },
         {
           label: 'Packaging',
           layout: 'row',
           images: [
-            { src: 'images/work/Branding Concepts/3miu/3miupackaging.jpg' },
-            { src: 'images/work/Branding Concepts/3miu/3miuposter.jpg' }
+            { src: 'images/work/Branding Concepts/3miu/3miupackaging.webp' },
+            { src: 'images/work/Branding Concepts/3miu/3miuposter.webp' }
           ]
         },
         {
           label: 'Mock ups',
           layout: 'grid',
           images: [
-            { src: 'images/work/Branding Concepts/3miu/image 10.jpg' },
-            { src: 'images/work/Branding Concepts/3miu/image 11.jpg' },
-            { src: 'images/work/Branding Concepts/3miu/image 12.jpg' },
-            { src: 'images/work/Branding Concepts/3miu/image 13.jpg' },
-            { src: 'images/work/Branding Concepts/3miu/image 14.jpg' },
-            { src: 'images/work/Branding Concepts/3miu/image 15.jpg' }
+            { src: 'images/work/Branding Concepts/3miu/image 10.webp' },
+            { src: 'images/work/Branding Concepts/3miu/image 11.webp' },
+            { src: 'images/work/Branding Concepts/3miu/image 12.webp' },
+            { src: 'images/work/Branding Concepts/3miu/image 13.webp' },
+            { src: 'images/work/Branding Concepts/3miu/image 14.webp' },
+            { src: 'images/work/Branding Concepts/3miu/image 15.webp' }
           ]
         }
       ],
@@ -241,8 +241,8 @@ window.PROJECTS = [
     timeline: '2 weeks',
     skills: ['Brand Identity', 'Visual Design', 'Typography'],
     tools: ['Procreate', 'Illustrator', 'Photoshop'],
-    thumbnailImage: 'images/work/Branding Concepts/blink/blinkbanner.jpg',
-    heroImage:      'images/work/Branding Concepts/blink/blinkbanner.jpg',
+    thumbnailImage: 'images/work/Branding Concepts/blink/blinkbanner.webp',
+    heroImage:      'images/work/Branding Concepts/blink/blinkbanner.webp',
     sections: {
       context: 'Designing a streetwear brand from the ground up.\n\nThe brief was to create an original streetwear brand. I built BLINK as an alternative sportswear label for young people who skate, run, and move through the world intentionally — where bold street style meets everyday function.',
       problem: '',
@@ -253,16 +253,16 @@ window.PROJECTS = [
           label: 'Mock ups',
           layout: 'grid',
           images: [
-            { src: 'images/work/Branding Concepts/blink/image 15.jpg' },
-            { src: 'images/work/Branding Concepts/blink/image 16.jpg' },
-            { src: 'images/work/Branding Concepts/blink/image 17.jpg' },
-            { src: 'images/work/Branding Concepts/blink/image 18.jpg' },
-            { src: 'images/work/Branding Concepts/blink/image 19.jpg' },
-            { src: 'images/work/Branding Concepts/blink/image 20.jpg' }
+            { src: 'images/work/Branding Concepts/blink/image 15.webp' },
+            { src: 'images/work/Branding Concepts/blink/image 16.webp' },
+            { src: 'images/work/Branding Concepts/blink/image 17.webp' },
+            { src: 'images/work/Branding Concepts/blink/image 18.webp' },
+            { src: 'images/work/Branding Concepts/blink/image 19.webp' },
+            { src: 'images/work/Branding Concepts/blink/image 20.webp' }
           ],
           subRow: [
-            { src: 'images/work/Branding Concepts/blink/blinkposter 1.jpg' },
-            { src: 'images/work/Branding Concepts/blink/image 21.jpg' }
+            { src: 'images/work/Branding Concepts/blink/blinkposter 1.webp' },
+            { src: 'images/work/Branding Concepts/blink/image 21.webp' }
           ]
         }
       ],
