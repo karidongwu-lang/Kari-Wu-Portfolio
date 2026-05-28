@@ -750,16 +750,20 @@
         var interval = null;
 
         el.addEventListener('mouseenter', function () {
+          el.style.display = 'inline-block';
+          el.style.width = el.offsetWidth + 'px';
           interval = setInterval(function () {
             idx = (idx + 1) % fonts.length;
             el.style.fontFamily = fonts[idx];
-          }, 120);
+          }, 700);
         });
 
         el.addEventListener('mouseleave', function () {
           clearInterval(interval);
           interval = null;
           el.style.fontFamily = "'Nothing You Could Do', cursive";
+          el.style.display = '';
+          el.style.width = '';
         });
       })();
 
