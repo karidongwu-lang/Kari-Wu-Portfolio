@@ -24,11 +24,11 @@ window.ART_ILLUSTRATIONS = [
 ];
 
 window.ART_STUDIES = [
-  { id: 'shoes',     title: 'Shoes Study',         filename: 'images/art/studies/shoes.webp',     medium: 'Graphite',      year: '2023' },
-  { id: 'acrylic',   title: 'Fruits Study',        filename: 'images/art/studies/Acrylic.webp',   medium: 'Acrylic paint', year: '2023' },
-  { id: 'charcoal',  title: 'Bust Study',          filename: 'images/art/studies/Charcoal.webp',  medium: 'Charcoal',      year: '2024' },
-  { id: 'graphite',  title: 'Garage Floor Study',  filename: 'images/art/studies/Graphite.webp',  medium: 'Graphite',      year: '2024' },
   { id: 'nainai',    title: 'Nainai',              filename: 'images/art/studies/nainai.webp',    medium: 'Procreate on iPad', year: '2025' },
+  { id: 'acrylic',   title: 'Fruits Study',        filename: 'images/art/studies/Acrylic.webp',   medium: 'Acrylic paint',     year: '2023' },
+  { id: 'graphite',  title: 'Garage Floor Study',  filename: 'images/art/studies/Graphite.webp',  medium: 'Graphite',          year: '2024' },
+  { id: 'charcoal',  title: 'Bust Study',          filename: 'images/art/studies/Charcoal.webp',  medium: 'Charcoal',          year: '2024' },
+  { id: 'shoes',     title: 'Shoes Study',         filename: 'images/art/studies/shoes.webp',     medium: 'Graphite',          year: '2023' },
   { id: 'sf',        title: 'San Francisco',       filename: 'images/art/studies/sf.webp',        medium: 'Procreate on iPad', year: '2023' }
 ];
 
