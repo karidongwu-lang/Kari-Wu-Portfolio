@@ -16,7 +16,7 @@ window.ART_ILLUSTRATIONS = [
   { id: 'fantasy',      title: 'Fantasy',                filename: 'images/art/illustrations/fantasy.jpg',     medium: 'Procreate on iPad', year: '2024' },
   { id: 'figure',       title: 'Figure',                 filename: 'images/art/illustrations/figure.jpg',      medium: 'Procreate on iPad', year: '2024' },
   { id: 'headshot',     title: 'Headshot',               filename: 'images/art/illustrations/headshot.jpg',    medium: 'Procreate on iPad', year: '2024' },
-  { id: 'painting',     title: 'Painting',               filename: 'images/art/illustrations/painting.JPG',   medium: 'Acrylic',           year: '2023' },
+  { id: 'painting',     title: 'Painting',               filename: 'images/art/illustrations/painting.jpg',   medium: 'Acrylic',           year: '2023' },
   { id: 'roosting',     title: 'Roosting',               filename: 'images/art/illustrations/roosting.jpg',    medium: 'Procreate on iPad', year: '2024' },
   { id: 'runandlive',   title: 'Run and Live',           filename: 'images/art/illustrations/runandlive.jpg',  medium: 'Procreate on iPad', year: '2024' },
   { id: 'symbols',      title: 'Symbols',                filename: 'images/art/illustrations/symbols.jpg',     medium: 'Procreate on iPad', year: '2024' },
