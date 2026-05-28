@@ -18,7 +18,7 @@ window.ART_PIECES = [
   {
     id: 'boxart-study',
     title: 'Crush',
-    filename: 'images/art/home.JPG',
+    filename: 'images/art/home.jpg',
     medium: 'Procreate on iPad',
     year: '2024'
   },
