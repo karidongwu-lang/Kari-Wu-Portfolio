@@ -2,3 +2,5 @@
 **/.DS_Store
 *.mov
 *.pdf
+.env
+node_modules/

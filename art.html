@@ -8,7 +8,7 @@
   <meta property="og:title"       content="Art — Kari Wu" />
   <meta property="og:description" content="Illustrations and personal art by Kari Wu — Scholastic Award winner and public artist." />
   <meta property="og:type"        content="website" />
-  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+  <link rel="icon" href="images/logo/catlogo-3.svg" type="image/svg+xml" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,9 +42,31 @@
     .art-section {
       padding-bottom: var(--space-32);
     }
+
+    body.is-dark,
+    html body.is-dark {
+      background-color: #3c3a51 !important;
+      color: #f0ede7 !important;
+    }
   </style>
 </head>
 <body>
+  <script>
+    (function(){
+      if(sessionStorage.getItem("theme")==="dark"){
+        document.body.classList.add("is-dark");
+        document.body.style.backgroundColor = "#3c3a51";
+        document.body.style.color = "#f0ede7";
+        var r = document.documentElement;
+        r.style.setProperty("--color-accent",  "#ffcb58");
+        r.style.setProperty("--color-bg",       "#3c3a51");
+        r.style.setProperty("--color-ink",      "#f0ede7");
+        r.style.setProperty("--color-muted",    "#9a96b8");
+        r.style.setProperty("--color-border",   "#504e68");
+        r.style.setProperty("--color-faint",    "#464460");
+      }
+    })();
+  </script>
 
   <div id="nav-placeholder"></div>
 

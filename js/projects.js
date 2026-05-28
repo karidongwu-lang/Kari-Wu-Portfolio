@@ -29,10 +29,10 @@ window.PROJECTS = [
       process: {
         text:
           'Discovery → validation → pilot.\n\nCustomer discovery → identified prior auth as the core pain point → validated with clinic owners → built browser-agent architecture to avoid lengthy EMR integration → launched first pilot with Vargo Physical Therapy, with 4 partner clinics and 37 PTs onboarded.',
+        layout: 'row',
         images: [
-          { src: 'https://placehold.co/600x400/FAF8F3/1A1A18?text=User+Research', caption: 'Clinic coordinator workflow mapping session' },
-          { src: 'https://placehold.co/600x400/FAF8F3/1A1A18?text=Wireframes', caption: 'Low-fidelity wireframes, round 1' },
-          { src: 'https://placehold.co/600x400/FAF8F3/1A1A18?text=Prototype', caption: 'High-fidelity prototype in Figma' }
+          { src: 'images/work/UI projects/Preva/clinicflow.jpg' },
+          { src: 'images/work/UI projects/Preva/agentflow.jpg' }
         ]
       },
       results: [
@@ -41,7 +41,9 @@ window.PROJECTS = [
         { image: 'https://placehold.co/400x300/FAF8F3/1A1A18?text=Resolution', title: 'Smart Gap Resolution', caption: 'Gap resolution with therapists, and tiered pricing ($350–$899/mo).' }
       ],
       takeaways:
-        'Designing for async, agent-driven workflows required rethinking visibility and failure states from the ground up.\n\nDesigning for a browser-agent workflow introduced constraints I hadn\'t encountered before. Unlike typical SaaS products, Previa\'s core actions happen asynchronously in the background — which forced me to rethink how to surface status, progress, and errors to users who aren\'t watching the agent work in real time. A lot of my early wireframes assumed too much user visibility into the process, and I had to strip those back significantly.\n\nThe other challenge was designing around incomplete data. Because the agent sometimes hits missing clinical information mid-submission, I had to map out every failure state and design an interruption flow that pulled the therapist in at exactly the right moment — specific enough to be actionable, without overwhelming someone mid-session with a patient. Getting that interaction right required diagramming the full agent decision tree before touching any UI.'
+        'Designing for async, agent-driven workflows required rethinking visibility and failure states from the ground up.\n\nDesigning for a browser-agent workflow introduced constraints I hadn\'t encountered before. Unlike typical SaaS products, Previa\'s core actions happen asynchronously in the background — which forced me to rethink how to surface status, progress, and errors to users who aren\'t watching the agent work in real time. A lot of my early wireframes assumed too much user visibility into the process, and I had to strip those back significantly.\n\nThe other challenge was designing around incomplete data. Because the agent sometimes hits missing clinical information mid-submission, I had to map out every failure state and design an interruption flow that pulled the therapist in at exactly the right moment — specific enough to be actionable, without overwhelming someone mid-session with a patient. Getting that interaction right required diagramming the full agent decision tree before touching any UI.',
+      takeawayImage: 'images/work/UI projects/Preva/demoday.jpg',
+      takeawayImageCaption: 'shoutout to my co-founder marcus'
     }
   },
 
@@ -69,14 +71,34 @@ window.PROJECTS = [
       solution:
         'A dispenser that supports independence first, and escalates help only when needed.\n\nA physical smart dispenser with a companion app concept. The device auto-rotates to the correct compartment at dose time, unlocks a one-handed drawer, and uses light and sound to confirm "taken" or flag a miss. Caregivers only get notified when something goes wrong.',
       process: {
-        text:
-          'Interviews → insight synthesis → paper prototyping → 3D iteration.\n\nI interviewed 4 older adults and 3 caregivers to identify where adherence actually breaks down — turns out misses spike during routine disruptions like travel or fatigue, not from forgetfulness alone. I moved quickly into paper prototypes to test grip and form, iterating from a narrow, hard-to-hold initial sketch to a wider body with a clearer display and more accessible drawer.',
-        images: [
-          { src: 'https://placehold.co/600x400/FAF8F3/1A1A18?text=User+Research', caption: 'Observational research and caregiver interviews' },
-          { src: 'https://placehold.co/600x400/FAF8F3/1A1A18?text=3D+Iterations', caption: '3D design iterations — compartment mechanism and form factor' },
-          { src: 'https://placehold.co/600x400/FAF8F3/1A1A18?text=App+Design', caption: 'Caregiver companion app — schedule management and tracking dashboard' }
-        ]
+        text: '',
+        images: []
       },
+      customSections: [
+        {
+          label: 'Iteration',
+          layout: 'row',
+          images: [
+            { src: 'images/work/Product Design/pilliteration.jpg' }
+          ]
+        },
+        {
+          label: 'Prototypes',
+          layout: 'row',
+          images: [
+            { src: 'images/work/Product Design/pillv1.jpg', caption: 'Prototype 1' },
+            { src: 'images/work/Product Design/pillv2.jpg', caption: 'Prototype 2' },
+            { src: 'images/work/Product Design/pillv3.jpg', caption: 'Prototype 3' }
+          ]
+        },
+        {
+          label: 'Final',
+          layout: 'row',
+          images: [
+            { src: 'images/work/Product Design/pillfinal.jpg' }
+          ]
+        }
+      ],
       results: [
         { image: 'https://placehold.co/400x300/FAF8F3/1A1A18?text=Device',  title: 'One-button open',          caption: 'Modular rotating dose ring with an accessible drawer and anti-tip base.' },
         { image: 'https://placehold.co/400x300/FAF8F3/1A1A18?text=Status',  title: 'Light + sound status',     caption: 'Confirms "taken" or flags a miss without any screen required.' },

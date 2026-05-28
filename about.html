@@ -8,7 +8,7 @@
   <meta property="og:title"       content="About — Kari Wu" />
   <meta property="og:description" content="About Kari Wu — BFA Design student at USC, community builder, and multidisciplinary creative." />
   <meta property="og:type"        content="website" />
-  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+  <link rel="icon" href="images/logo/catlogo-3.svg" type="image/svg+xml" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -160,8 +160,12 @@
     }
 
     .about-img-strip .about-img-doodle {
-      width: calc((50% - 5px) * 1.2);
+      width: calc((50% - 5px) * 1.8);
       align-self: flex-end;
+    }
+
+    body.is-dark .about-img-doodle {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(47%) saturate(600%) hue-rotate(3deg) brightness(103%);
     }
 
     /* ── Responsive: mobile swipe ────────────────────────────────────────── */
@@ -195,13 +199,29 @@
       }
 
       .about-img-strip .about-img-doodle {
-        width: calc(80vw * 1.2);
+        width: calc(80vw * 1.8);
       }
       }
     }
   </style>
 </head>
 <body>
+  <script>
+    (function(){
+      if(sessionStorage.getItem("theme")==="dark"){
+        document.body.classList.add("is-dark");
+        document.body.style.backgroundColor = "#3c3a51";
+        document.body.style.color = "#f0ede7";
+        var r = document.documentElement;
+        r.style.setProperty("--color-accent",  "#ffcb58");
+        r.style.setProperty("--color-bg",       "#3c3a51");
+        r.style.setProperty("--color-ink",      "#f0ede7");
+        r.style.setProperty("--color-muted",    "#9a96b8");
+        r.style.setProperty("--color-border",   "#504e68");
+        r.style.setProperty("--color-faint",    "#464460");
+      }
+    })();
+  </script>
 
   <div id="nav-placeholder"></div>
 
@@ -236,7 +256,7 @@
             <img src="images/about/IMG_3559 1.jpg"   alt="Kari Wu" />
             <img src="images/about/IMG_7701 1.jpg"   alt="Kari Wu" />
             <img src="images/about/IMG_8396 2 1.jpg" alt="Kari Wu" />
-            <img src="images/doodles/afterimagedoodle.png" alt="" class="about-img-doodle" />
+            <img src="images/doodles/cat 01 Artboard 1.svg" alt="" class="about-img-doodle" />
           </div>
         </div>
 

@@ -57,6 +57,13 @@
   align-items: start;
 }
 
+.cs-takeaway-wrap {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
 .cs-solution-video {
   width: 100%;
   height: auto;
@@ -292,6 +299,14 @@
   max-width: 100%;
   object-fit: contain;
   display: block;
+}
+
+.cs-process-caption {
+  font-size: 0.65rem;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: var(--space-2);
+  letter-spacing: 0.02em;
 }
 
 .cs-brand-item__label {

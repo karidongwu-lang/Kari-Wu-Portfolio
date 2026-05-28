@@ -138,6 +138,39 @@ button {
   border-color: #c8392b;
 }
 
+body.is-dark {
+  --color-bg:           #3c3a51;
+  --color-ink:          #f0ede7;
+  --color-muted:        #9a96b8;
+  --color-border:       #504e68;
+  --color-faint:        #464460;
+  --color-accent-light: #4a4762;
+  background-color:     #3c3a51 !important;
+  color:                #f0ede7 !important;
+}
+
+body.is-dark #cursor {
+  border-color: #ffcb58;
+}
+
+body.is-dark #cursor[data-state="hover"] {
+  background: #ffcb58;
+  border-color: #ffcb58;
+}
+
+body.is-dark .nav-logo,
+body.is-dark .footer-logo {
+  filter: none;
+}
+
+body.is-dark .nav-logo {
+  content: url('../images/logo/catlogo-night.svg');
+}
+
+body.is-dark .footer-logo {
+  content: url('../images/logo/catlogo-2-night.svg');
+}
+
 #cursor[data-state="text"] {
   width: 2px;
   height: 28px;

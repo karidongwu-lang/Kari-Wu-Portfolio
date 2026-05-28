@@ -8,7 +8,7 @@
   <meta property="og:title"      id="page-og-title" content="Case Study — Kari Wu" />
   <meta property="og:description" id="page-og-desc" content="Case study by Kari Wu — UX Designer." />
   <meta property="og:type"        content="website" />
-  <link rel="icon" href="images/logo/tablogo.png" type="image/png" />
+  <link rel="icon" href="images/logo/catlogo-3.svg" type="image/svg+xml" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +20,22 @@
   <link rel="stylesheet" href="styles/case-study.css" />
 </head>
 <body>
+  <script>
+    (function(){
+      if(sessionStorage.getItem("theme")==="dark"){
+        document.body.classList.add("is-dark");
+        document.body.style.backgroundColor = "#3c3a51";
+        document.body.style.color = "#f0ede7";
+        var r = document.documentElement;
+        r.style.setProperty("--color-accent",  "#ffcb58");
+        r.style.setProperty("--color-bg",       "#3c3a51");
+        r.style.setProperty("--color-ink",      "#f0ede7");
+        r.style.setProperty("--color-muted",    "#9a96b8");
+        r.style.setProperty("--color-border",   "#504e68");
+        r.style.setProperty("--color-faint",    "#464460");
+      }
+    })();
+  </script>
 
   <div id="nav-placeholder"></div>
 
@@ -98,7 +114,7 @@
         if (p.demoVideo) {
           solutionHTML =
             '<div class="cs-solution-wrap">' +
-              solutionText +
+              '<div class="cs-solution-text">' + solutionText + '</div>' +
               '<video class="cs-solution-video" src="' + p.demoVideo + '" autoplay muted loop playsinline controls></video>' +
             '</div>';
         } else {
@@ -137,7 +153,22 @@
         resultsHTML += '</div>';
       }
 
-      var takeawaysHTML = paras(s.takeaways);
+      var takeawaysHTML = '';
+      if (s.takeaways) {
+        var takeawaysText = paras(s.takeaways);
+        if (s.takeawayImage) {
+          takeawaysHTML =
+            '<div class="cs-takeaway-wrap">' +
+              '<div class="cs-solution-text">' + takeawaysText + '</div>' +
+              '<figure class="cs-process-item">' +
+                '<img src="' + s.takeawayImage + '" alt="' + esc(s.takeawayImageCaption || '') + '" loading="lazy" />' +
+                (s.takeawayImageCaption ? '<figcaption class="cs-process-caption">' + esc(s.takeawayImageCaption) + '</figcaption>' : '') +
+              '</figure>' +
+            '</div>';
+        } else {
+          takeawaysHTML = takeawaysText;
+        }
+      }
 
       /* ── Multi-project sections (e.g. BOBA) ── */
       function buildSections(proj, demoVideo) {
@@ -213,7 +244,9 @@
             var cls = cs.layout === 'row' ? 'cs-process-row' : 'cs-process-grid';
             var imgsHTML = '<div class="' + cls + '">';
             cs.images.forEach(function (img) {
-              imgsHTML += '<figure class="cs-process-item"><img src="' + img.src + '" alt="" loading="lazy" /></figure>';
+              imgsHTML += '<figure class="cs-process-item"><img src="' + img.src + '" alt="" loading="lazy" />' +
+                (img.caption ? '<figcaption class="cs-process-caption">' + esc(img.caption) + '</figcaption>' : '') +
+                '</figure>';
             });
             imgsHTML += '</div>';
             if (cs.subRow && cs.subRow.length) {
