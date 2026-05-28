@@ -155,6 +155,19 @@
       grid.innerHTML = '';
       pieces = data || [];
 
+      /* Determine column count from CSS */
+      var colCount = window.innerWidth <= 480 ? 1 : window.innerWidth <= 960 ? 2 : 3;
+
+      /* Create column divs */
+      var cols = [];
+      for (var c = 0; c < colCount; c++) {
+        var col = document.createElement('div');
+        col.className = 'art-grid-col';
+        grid.appendChild(col);
+        cols.push(col);
+      }
+
+      /* Distribute tiles evenly across columns */
       pieces.forEach(function (piece, i) {
         var tile = document.createElement('div');
         tile.className = 'art-tile sketch-hover';
@@ -170,18 +183,12 @@
             '<p class="art-tile__meta">' + piece.medium + ' · ' + piece.year + '</p>' +
           '</div>';
 
-        tile.addEventListener('click', function () {
-          openLightbox(i);
-        });
-
+        tile.addEventListener('click', function () { openLightbox(i); });
         tile.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openLightbox(i);
-          }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
         });
 
-        grid.appendChild(tile);
+        cols[i % colCount].appendChild(tile);
       });
 
       document.fonts.ready.then(function () {

@@ -159,16 +159,24 @@
 /* ─── ART GALLERY TILES ──────────────────────────────────────────────────── */
 
 .art-grid {
-  columns: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: var(--space-4);
+  align-items: start;
+}
+
+.art-grid-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 @media (max-width: 960px) {
-  .art-grid { columns: 2; }
+  .art-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
-  .art-grid { columns: 1; }
+  .art-grid { grid-template-columns: 1fr; }
 }
 
 .art-tile {
