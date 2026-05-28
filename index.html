@@ -520,6 +520,34 @@
     @media (max-width: 480px) {
       .proj-thumb, .play-thumb { display: none; }
     }
+
+    /* ── Line boil filter ──────────────────────────────────────────────────── */
+
+    .hero-doodle-boil-filter {
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+
+    @keyframes boil-seed-1 {
+      0%,100% { filter: url(#boil-a); }
+      33%      { filter: url(#boil-b); }
+      66%      { filter: url(#boil-c); }
+    }
+
+    @keyframes boil-seed-2 {
+      0%,100% { filter: url(#boil-b); }
+      33%      { filter: url(#boil-c); }
+      66%      { filter: url(#boil-a); }
+    }
+
+    .hero-doodle > img:first-child {
+      animation: boil-seed-1 0.12s steps(1) infinite;
+    }
+
+    .hero-doodle-night > img:first-child {
+      animation: boil-seed-2 0.12s steps(1) infinite;
+    }
   </style>
 </head>
 <body>
@@ -539,6 +567,25 @@
       }
     })();
   </script>
+
+
+  <!-- Line boil SVG filters -->
+  <svg class="hero-doodle-boil-filter" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="boil-a" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.018 0.025" numOctaves="2" seed="1" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="boil-b" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.022 0.018" numOctaves="2" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="boil-c" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.015 0.022" numOctaves="2" seed="13" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
 
   <div id="nav-placeholder"></div>
 
