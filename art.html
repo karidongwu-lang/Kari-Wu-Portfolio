@@ -43,6 +43,36 @@
       padding-bottom: var(--space-32);
     }
 
+    .art-tabs {
+      display: flex;
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+
+    .art-tab {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+      cursor: pointer;
+      padding-bottom: 3px;
+      border-bottom: 1px solid transparent;
+      transition: color var(--trans-fast), border-color var(--trans-fast);
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .art-tab:hover {
+      color: var(--color-ink);
+    }
+
+    .art-tab.is-active {
+      color: var(--color-ink);
+      border-bottom-color: var(--color-ink);
+    }
+
     body.is-dark,
     html body.is-dark {
       background-color: #3c3a51 !important;
@@ -79,6 +109,10 @@
       </header>
 
       <section class="art-section">
+        <div class="art-tabs">
+          <button class="art-tab is-active" data-tab="illustrations">(illustrations)</button>
+          <button class="art-tab" data-tab="studies">(studies)</button>
+        </div>
         <div class="art-grid reveal-stagger" id="art-grid"></div>
       </section>
 
@@ -114,11 +148,12 @@
     var pieces = [];
 
     /* ── Render gallery ── */
-    function renderArt() {
+    function renderArt(data) {
       var grid = document.getElementById('art-grid');
-      if (!grid || !window.ART_PIECES) return;
+      if (!grid) return;
 
-      pieces = window.ART_PIECES;
+      grid.innerHTML = '';
+      pieces = data || [];
 
       pieces.forEach(function (piece, i) {
         var tile = document.createElement('div');
@@ -195,7 +230,17 @@
 
     /* ── Event wiring ── */
     document.addEventListener('DOMContentLoaded', function () {
-      renderArt();
+      renderArt(window.ART_ILLUSTRATIONS);
+
+      /* Tab switching */
+      document.querySelectorAll('.art-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          document.querySelectorAll('.art-tab').forEach(function (t) { t.classList.remove('is-active'); });
+          tab.classList.add('is-active');
+          var dataset = tab.dataset.tab === 'studies' ? window.ART_STUDIES : window.ART_ILLUSTRATIONS;
+          renderArt(dataset);
+        });
+      });
 
       document.getElementById('lb-close').addEventListener('click', closeLightbox);
       document.getElementById('lb-prev').addEventListener('click', prevPiece);
