@@ -21,7 +21,7 @@ window.PROJECTS = [
     demoVideo:      'images/work/UI projects/Preva/prevademo.mp4',
     sections: {
       context:
-        '12-week incubator, founding team of 2.\n\nBuilt during an 12-week incubator program as a founding team of 2 co-founders. Conducted extensive customer discovery before landing on physical therapy clinics as our space.',
+        '12-week incubator, founding team of two.\n\nBuilt during an 12-week incubator program as a founding team of two co-founders. Conducted extensive customer discovery before landing on physical therapy clinics as our space.',
       problem:
         'Insurance paperwork is killing PT clinics.\n\nPrior authorization — a mandatory insurance form for PT clinics — takes 20 hours/week of manual work per clinic. The burden is severe enough that 57% of PT clinics have dropped at least one insurance network entirely, turning away patients like my co-founder\'s friend Navin, who waited 4 extra weeks to begin ACL recovery.',
       solution:
