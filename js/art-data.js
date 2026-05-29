@@ -14,7 +14,9 @@ window.ART_ILLUSTRATIONS = [
   { id: 'painting',     title: 'Painting',               filename: 'images/art/illustrations/painting.webp',    medium: 'Acrylic',           year: '2024' },
   { id: 'reality',      title: 'Reality',                filename: 'images/art/illustrations/reality.webp',     medium: 'Procreate on iPad', year: '2024' },
   { id: 'roosting',     title: 'Roosting',               filename: 'images/art/illustrations/roosting.webp',    medium: 'Procreate on iPad', year: '2022' },
-  { id: 'figure',       title: 'Figure',                 filename: 'images/art/illustrations/figure.webp',      medium: 'Procreate on iPad', year: '2022' }
+  { id: 'figure',       title: 'Figure',                 filename: 'images/art/illustrations/figure.webp',      medium: 'Procreate on iPad', year: '2022' },
+  { id: 'kitchen',      title: 'Kitchen',                filename: 'images/art/illustrations/kitchen.webp',     medium: 'Procreate on iPad', year: '2026' },
+  { id: 'card',         title: 'Card',                   filename: 'images/art/illustrations/card.webp',        medium: 'Procreate on iPad', year: '2026' }
 ];
 
 window.ART_STUDIES = [
