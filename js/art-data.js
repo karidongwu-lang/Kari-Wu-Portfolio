@@ -9,12 +9,12 @@ window.ART_ILLUSTRATIONS = [
   { id: 'bubbles',      title: 'Bubbles',                filename: 'images/art/illustrations/bubbles.webp',     medium: 'Procreate on iPad', year: '2021' },
   { id: 'chase',        title: 'Chase',                  filename: 'images/art/illustrations/chase.webp',       medium: 'Procreate on iPad', year: '2024' },
   { id: 'fantasy',      title: 'Fantasy',                filename: 'images/art/illustrations/fantasy.webp',     medium: 'Mixed Media',       year: '2025' },
-  { id: 'figure',       title: 'Figure',                 filename: 'images/art/illustrations/figure.webp',      medium: 'Procreate on iPad', year: '2022' },
+  { id: 'symbols',      title: '#@*!!',                  filename: 'images/art/illustrations/symbols.webp',     medium: 'Procreate on iPad', year: '2023' },
   { id: 'mothersday',   title: 'Mom',                    filename: 'images/art/illustrations/mothersday.webp',  medium: 'Procreate on iPad', year: '2025' },
   { id: 'painting',     title: 'Painting',               filename: 'images/art/illustrations/painting.webp',    medium: 'Acrylic',           year: '2024' },
   { id: 'reality',      title: 'Reality',                filename: 'images/art/illustrations/reality.webp',     medium: 'Procreate on iPad', year: '2024' },
   { id: 'roosting',     title: 'Roosting',               filename: 'images/art/illustrations/roosting.webp',    medium: 'Procreate on iPad', year: '2022' },
-  { id: 'symbols',      title: '#@*!!',                  filename: 'images/art/illustrations/symbols.webp',     medium: 'Procreate on iPad', year: '2023' }
+  { id: 'figure',       title: 'Figure',                 filename: 'images/art/illustrations/figure.webp',      medium: 'Procreate on iPad', year: '2022' }
 ];
 
 window.ART_STUDIES = [
