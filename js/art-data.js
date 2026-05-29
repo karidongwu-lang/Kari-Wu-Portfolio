@@ -2,7 +2,6 @@
 
 window.ART_ILLUSTRATIONS = [
   { id: 'home',         title: 'Crush',                  filename: 'images/art/illustrations/home.webp',        medium: 'Procreate on iPad', year: '2024' },
-  { id: 'reality',      title: 'Reality',                filename: 'images/art/illustrations/reality.webp',     medium: 'Procreate on iPad', year: '2024' },
   { id: 'headshot',     title: 'Headshot',               filename: 'images/art/illustrations/headshot.webp',    medium: 'Acrylic Paint',     year: '2024' },
   { id: 'papermixed',   title: 'Luck',                   filename: 'images/art/illustrations/PaperMixed.webp',  medium: 'Multimedia',        year: '2023' },
   { id: 'crayondigital',title: 'Slice',                  filename: 'images/art/illustrations/CrayonDigital.webp', medium: 'Multimedia',      year: '2023' },
@@ -13,6 +12,7 @@ window.ART_ILLUSTRATIONS = [
   { id: 'figure',       title: 'Figure',                 filename: 'images/art/illustrations/figure.webp',      medium: 'Procreate on iPad', year: '2022' },
   { id: 'mothersday',   title: 'Mom',                    filename: 'images/art/illustrations/mothersday.webp',  medium: 'Procreate on iPad', year: '2025' },
   { id: 'painting',     title: 'Painting',               filename: 'images/art/illustrations/painting.webp',    medium: 'Acrylic',           year: '2024' },
+  { id: 'reality',      title: 'Reality',                filename: 'images/art/illustrations/reality.webp',     medium: 'Procreate on iPad', year: '2024' },
   { id: 'roosting',     title: 'Roosting',               filename: 'images/art/illustrations/roosting.webp',    medium: 'Procreate on iPad', year: '2022' },
   { id: 'symbols',      title: '#@*!!',                  filename: 'images/art/illustrations/symbols.webp',     medium: 'Procreate on iPad', year: '2023' }
 ];
