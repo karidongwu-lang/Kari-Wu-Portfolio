@@ -42,7 +42,7 @@ window.PROJECTS = [
       ],
       takeaways:
         'Designing for async, agent-driven workflows required rethinking visibility and failure states from the ground up.\n\nDesigning for a browser-agent workflow introduced constraints I hadn\'t encountered before. Unlike typical SaaS products, Previa\'s core actions happen asynchronously in the background — which forced me to rethink how to surface status, progress, and errors to users who aren\'t watching the agent work in real time. A lot of my early wireframes assumed too much user visibility into the process, and I had to strip those back significantly.\n\nThe other challenge was designing around incomplete data. Because the agent sometimes hits missing clinical information mid-submission, I had to map out every failure state and design an interruption flow that pulled the therapist in at exactly the right moment — specific enough to be actionable, without overwhelming someone mid-session with a patient. Getting that interaction right required diagramming the full agent decision tree before touching any UI.',
-      takeawayImage: 'images/work/UI projects/Preva/demoday.webp',
+      takeawayImage: 'images/work/UI projects/Preva/newdemo.webp',
       takeawayImageCaption: 'shoutout to my co-founder marcus'
     }
   },
