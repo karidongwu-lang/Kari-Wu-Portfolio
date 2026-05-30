@@ -164,6 +164,16 @@
       align-self: flex-end;
     }
 
+    .about-img-doodle {
+      animation: about-doodle-boil 0.5s steps(1) infinite;
+    }
+
+    @keyframes about-doodle-boil {
+      0%, 100% { filter: url(#about-boil-a); }
+      33%       { filter: url(#about-boil-b); }
+      66%       { filter: url(#about-boil-c); }
+    }
+
     body.is-dark .about-img-doodle {
       filter: brightness(0) saturate(100%) invert(87%) sepia(50%) saturate(700%) hue-rotate(342deg) brightness(102%);
     }
@@ -314,6 +324,23 @@
     }
 
     document.addEventListener('DOMContentLoaded', initWheelScroll);
-  </script>
+  </script>  <!-- Boil filters for cat doodle -->
+  <svg style="position:absolute;width:0;height:0" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="about-boil-a" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.018 0.025" numOctaves="2" seed="1" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="about-boil-b" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.022 0.018" numOctaves="2" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="about-boil-c" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.015 0.022" numOctaves="2" seed="13" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
 </body>
 </html>
