@@ -175,7 +175,13 @@
     }
 
     body.is-dark .about-img-doodle {
-      filter: brightness(0) saturate(100%) invert(87%) sepia(50%) saturate(700%) hue-rotate(342deg) brightness(102%);
+      animation: about-doodle-boil-dark 0.5s steps(1) infinite;
+    }
+
+    @keyframes about-doodle-boil-dark {
+      0%, 100% { filter: url(#about-boil-a) brightness(0) saturate(100%) invert(87%) sepia(50%) saturate(700%) hue-rotate(342deg) brightness(102%); }
+      33%       { filter: url(#about-boil-b) brightness(0) saturate(100%) invert(87%) sepia(50%) saturate(700%) hue-rotate(342deg) brightness(102%); }
+      66%       { filter: url(#about-boil-c) brightness(0) saturate(100%) invert(87%) sepia(50%) saturate(700%) hue-rotate(342deg) brightness(102%); }
     }
 
     /* ── Responsive: mobile swipe ────────────────────────────────────────── */
