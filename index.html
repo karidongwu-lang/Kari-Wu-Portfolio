@@ -630,7 +630,7 @@
       var list = document.getElementById('proj-list');
       if (!list || !window.PROJECTS) return;
 
-      var ids = ['previa', 'build-our-bridges', 'smart-pill-dispenser', '3miu', 'blink'];
+      var ids = ['previa', 'smart-pill-dispenser', 'build-our-bridges', '3miu', 'blink'];
       var selected = ids.map(function (id) {
         return window.PROJECTS.find(function (p) { return p.id === id; });
       }).filter(Boolean);
