@@ -297,12 +297,8 @@
 
     .proj-tag {
       font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: var(--color-muted);
-      border: 1px solid var(--color-border);
-      padding: 2px 8px;
-      border-radius: 999px;
     }
 
     .proj-desc {
@@ -650,6 +646,7 @@
             '<span class="proj-title">' + p.title + '</span>' +
             '<div class="proj-meta">' +
               '<span class="proj-year">' + p.year + '</span>' +
+              '<span class="proj-year"> · </span>' +
               '<span class="proj-tag">' + fmtCat(p.category) + '</span>' +
             '</div>' +
             '<p class="proj-desc">' + (p.blurb || '') + '</p>' +
