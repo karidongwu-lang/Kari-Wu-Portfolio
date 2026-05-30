@@ -593,7 +593,7 @@
       <div class="container">
         <p class="hero-line1">Hello! I'm <span class="hero-kari">Kari</span></p>
         <p class="hero-line2">– a designer and illustrator<br>making digital spaces feel a<br>little more personal</p>
-        <div class="hero-scroll-hint">
+        <div class="hero-scroll-hint" id="scroll-hint" style="cursor:pointer;">
           <span class="hero-scroll-label">scroll for more :)</span>
           <span class="hero-scroll-arrow">↓</span>
         </div>
@@ -608,33 +608,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ─── MARQUEE ───────────────────────────────────────────────────────────── -->
-    <div class="marquee-band" aria-hidden="true">
-      <div class="marquee-track">
-        <span class="marquee-item">ui/ux</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">illustration</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">product design</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">startups</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">branding</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">community</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">accessibility</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">public art</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">figma</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">usc '29</span><span class="marquee-sep">&middot;</span>
-        <!-- duplicate for seamless loop -->
-        <span class="marquee-item">ui/ux</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">illustration</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">product design</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">startups</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">branding</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">community</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">accessibility</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">public art</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">figma</span><span class="marquee-sep">&middot;</span>
-        <span class="marquee-item">usc '29</span><span class="marquee-sep">&middot;</span>
-      </div>
-    </div>
 
     <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
     <section id="work">
@@ -730,6 +703,10 @@
     document.addEventListener('DOMContentLoaded', function () {
       renderProjects();
       renderPlay();
+
+      document.getElementById('scroll-hint').addEventListener('click', function () {
+        document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+      });
 
       document.getElementById('lightbulb-btn').addEventListener('click', function () {
         document.body.classList.add('is-dark');
