@@ -5,9 +5,9 @@
 <style type="text/css">
 	.st0{display:none;}
 	.st1{fill:#FFCB58;}
-	#dood_x27_e path{fill:#3c3a51;}
-	#background path{fill:#3c3a51;}
-	#lightbulb path:not(.st1){fill:#3c3a51;}
+	#dood_x27_e path{fill:#f0ede7;}
+	#background path{fill:#f0ede7;}
+	#lightbulb{display:none;}
 </style>
 <g id="Layer_1" class="st0">
 	

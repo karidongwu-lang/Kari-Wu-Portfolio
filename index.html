@@ -112,7 +112,7 @@
       left: 79.88%;
       top: 17.94%;
       width: 7.23%;
-      height: 14%;
+      height: auto;
       pointer-events: all;
       cursor: pointer;
       transform-origin: center center;
@@ -141,7 +141,7 @@
       left: 80.57%;
       top: 17.60%;
       width: 7.53%;
-      height: 14%;
+      height: auto;
       pointer-events: all;
       cursor: pointer;
       transform-origin: center center;
@@ -516,11 +516,13 @@
       66%      { filter: url(#boil-a); }
     }
 
-    .hero-doodle > img:first-child {
+    .hero-doodle > img:first-child,
+    .hero-lightbulb {
       animation: boil-seed-1 0.5s steps(1) infinite;
     }
 
-    .hero-doodle-night > img:first-child {
+    .hero-doodle-night > img:first-child,
+    .hero-lightbulb-night {
       animation: boil-seed-2 0.5s steps(1) infinite;
     }
   </style>
@@ -577,12 +579,12 @@
         </div>
         <div class="hero-doodle" aria-hidden="true">
           <img src="images/doodles/daydoodlev2.svg" alt="" />
-          <div class="hero-lightbulb" id="lightbulb-btn"></div>
+          <img src="images/doodles/lightbulb.svg" class="hero-lightbulb" id="lightbulb-btn" alt="" />
           <span class="hero-lightbulb-hint">click me! <span style="font-size:1.4em;line-height:1">→</span></span>
         </div>
         <div class="hero-doodle-night" aria-hidden="true">
           <img src="images/doodles/nightdoodlev2.svg" alt="" />
-          <div class="hero-lightbulb-night" id="lightbulb-night-btn"></div>
+          <img src="images/doodles/nightlightbulb.svg" class="hero-lightbulb-night" id="lightbulb-night-btn" alt="" />
         </div>
       </div>
     </section>
