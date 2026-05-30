@@ -190,44 +190,28 @@
       50%       { transform: translateY(4px); }
     }
 
-    /* ─── MARQUEE ────────────────────────────────────────────────────────────── */
+    /* ─── SCRIBBLY DIVIDER ───────────────────────────────────────────────────── */
 
-    .marquee-band {
-      overflow: hidden;
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-      padding-block: var(--space-3);
-      user-select: none;
+    .scribble-divider {
+      padding-block: var(--space-2);
       margin-top: var(--space-16);
     }
 
-    .marquee-track {
-      display: flex;
-      white-space: nowrap;
-      width: max-content;
-      animation: marqueeRoll 40s linear infinite;
+    .scribble-line {
+      width: 100%;
+      height: 30px;
+      display: block;
+      overflow: visible;
     }
 
-    .marquee-track:hover { animation-play-state: paused; }
-
-    .marquee-item {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      color: var(--color-muted);
-      padding-inline: var(--space-4);
-      flex-shrink: 0;
+    .scribble-line path {
+      animation: scribble-boil 0.45s steps(1) infinite;
     }
 
-    .marquee-sep {
-      color: var(--color-accent);
-      flex-shrink: 0;
-      padding-inline: var(--space-1);
-      font-size: 0.7rem;
-    }
-
-    @keyframes marqueeRoll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+    @keyframes scribble-boil {
+      0%, 100% { filter: url(#boil-a); }
+      33%       { filter: url(#boil-b); }
+      66%       { filter: url(#boil-c); }
     }
 
     /* ─── SECTION LABEL ──────────────────────────────────────────────────────── */
@@ -608,6 +592,14 @@
         </div>
       </div>
     </section>
+
+    <!-- ─── SCRIBBLY DIVIDER ─────────────────────────────────────────────────── -->
+    <div class="scribble-divider" aria-hidden="true">
+      <svg class="scribble-line" viewBox="0 0 1200 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,15 C40,8 80,22 120,14 C160,6 200,20 240,13 C280,6 320,21 360,14 C400,7 440,20 480,13 C520,6 560,22 600,14 C640,6 680,21 720,13 C760,5 800,20 840,14 C880,8 920,21 960,13 C1000,5 1040,20 1080,14 C1120,8 1160,21 1200,15"
+              fill="none" stroke="var(--color-accent)" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </div>
 
     <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
     <section id="work">
