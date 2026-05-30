@@ -65,7 +65,7 @@ window.PROJECTS = [
     heroImage:      'images/work/Product Design/pillbanner.webp',
     sections: {
       context:
-        'A 7-week human-centered design project spanning research, industrial design, and prototyping.\n\nInspired by watching my grandmother struggle with pill bottles and rely on her daughter for weekly sorting, I designed a smart pill dispenser for older adults and their caregivers — built from scratch using interviews, paper prototyping, and 3D modeling in Rhino.',
+        'A 3-week human-centered design project spanning research, industrial design, and prototyping.\n\nInspired by watching my grandmother struggle with pill bottles and rely on her daughter for weekly sorting, I designed a smart pill dispenser for older adults and their caregivers — built from scratch using interviews, paper prototyping, and 3D modeling in Rhino.',
       problem:
         'Medication routines fail older adults at every touchpoint.\n\nComplex multi-med schedules are easy to forget, standard packaging is physically inaccessible for people with low vision or limited dexterity, and there\'s no reliable way to confirm whether a dose was actually taken. Meanwhile, caregivers spend roughly 45 minutes a week sorting and checking — time that shouldn\'t be necessary.',
       solution:
