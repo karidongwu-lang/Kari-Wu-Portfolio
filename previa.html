@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Previa — Kari Wu</title>
+  <meta name="description" content="Previa case study — redesigning prior authorization as an agentic AI workspace." />
+  <link rel="icon" href="images/logo/catlogo-3.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/nav.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --cs-navy: #1b2a4a;
+      --cs-accent: #C93A2C;
+      --cs-gray: #f0f2f5;
+      --cs-text: #1b2a4a;
+      --cs-muted: #6b7a99;
+      --cs-border: #e5e8ef;
+    }
+
+    .prv-page {
+      padding-top: var(--nav-height);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--cs-text);
+      line-height: 1.6;
+    }
+
+    .prv-page h1, .prv-page h2, .prv-page h3 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 400;
+    }
+
+    /* ── Sidebar nav ── */
+    .prv-sidebar {
+      position: fixed;
+      top: calc(var(--nav-height) + 32px);
+      left: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 50;
+    }
+    .prv-sidebar a {
+      display: block;
+      text-decoration: none;
+      white-space: nowrap;
+      color: #c8cdd9;
+      font-size: 11px;
+      font-family: 'Andale Mono', 'Courier New', monospace;
+      padding: 2px 0;
+      transition: color 0.15s;
+    }
+    .prv-sidebar a:hover { color: var(--cs-navy); }
+    .prv-sidebar a.active { color: var(--cs-navy); }
+
+    @media (max-width: 1100px) { .prv-sidebar { display: none; } }
+
+    /* ── Layout ── */
+    .prv-container { max-width: 800px; margin: 0 auto; padding: 0 32px; }
+    .prv-container-wide { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Hero ── */
+    .prv-hero { padding: 80px 0 56px; }
+    .prv-hero-meta { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .prv-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cs-accent); }
+    .prv-hero h1 { font-size: clamp(28px, 4vw, 44px); color: var(--cs-navy); line-height: 1.15; margin-bottom: 16px; }
+    .prv-hero h1 em { font-style: italic; color: var(--cs-navy); }
+    .prv-hero-summary { font-size: 17px; color: var(--cs-muted); max-width: 600px; margin-bottom: 32px; line-height: 1.6; }
+    .prv-hero-attrs { display: flex; gap: 40px; padding: 20px 0; border-top: 1px solid var(--cs-border); flex-wrap: wrap; }
+    .prv-attr-label { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 4px; }
+    .prv-attr-val { font-size: 13px; font-weight: 600; color: var(--cs-navy); }
+
+    /* ── Sections ── */
+    .prv-section { padding: 72px 0; border-bottom: 1px solid var(--cs-border); }
+    .prv-section:last-of-type { border-bottom: none; }
+    .prv-section-num { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cs-accent); margin-bottom: 10px; }
+    .prv-page h2 { font-size: 30px; color: var(--cs-navy); margin-bottom: 20px; }
+    .prv-page p { font-size: 15px; color: #3a4a6a; margin-bottom: 16px; max-width: 660px; line-height: 1.7; }
+    .prv-page p:last-child { margin-bottom: 0; }
+
+    /* Browser container */
+    .prv-browser { border-radius: 12px; border: 1px solid var(--cs-border); box-shadow: 0 4px 32px rgba(0,0,0,0.08); overflow: hidden; margin-top: 32px; }
+    .prv-browser-bar { background: #f5f6fa; border-bottom: 1px solid var(--cs-border); padding: 9px 14px; display: flex; align-items: center; gap: 10px; }
+    .prv-browser-dots { display: flex; gap: 5px; }
+    .prv-browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .prv-browser-dot:nth-child(1) { background: #ff6b6b; }
+    .prv-browser-dot:nth-child(2) { background: #ffd93d; }
+    .prv-browser-dot:nth-child(3) { background: #6bcb77; }
+    .prv-browser-url { flex: 1; background: #fff; border: 1px solid var(--cs-border); border-radius: 6px; padding: 4px 12px; font-size: 11px; color: var(--cs-muted); }
+    .prv-browser img { width: 100%; display: block; }
+
+    /* HMW callout */
+    .prv-hmw { margin: 32px 0; }
+    .prv-hmw p {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 22px; font-style: italic; font-weight: 400;
+      color: var(--cs-navy); line-height: 1.5; max-width: 620px; margin: 0;
+    }
+
+    /* Screen items */
+    .prv-screen-item { margin-top: 56px; }
+    .prv-screen-item:first-child { margin-top: 32px; }
+    .prv-screen-item h3 { font-size: 20px; color: var(--cs-navy); margin-bottom: 6px; }
+    .prv-screen-item p { font-size: 14px; color: var(--cs-muted); margin: 0; max-width: none; line-height: 1.5; }
+
+    /* Decisions */
+    .prv-decisions { margin-top: 28px; display: flex; flex-direction: column; gap: 28px; }
+    .prv-decision { display: flex; flex-direction: column; gap: 6px; padding-left: 16px; border-left: 2px solid var(--cs-border); }
+    .prv-decision h4 { font-size: 13px; font-weight: 700; color: var(--cs-navy); font-family: 'Andale Mono', 'Courier New', monospace; letter-spacing: 0.2px; }
+    .prv-decision p { font-size: 14px; color: #3a4a6a; margin: 0; max-width: none; line-height: 1.6; }
+
+    /* Next list */
+    .prv-next-list { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+    .prv-next-item { display: flex; gap: 12px; align-items: flex-start; }
+    .prv-next-arrow { color: var(--cs-accent); font-weight: 700; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+    .prv-next-text { font-size: 14px; color: #3a4a6a; line-height: 1.5; }
+    .prv-next-text strong { color: var(--cs-navy); font-weight: 700; font-family: 'Andale Mono', 'Courier New', monospace; font-size: 13px; }
+
+    /* Back link */
+    .prv-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); padding: 48px 0 0; transition: color 0.15s; }
+    .prv-back:hover { color: var(--color-ink); }
+  </style>
+</head>
+<body>
+  <script>
+    (function(){
+      if(sessionStorage.getItem("theme")==="dark"){
+        document.body.classList.add("is-dark");
+        document.body.style.backgroundColor = "#3c3a51";
+        document.body.style.color = "#f0ede7";
+        var r = document.documentElement;
+        r.style.setProperty("--color-accent",  "#ffcb58");
+        r.style.setProperty("--color-bg",       "#3c3a51");
+        r.style.setProperty("--color-ink",      "#f0ede7");
+        r.style.setProperty("--color-muted",    "#9a96b8");
+        r.style.setProperty("--color-border",   "#504e68");
+        r.style.setProperty("--color-faint",    "#464460");
+      }
+    })();
+  </script>
+
+  <div id="nav-placeholder"></div>
+
+  <div class="prv-page">
+
+    <!-- Sidebar -->
+    <nav class="prv-sidebar" id="sideNav">
+      <a href="#hero" class="active">Overview</a>
+      <a href="#problem">Problem</a>
+      <a href="#role">Approach</a>
+      <a href="#loop">Agentic Loop</a>
+      <a href="#screens">Screens</a>
+      <a href="#decisions">Decisions</a>
+      <a href="#reflection">Reflections</a>
+    </nav>
+
+    <!-- 01 Hero -->
+    <section id="hero" style="border-bottom:1px solid var(--cs-border);">
+      <div class="prv-container">
+        <div class="prv-hero">
+          <div class="prv-hero-meta">
+            <span class="prv-hero-tag">AI / Product Design</span>
+            <span class="prv-hero-tag" style="color:var(--cs-muted);">·</span>
+            <span class="prv-hero-tag" style="color:var(--cs-muted);font-weight:500;text-transform:none;letter-spacing:0;">UX Case Study</span>
+          </div>
+          <h1>Redesigning prior auth<br>as an <em>agentic AI workspace</em></h1>
+          <div class="prv-hero-summary">How I turned a manual 8-step clinic workflow into a human-AI loop — where the agent handles the repetitive work and staff stay in control of every decision that matters.</div>
+          <div class="prv-hero-attrs">
+            <div><div class="prv-attr-label">Project</div><div class="prv-attr-val">Previa</div></div>
+            <div><div class="prv-attr-label">Role</div><div class="prv-attr-val">Co-Designer & Co-Founder</div></div>
+            <div><div class="prv-attr-label">Type</div><div class="prv-attr-val">Agentic AI · Healthcare</div></div>
+            <div><div class="prv-attr-label">Timeline</div><div class="prv-attr-val">12 weeks</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="prv-container-wide">
+        <div class="prv-browser" style="border-radius:12px 12px 0 0;box-shadow:none;">
+          <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Dashboard</div></div>
+          <img src="images/work/UI projects/Preva/dashboard.png" alt="Previa Dashboard">
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Problem -->
+    <section id="problem" class="prv-section">
+      <div class="prv-container">
+        <div class="prv-section-num">01 — The Problem</div>
+        <h2>Authorization is slow, repetitive, and error-prone</h2>
+        <p>Prior authorization is one of the most time-consuming tasks in a physical therapy clinic. Staff spend hours manually collecting patient data, checking payer requirements, filling out forms, and chasing follow-ups — for every single patient, every single authorization cycle.</p>
+        <p>Every payer has different rules. Every case has documents scattered across systems. A single missing field delays care by days. And when a denial comes back, the reason is buried in codes that take expertise to decode.</p>
+        <p>The pain isn't just "filling a form." It's knowing what's required, finding the right information, and tracking dozens of incomplete cases simultaneously.</p>
+        <div class="prv-hmw">
+          <p>"How might we let clinic staff delegate the repetitive parts of authorization while keeping them in control of every decision that matters?"</p>
+        </div>
+        <div class="prv-browser">
+          <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Current Workflow Map</div></div>
+          <img src="images/work/UI projects/Preva/workflow-map.png" alt="Current Workflow Map">
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Approach -->
+    <section id="role" class="prv-section">
+      <div class="prv-container">
+        <div class="prv-section-num">02 — My Role & Approach</div>
+        <h2>Mapping human vs. agent responsibility first</h2>
+        <p>Before designing any screen, I mapped every task in the workflow to one of three buckets: agent-owned, human-owned, or shared. In healthcare-adjacent products, this boundary matters — the AI should never submit without human approval.</p>
+        <p>This exercise surfaced the core design constraint: the agent can read, extract, check, and draft. But the human must confirm, correct uncertain fields, and approve any submission. The screens had to make that handoff feel natural — not like a burden.</p>
+        <div class="prv-browser">
+          <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Responsibility Matrix</div></div>
+          <img src="images/work/UI projects/Preva/responsibility-matrix.png" alt="Responsibility Matrix">
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Agentic Loop -->
+    <section id="loop" class="prv-section">
+      <div class="prv-container">
+        <div class="prv-section-num">03 — The Agentic Loop</div>
+        <h2>This isn't a form tool. It's a loop.</h2>
+        <p>The key insight was framing Previa as a goal-pursuing agent, not a smart form. The agent doesn't just fill fields — it understands what's needed, plans a sequence of actions, surfaces what it can't resolve, and hands off to the human at exactly the right moment.</p>
+        <p>The key design decision was making the agent's reasoning visible at every step — not just showing a result, but showing confidence levels, source evidence, and the exact moment where human judgment is required. Amy should always know: what is the agent doing, why, and what does it need from me?</p>
+        <div class="prv-browser">
+          <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Agentic Flow</div></div>
+          <img src="images/work/UI projects/Preva/agentic-flow.png" alt="Agentic Flow">
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Screens -->
+    <section id="screens" class="prv-section">
+      <div class="prv-container-wide">
+        <div class="prv-container" style="padding:0 32px;">
+          <div class="prv-section-num">04 — The Screens</div>
+          <h2>Five screens, one complete workflow</h2>
+          <p>Each screen has one job. The design avoids overloading any single view — instead each screen answers exactly one question Amy might have at that moment in the workflow.</p>
+        </div>
+
+        <div class="prv-screen-item" style="padding:0 32px;">
+          <h3>Dashboard</h3>
+          <p>Agent pre-sorts work by urgency. Amy opens the app and knows exactly what to do — no hunting, no filtering.</p>
+          <div class="prv-browser">
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Dashboard</div></div>
+            <img src="images/work/UI projects/Preva/dashboard.png" alt="Dashboard">
+          </div>
+        </div>
+
+        <div class="prv-screen-item" style="padding:0 32px;">
+          <h3>Case Detail</h3>
+          <p>All patient, auth, and AI context in one place before Amy touches anything. The AI case summary makes clear what the agent has already understood.</p>
+          <div class="prv-browser">
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Emma Lee · Case Detail</div></div>
+            <img src="images/work/UI projects/Preva/case-detail.png" alt="Case Detail">
+          </div>
+        </div>
+
+        <div class="prv-screen-item" style="padding:0 32px;">
+          <h3>Review Draft Packet</h3>
+          <p>The most important screen. This is where trust is built or broken — the AI shows its work (confidence scores, source evidence, flagged conflicts) and Amy decides. Every editable field has a dashed underline. Every flag has a resolution path.</p>
+          <div class="prv-browser">
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Emma Lee · Review Draft</div></div>
+            <img src="images/work/UI projects/Preva/review-draft.png" alt="Review Draft Packet">
+          </div>
+        </div>
+
+        <div class="prv-screen-item" style="padding:0 32px;">
+          <h3>Post-Submission Tracking</h3>
+          <p>The agent's job doesn't end at submission. One focused screen answers one question: where is it? No secondary panels — just status, timeline, and what the agent is watching for.</p>
+          <div class="prv-browser">
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Emma Lee · Tracking</div></div>
+            <img src="images/work/UI projects/Preva/post-submission.png" alt="Post-Submission Tracking">
+          </div>
+        </div>
+
+        <div class="prv-screen-item" style="padding:0 32px;">
+          <h3>Activity Log</h3>
+          <p>The trust layer. Every agent action is logged, timestamped, and attributed — so Amy, her manager, and compliance teams can always answer "what did the AI do, and why?"</p>
+          <div class="prv-browser">
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">previa.com — Activity Log</div></div>
+            <img src="images/work/UI projects/Preva/activity-log.png" alt="Activity Log">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Decisions -->
+    <section id="decisions" class="prv-section">
+      <div class="prv-container">
+        <div class="prv-section-num">05 — Key Design Decisions</div>
+        <h2>Four decisions that changed the design</h2>
+        <p>These weren't in the brief — each one came out of a specific moment where the obvious solution turned out to be wrong.</p>
+        <div class="prv-decisions">
+          <div class="prv-decision">
+            <h4>Replaced the patient table with agent-sorted sections</h4>
+            <p>The first dashboard was a generic table with filter tabs. The problem: "all cases" forces Amy to decide what to look at first. The agent already knows which cases are ready, blocked, or at risk — so I let it do that sorting. Amy arrives knowing exactly what needs her attention.</p>
+          </div>
+          <div class="prv-decision">
+            <h4>Stripped the post-submission screen to one question</h4>
+            <p>The first version had two columns — submission details, visits tracker, patient info, payer info. Then I asked: what does Amy actually need to know after submitting? Just one thing: where is it? I removed the right panel entirely and kept only status, timeline, and what the agent is watching for.</p>
+          </div>
+          <div class="prv-decision">
+            <h4>Every flag comes with a resolution path</h4>
+            <p>Early drafts flagged problems with a colored row and a badge. That's useful but incomplete — it tells Amy something is wrong without telling her what to do about it. I added inline resolve boxes beneath each flagged field with concrete next-step options.</p>
+          </div>
+          <div class="prv-decision">
+            <h4>Added live agent activity to the dashboard</h4>
+            <p>The dashboard showed outcomes but nothing about what was happening right now. I added a live agent activity feed — what the agent is currently extracting, what just completed, what's blocked. It turns the dashboard from a static status board into a live workspace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Reflection -->
+    <section id="reflection" class="prv-section">
+      <div class="prv-container">
+        <div class="prv-section-num">06 — Reflections</div>
+        <h2>What I learned building this</h2>
+        <p>This project pushed me to think beyond screens — the hardest design decisions weren't visual, they were about trust boundaries: what the agent is allowed to do, when to surface uncertainty, and how to make human oversight feel natural rather than bureaucratic.</p>
+        <p>The most useful framework was asking: <em>what is the cost of the agent being wrong here?</em> That question determined every decision about when to automate, when to flag, and when to require explicit human sign-off.</p>
+        <p style="margin-top:28px;font-weight:600;color:var(--cs-navy);max-width:none;">What I'd build next</p>
+        <div class="prv-next-list">
+          <div class="prv-next-item">
+            <div class="prv-next-arrow">→</div>
+            <div class="prv-next-text"><strong>Denial handling flow —</strong> The agent interprets denial codes and drafts an appeal, closing the loop on the most painful part of the current workflow.</div>
+          </div>
+          <div class="prv-next-item">
+            <div class="prv-next-arrow">→</div>
+            <div class="prv-next-text"><strong>Payer-specific learning —</strong> The agent improves its extraction confidence over time per payer. The more cases it processes for Aetna, the better it gets at Aetna.</div>
+          </div>
+          <div class="prv-next-item">
+            <div class="prv-next-arrow">→</div>
+            <div class="prv-next-text"><strong>Multi-patient bulk review —</strong> A triage view where Amy batch-approves everything the agent is confident about, handling 20 cases in a morning instead of one at a time.</div>
+          </div>
+        </div>
+
+        <a href="index.html" class="prv-back">← Back to work</a>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/projects.js"></script>
+  <script src="js/art-data.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    /* Sidebar scroll spy */
+    (function () {
+      var sections = ['hero','problem','role','loop','screens','decisions','reflection'];
+      var navLinks = document.querySelectorAll('.prv-sidebar a');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function(a) { a.classList.remove('active'); });
+            var active = document.querySelector('.prv-sidebar a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    })();
+  </script>
+</body>
+</html>
