@@ -637,7 +637,7 @@
 
       selected.forEach(function (p, i) {
         var row = document.createElement('a');
-        row.href      = 'case-study.html?id=' + p.id;
+        row.href      = p.id === 'previa' ? 'case-studies/previa/' : 'case-study.html?id=' + p.id;
         row.className = 'proj-row';
         row.setAttribute('data-cursor', 'hover');
 
