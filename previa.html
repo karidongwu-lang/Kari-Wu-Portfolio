@@ -392,15 +392,19 @@
       var navLinks = Array.from(document.querySelectorAll('.prv-sidebar a'));
 
       function update() {
-        var scrollMid = window.scrollY + window.innerHeight * 0.45;
+        var scrollTop = window.scrollY;
+        var viewMid = scrollTop + window.innerHeight * 0.45;
         var activeIdx = 0;
         for (var i = 0; i < sectionIds.length; i++) {
           var el = document.getElementById(sectionIds[i]);
-          if (el && el.offsetTop <= scrollMid) activeIdx = i;
+          if (el && el.offsetTop <= viewMid) activeIdx = i;
         }
         navLinks.forEach(function(a, i) {
           a.classList.toggle('active', i === activeIdx);
-          a.style.display = i < activeIdx ? 'none' : 'block';
+          /* Hide an item only when its section has fully scrolled above the viewport */
+          var nextEl = document.getElementById(sectionIds[i + 1]);
+          var fullyPast = nextEl && (nextEl.offsetTop < scrollTop);
+          a.style.display = fullyPast ? 'none' : 'block';
         });
       }
 
