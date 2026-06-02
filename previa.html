@@ -64,7 +64,6 @@
       flex-direction: column;
       gap: 8px;
       z-index: 50;
-      transition: transform 0.25s ease;
     }
     .prv-sidebar a {
       display: block;
@@ -398,9 +397,11 @@
           var el = document.getElementById(sectionIds[i]);
           if (el && el.offsetTop <= threshold) activeIdx = i;
         }
+        /* Slide sidebar top up as nav scrolls off, clamp at 16px */
         var sidebar = document.getElementById('sideNav');
-        var itemHeight = 29; /* ~font-size + gap */
-        sidebar.style.transform = 'translateY(-' + (activeIdx * itemHeight) + 'px)';
+        var top = Math.max(16, navHeight + 16 - window.scrollY);
+        sidebar.style.top = top + 'px';
+        sidebar.style.transform = '';
         navLinks.forEach(function(a, i) {
           a.classList.toggle('active', i === activeIdx);
           a.style.display = 'block';
