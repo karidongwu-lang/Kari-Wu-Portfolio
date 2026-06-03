@@ -212,7 +212,7 @@ window.PROJECTS = [
           ]
         },
         {
-          label: 'Mock ups',
+          label: 'Mockups',
           layout: 'grid',
           images: [
             { src: 'images/work/Branding Concepts/3miu/image 10.webp' },
@@ -250,7 +250,7 @@ window.PROJECTS = [
       process: { text: '', images: [] },
       customSections: [
         {
-          label: 'Mock ups',
+          label: 'Mockups',
           layout: 'grid',
           images: [
             { src: 'images/work/Branding Concepts/blink/image 15.webp' },
