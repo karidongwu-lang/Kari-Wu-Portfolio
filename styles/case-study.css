@@ -397,7 +397,9 @@
   }
 
   .cs-hero-image {
-    aspect-ratio: 16 / 9;
+    height: 56vw;
+    max-height: 360px;
+    object-fit: cover;
   }
 
   .cs-solution-wrap,
