@@ -98,8 +98,15 @@
     .prv-hero-img { width: 100%; display: block; }
 
     /* ── Sections ── */
-    .prv-section { padding: 72px 0; border-bottom: 1px solid var(--cs-border); }
-    .prv-section:last-of-type { border-bottom: none; }
+    .prv-section { padding: 72px 0; position: relative; }
+    .prv-section:not(:last-of-type)::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--cs-border);
+      margin: 72px auto 0;
+    }
     .prv-section-num { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cs-accent); margin-bottom: 10px; }
     .prv-page h2 { font-size: 30px; color: var(--cs-navy); margin-bottom: 20px; }
     .prv-page p  { font-size: 15px; color: #3a4a6a; margin-bottom: 16px; max-width: 660px; line-height: 1.7; }
@@ -197,6 +204,7 @@
       .prv-hero h1 { font-size: clamp(18px, 6vw, 28px); }
       .prv-hero-attrs { gap: 20px; }
       .prv-section { padding: 48px 0; }
+      .prv-section:not(:last-of-type)::after { margin-top: 48px; }
       .prv-page h2 { font-size: 22px; }
       .prv-next { text-align: left; }
       .prv-hero-summary { font-size: 15px; }
@@ -402,7 +410,7 @@
 
       /* ── Hero ── */
       var heroHTML =
-        '<section id="hero" style="border-bottom:1px solid var(--cs-border); padding-top:16px;">' +
+        '<section id="hero" style="padding-top:16px;">' +
           '<div class="prv-container">' +
             '<div class="prv-hero">' +
               '<div class="prv-hero-meta">' +
