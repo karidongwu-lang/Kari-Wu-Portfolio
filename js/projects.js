@@ -6,7 +6,7 @@ window.PROJECTS = [
 
   {
     id: 'previa',
-    title: 'Previa',
+    title: 'Preva',
     category: 'ui-projects',
     year: '2026',
     duration: 'Ongoing',
@@ -25,7 +25,7 @@ window.PROJECTS = [
       problem:
         'Insurance paperwork is killing PT clinics.\n\nPrior authorization — a mandatory insurance form for PT clinics — takes 20 hours/week of manual work per clinic. The burden is severe enough that 57% of PT clinics have dropped at least one insurance network entirely, turning away patients like my co-founder\'s friend Navin, who waited 4 extra weeks to begin ACL recovery.',
       solution:
-        'A browser agent that handles prior auth end-to-end, without any manual steps.\n\nPrevia automates prior authorization end-to-end. A browser agent pulls clinical data from any EMR, flags missing information, works with the therapist to resolve gaps, and submits directly to insurance portals — no manual steps, no integrations required.',
+        'A browser agent that handles prior auth end-to-end, without any manual steps.\n\nPreva automates prior authorization end-to-end. A browser agent pulls clinical data from any EMR, flags missing information, works with the therapist to resolve gaps, and submits directly to insurance portals — no manual steps, no integrations required.',
       process: {
         text:
           'Discovery → validation → pilot.\n\nCustomer discovery → identified prior auth as the core pain point → validated with clinic owners → built browser-agent architecture to avoid lengthy EMR integration → launched first pilot with Vargo Physical Therapy, with 4 partner clinics and 37 PTs onboarded.',
@@ -41,7 +41,7 @@ window.PROJECTS = [
         { image: 'https://placehold.co/400x300/FAF8F3/1A1A18?text=Resolution', title: 'Smart Gap Resolution', caption: 'Gap resolution with therapists, and tiered pricing ($350–$899/mo).' }
       ],
       takeaways:
-        'Designing for async, agent-driven workflows required rethinking visibility and failure states from the ground up.\n\nDesigning for a browser-agent workflow introduced constraints I hadn\'t encountered before. Unlike typical SaaS products, Previa\'s core actions happen asynchronously in the background — which forced me to rethink how to surface status, progress, and errors to users who aren\'t watching the agent work in real time. A lot of my early wireframes assumed too much user visibility into the process, and I had to strip those back significantly.\n\nThe other challenge was designing around incomplete data. Because the agent sometimes hits missing clinical information mid-submission, I had to map out every failure state and design an interruption flow that pulled the therapist in at exactly the right moment — specific enough to be actionable, without overwhelming someone mid-session with a patient. Getting that interaction right required diagramming the full agent decision tree before touching any UI.',
+        'Designing for async, agent-driven workflows required rethinking visibility and failure states from the ground up.\n\nDesigning for a browser-agent workflow introduced constraints I hadn\'t encountered before. Unlike typical SaaS products, Preva\'s core actions happen asynchronously in the background — which forced me to rethink how to surface status, progress, and errors to users who aren\'t watching the agent work in real time. A lot of my early wireframes assumed too much user visibility into the process, and I had to strip those back significantly.\n\nThe other challenge was designing around incomplete data. Because the agent sometimes hits missing clinical information mid-submission, I had to map out every failure state and design an interruption flow that pulled the therapist in at exactly the right moment — specific enough to be actionable, without overwhelming someone mid-session with a patient. Getting that interaction right required diagramming the full agent decision tree before touching any UI.',
       takeawayImage: 'images/work/UI projects/Preva/newdemo.webp',
       takeawayImageCaption: 'shoutout to my co-founder marcus'
     }
