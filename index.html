@@ -154,6 +154,20 @@
     @media (max-width: 700px) {
       .hero-doodle { display: none; }
       .hero-line1, .hero-line2 { max-width: 100%; }
+      .hero {
+        padding-top: calc(var(--nav-height) + var(--space-8));
+        padding-bottom: var(--space-16);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-line1, .hero-line2 {
+        font-size: clamp(1.6rem, 8vw, 2.4rem);
+      }
+      .proj-title { font-size: clamp(1.4rem, 7vw, 2rem); }
+      .proj-row { gap: var(--space-4); padding: var(--space-8) 0; }
+      .play-row { gap: var(--space-4); padding: var(--space-6) 0; }
+      .sec-label { padding-top: var(--space-8); }
     }
 
     /* ─── DARK TOGGLE ────────────────────────────────────────────────────────── */

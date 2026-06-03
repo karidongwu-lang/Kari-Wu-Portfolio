@@ -156,4 +156,13 @@
 @media (max-width: 640px) {
   .nav-links     { display: none; }
   .nav-hamburger { display: flex; }
+
+  .nav-inner {
+    padding-inline: 1.25rem;
+    height: 64px;
+  }
+
+  .site-nav.is-scrolled .nav-inner {
+    height: 56px;
+  }
 }
