@@ -202,15 +202,14 @@
     <nav class="prv-sidebar" id="sideNav">
       <a href="#hero" class="active">Overview</a>
       <a href="#problem">Problem</a>
-      <a href="#research">Research Insights</a>
-      <a href="#challenge">Design Challenge</a>
-      <a href="#uxshift">Key UX Shift</a>
-      <a href="#approach">Design Approach</a>
-      <a href="#finaldesign">Final Design</a>
-      <a href="#reflection">Reflection</a>
+      <a href="#role">Approach</a>
+      <a href="#loop">Agentic Loop</a>
+      <a href="#screens">Screens</a>
+      <a href="#decisions">Decisions</a>
+      <a href="#reflection">Reflections</a>
     </nav>
 
-    <!-- Hero / Overview -->
+    <!-- 01 Hero -->
     <section id="hero" style="border-bottom:1px solid var(--cs-border); padding-top: 16px;">
       <div class="prv-container">
         <div class="prv-hero">
@@ -219,8 +218,8 @@
             <span class="prv-hero-tag" style="color:var(--cs-muted);">·</span>
             <span class="prv-hero-tag" style="color:var(--cs-muted);font-weight:500;text-transform:none;letter-spacing:0;">UX Case Study</span>
           </div>
-          <h1>Preva — <em>Supervised Agentic AI for Prior Authorization</em></h1>
-          <div class="prv-hero-summary">Preva is a supervised agentic AI prior authorization assistant for physical therapy clinics. It helps clinic staff prepare, review, submit, and track prior authorization requests by automating repetitive administrative work while keeping humans in control of final decisions.</div>
+          <h1>Redesigning prior auth as an <em>agentic AI workspace</em></h1>
+          <div class="prv-hero-summary">How I turned a manual 8-step clinic workflow into a human-AI loop — where the agent handles the repetitive work and staff stay in control of every decision that matters.</div>
           <div class="prv-hero-attrs">
             <div><div class="prv-attr-label">Project</div><div class="prv-attr-val">Preva</div></div>
             <div><div class="prv-attr-label">Role</div><div class="prv-attr-val">Designer & Co-Founder</div></div>
@@ -240,92 +239,61 @@
     <!-- 02 Problem -->
     <section id="problem" class="prv-section">
       <div class="prv-container">
-        <div class="prv-section-num">02 — Problem</div>
-        <h2>Prior authorization is a time-consuming workflow</h2>
-        <p>Prior authorization is a time-consuming workflow involving insurance rules, patient documentation, form preparation, submission, and follow-up. Clinic staff often spend time searching across documents, checking payer requirements, and tracking incomplete cases manually.</p>
-        <img class="prv-img" src="images/work/UI projects/Preva/clinicflow.jpg" alt="Workflow Map">
-      </div>
-    </section>
-
-    <!-- 03 Research Insights -->
-    <section id="research" class="prv-section">
-      <div class="prv-container">
-        <div class="prv-section-num">03 — Research Insights</div>
-        <h2>What we heard from clinic staff</h2>
-        <div class="prv-decisions">
-          <div class="prv-decision">
-            <p>Staff need to know what is missing before they submit.</p>
-          </div>
-          <div class="prv-decision">
-            <p>Payer requirements vary and are difficult to track.</p>
-          </div>
-          <div class="prv-decision">
-            <p>Copying information across documents and forms creates repetitive work.</p>
-          </div>
-          <div class="prv-decision">
-            <p>Staff need confidence before submitting because mistakes can delay care.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 03 Design Challenge -->
-    <section id="challenge" class="prv-section">
-      <div class="prv-container">
-        <div class="prv-section-num">03 — Design Challenge</div>
-        <h2>How might we design a smarter authorization workflow?</h2>
+        <div class="prv-section-num">01 — The Problem</div>
+        <h2>Authorization is slow, repetitive, and error-prone</h2>
+        <p>Prior authorization is one of the most time-consuming tasks in a physical therapy clinic. Staff spend hours manually collecting patient data, checking payer requirements, filling out forms, and chasing follow-ups — for every single patient, every single authorization cycle.</p>
+        <p>Every payer has different rules. Every case has documents scattered across systems. A single missing field delays care by days. And when a denial comes back, the reason is buried in codes that take expertise to decode.</p>
+        <p>The pain isn't just "filling a form." It's knowing what's required, finding the right information, and tracking dozens of incomplete cases simultaneously.</p>
         <div class="prv-hmw">
-          <p>How might we design an AI agent that reduces repetitive prior authorization work while keeping clinic staff informed, confident, and in control?</p>
+          <p>"How might we let clinic staff delegate the repetitive parts of authorization while keeping them in control of every decision that matters?"</p>
+        </div>
+        <div class="prv-browser">
+          <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Current Workflow Map</div></div>
+          <img src="images/work/UI projects/Preva/workflow-map.png" alt="Current Workflow Map">
         </div>
       </div>
     </section>
 
-    <!-- 04 Key UX Shift -->
-    <section id="uxshift" class="prv-section">
+    <!-- 03 Approach -->
+    <section id="role" class="prv-section">
       <div class="prv-container">
-        <div class="prv-section-num">04 — Key UX Shift</div>
-        <h2>Designing a trustworthy delegation experience</h2>
-        <p>The UX challenge isn't just "Make each step easy." It is: How do I design a trustworthy delegation experience?</p>
-        <p>Agentic AI UI should help users delegate repetitive steps, supervise the agent, review uncertain outputs, and approve high-impact actions.</p>
+        <div class="prv-section-num">02 — My Role & Approach</div>
+        <h2>Mapping human vs. agent responsibility first</h2>
+        <p>Before designing any screen, I mapped every task in the workflow to one of three buckets: agent-owned, human-owned, or shared. In healthcare-adjacent products, this boundary matters — the AI should never submit without human approval.</p>
+        <p>This exercise surfaced the core design constraint: the agent can read, extract, check, and draft. But the human must confirm, correct uncertain fields, and approve any submission. The screens had to make that handoff feel natural — not like a burden.</p>
+        <div class="prv-browser">
+          <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Responsibility Matrix</div></div>
+          <img src="images/work/UI projects/Preva/responsibility-matrix.png" alt="Responsibility Matrix">
+        </div>
       </div>
     </section>
 
-    <!-- 05 Design Approach -->
-    <section id="approach" class="prv-section">
+    <!-- 04 Agentic Loop -->
+    <section id="loop" class="prv-section">
       <div class="prv-container">
-        <div class="prv-section-num">05 — Design Approach</div>
-        <h2>From manual authorization to supervised automation</h2>
-        <p>Instead of designing Preva as a traditional form-filling tool, I explored how an AI agent could help clinic staff move from manual authorization work to supervised automation. The agent extracts patient and insurance information, identifies missing requirements, drafts the authorization packet, and asks for human approval before submission. My UX focus was designing the trust layer: plan preview, confidence states, missing-information alerts, review checkpoints, and an activity log.</p>
-
-        <div class="prv-decisions" style="margin-top:40px;">
-          <div class="prv-decision">
-            <h4>a — Decide what the AI agent should and should not do</h4>
-            <p>The AI should not do everything automatically, especially in healthcare-adjacent workflows. I mapped the workflow into human-owned, agent-owned, and shared responsibilities. Because prior authorization affects care access and insurance approval, I designed the AI agent to assist with extraction, checking, drafting, and tracking, while keeping final decisions and submissions under human control.</p>
-          </div>
+        <div class="prv-section-num">03 — The Agentic Loop</div>
+        <h2>This isn't a form tool. It's a loop.</h2>
+        <p>The key insight was framing Preva as a goal-pursuing agent, not a smart form. The agent doesn't just fill fields — it understands what's needed, plans a sequence of actions, surfaces what it can't resolve, and hands off to the human at exactly the right moment.</p>
+        <p>The key design decision was making the agent's reasoning visible at every step — not just showing a result, but showing confidence levels, source evidence, and the exact moment where human judgment is required. Staff should always know: what is the agent doing, why, and what does it need from me?</p>
+        <div class="prv-browser">
+          <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Agentic Flow</div></div>
+          <img src="images/work/UI projects/Preva/agentic-flow.png" alt="Agentic Flow">
         </div>
-        <img class="prv-img" src="images/work/UI projects/Preva/responsibility-matrix.png" alt="Human-Agent Responsibility Matrix">
-
-        <div class="prv-decisions" style="margin-top:40px;">
-          <div class="prv-decision">
-            <h4>b — Define risk level</h4>
-            <p>Low risk tasks (summarize, organize, classify, suggest): the agent can act automatically. Medium risk tasks (draft, pre-fill, recommend): Review, Decide/Modify. High risk tasks (submit, send, delete, approve, diagnose, reject): must review and approve.</p>
-          </div>
-        </div>
-        <img class="prv-img" src="images/work/UI projects/Preva/agentflow.jpg" alt="Agentic AI Flow">
       </div>
     </section>
 
-    <!-- 07 Final Design -->
-    <section id="finaldesign" class="prv-section">
+    <!-- 05 Screens -->
+    <section id="screens" class="prv-section">
       <div class="prv-container-wide">
         <div class="prv-container" style="padding:0 32px;">
-          <div class="prv-section-num">07 — Final Design</div>
-          <h2>Key screens covering the prior authorization workflow</h2>
-          <p>From the morning dashboard to post-submission tracking.</p>
+          <div class="prv-section-num">04 — The Screens</div>
+          <h2>Five screens, one complete workflow</h2>
+          <p>Each screen has one job. The design avoids overloading any single view — instead each screen answers exactly one question staff might have at that moment in the workflow.</p>
         </div>
 
         <div class="prv-screen-item" style="padding:0 32px;">
           <h3>Dashboard</h3>
+          <p>Agent pre-sorts work by urgency. Staff open the app and know exactly what to do — no hunting, no filtering.</p>
           <div class="prv-browser">
             <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Dashboard</div></div>
             <img src="images/work/UI projects/Preva/dashboard.png" alt="Dashboard">
@@ -334,47 +302,93 @@
 
         <div class="prv-screen-item" style="padding:0 32px;">
           <h3>Case Detail</h3>
+          <p>All patient, auth, and AI context in one place before staff touch anything. The AI case summary makes clear what the agent has already understood.</p>
           <div class="prv-browser">
-            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Case Detail</div></div>
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Emma Lee · Case Detail</div></div>
             <img src="images/work/UI projects/Preva/case-detail.png" alt="Case Detail">
           </div>
         </div>
 
         <div class="prv-screen-item" style="padding:0 32px;">
           <h3>Review Draft Packet</h3>
+          <p>The most important screen. This is where trust is built or broken — the AI shows its work (confidence scores, source evidence, flagged conflicts) and staff decide. Every editable field has a dashed underline. Every flag has a resolution path.</p>
           <div class="prv-browser">
-            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Review Draft</div></div>
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Emma Lee · Review Draft</div></div>
             <img src="images/work/UI projects/Preva/review-draft.png" alt="Review Draft Packet">
           </div>
         </div>
 
         <div class="prv-screen-item" style="padding:0 32px;">
           <h3>Post-Submission Tracking</h3>
+          <p>The agent's job doesn't end at submission. One focused screen answers one question: where is it? No secondary panels — just status, timeline, and what the agent is watching for.</p>
           <div class="prv-browser">
-            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Tracking</div></div>
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Emma Lee · Tracking</div></div>
             <img src="images/work/UI projects/Preva/post-submission.png" alt="Post-Submission Tracking">
           </div>
         </div>
 
         <div class="prv-screen-item" style="padding:0 32px;">
           <h3>Activity Log</h3>
+          <p>The trust layer. Every agent action is logged, timestamped, and attributed — so staff, managers, and compliance teams can always answer "what did the AI do, and why?"</p>
           <div class="prv-browser">
             <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Activity Log</div></div>
             <img src="images/work/UI projects/Preva/activity-log.png" alt="Activity Log">
           </div>
         </div>
-
-  
+      </div>
     </section>
 
-    <!-- 08 Reflection -->
+    <!-- 06 Decisions -->
+    <section id="decisions" class="prv-section">
+      <div class="prv-container">
+        <div class="prv-section-num">05 — Key Design Decisions</div>
+        <h2>Four decisions that changed the design</h2>
+        <p>These weren't in the brief — each one came out of a specific moment where the obvious solution turned out to be wrong.</p>
+        <div class="prv-decisions">
+          <div class="prv-decision">
+            <h4>Replaced the patient table with agent-sorted sections</h4>
+            <p>The first dashboard was a generic table with filter tabs. The problem: "all cases" forces staff to decide what to look at first. The agent already knows which cases are ready, blocked, or at risk — so I let it do that sorting. Staff arrive knowing exactly what needs attention.</p>
+          </div>
+          <div class="prv-decision">
+            <h4>Stripped the post-submission screen to one question</h4>
+            <p>The first version had two columns — submission details, visits tracker, patient info, payer info. Then I asked: what does staff actually need to know after submitting? Just one thing: where is it? I removed the right panel entirely and kept only status, timeline, and what the agent is watching for.</p>
+          </div>
+          <div class="prv-decision">
+            <h4>Every flag comes with a resolution path</h4>
+            <p>Early drafts flagged problems with a colored row and a badge. That's useful but incomplete — it tells staff something is wrong without telling her what to do about it. I added inline resolve boxes beneath each flagged field with concrete next-step options.</p>
+          </div>
+          <div class="prv-decision">
+            <h4>Added live agent activity to the dashboard</h4>
+            <p>The dashboard showed outcomes but nothing about what was happening right now. I added a live agent activity feed — what the agent is currently extracting, what just completed, what's blocked. It turns the dashboard from a static status board into a live workspace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Reflection -->
     <section id="reflection" class="prv-section">
       <div class="prv-container">
-        <div class="prv-section-num">08 — Reflection</div>
-        <h2>Designing a trustworthy partnership</h2>
-        <p>This project helped me understand that designing for agentic AI is not about hiding the interface or replacing every human action. It is about designing a trustworthy partnership where the AI handles repetitive work and the human supervises decisions, exceptions, and approvals.</p>
+        <div class="prv-section-num">06 — Reflections</div>
+        <h2>What I learned building this</h2>
+        <p>This project pushed me to think beyond screens — the hardest design decisions weren't visual, they were about trust boundaries: what the agent is allowed to do, when to surface uncertainty, and how to make human oversight feel natural rather than bureaucratic.</p>
+        <p>The most useful framework was asking: <em>what is the cost of the agent being wrong here?</em> That question determined every decision about when to automate, when to flag, and when to require explicit human sign-off.</p>
+        <p style="margin-top:28px;font-weight:600;color:var(--cs-navy);max-width:none;">What I'd build next</p>
+        <div class="prv-next-list">
+          <div class="prv-next-item">
+            <div class="prv-next-arrow">→</div>
+            <div class="prv-next-text"><strong>Denial handling flow —</strong> The agent interprets denial codes and drafts an appeal, closing the loop on the most painful part of the current workflow.</div>
+          </div>
+          <div class="prv-next-item">
+            <div class="prv-next-arrow">→</div>
+            <div class="prv-next-text"><strong>Payer-specific learning —</strong> The agent improves its extraction confidence over time per payer. The more cases it processes for Aetna, the better it gets at Aetna.</div>
+          </div>
+          <div class="prv-next-item">
+            <div class="prv-next-arrow">→</div>
+            <div class="prv-next-text"><strong>Multi-patient bulk review —</strong> A triage view where staff batch-approve everything the agent is confident about, handling 20 cases in a morning instead of one at a time.</div>
+          </div>
+        </div>
 
-        <a href="index.html#work" class="prv-back">← Back to work</a>
+        <a href="case-study.html?id=smart-pill-dispenser" class="prv-back">← Back to work</a>
 
         <div class="prv-next">
           <p class="prv-next-label">Next project</p>
@@ -395,7 +409,7 @@
   <script>
     /* Sidebar scroll spy */
     (function () {
-      var sectionIds = ['hero','problem','research','challenge','uxshift','approach','finaldesign','reflection'];
+      var sectionIds = ['hero','problem','role','loop','screens','decisions','reflection'];
       var navLinks = Array.from(document.querySelectorAll('.prv-sidebar a'));
 
       function update() {
