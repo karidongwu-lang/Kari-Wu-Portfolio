@@ -12,7 +12,7 @@ window.PROJECTS = [
     duration: 'Ongoing',
     blurb: 'Automating prior authorization workflows for physical therapy clinics.',
     featured: true,
-    role: 'Co-Designer & Co-Founder',
+    role: 'Designer & Co-Founder',
     timeline: '12 weeks',
     skills: ['User Research', 'Interaction Design', 'Prototyping', 'Systems Thinking'],
     tools: ['Figma', 'Claude Code', 'VS Code'],
