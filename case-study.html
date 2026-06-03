@@ -293,8 +293,8 @@
       var sectionsHTML = '';
       var num = 1;
 
-      function makeSection(id, numLabel, heading, contentHTML) {
-        sidebarItems.push({ id: id, label: heading });
+      function makeSection(id, numLabel, sidebarLabel, heading, contentHTML) {
+        sidebarItems.push({ id: id, label: sidebarLabel });
         return (
           '<section id="' + id + '" class="prv-section">' +
             '<div class="prv-container">' +
@@ -346,11 +346,11 @@
         /* ── Single-project ── */
 
         if (s.context) {
-          sectionsHTML += makeSection('context', 'Context', s.context.split('\n\n')[0].trim(), paras(s.context));
+          sectionsHTML += makeSection('context', 'Context', 'Context', s.context.split('\n\n')[0].trim(), paras(s.context));
         }
 
         if (s.problem) {
-          sectionsHTML += makeSection('problem', 'The Problem', s.problem.split('\n\n')[0].trim(), paras(s.problem));
+          sectionsHTML += makeSection('problem', 'The Problem', 'Problem', s.problem.split('\n\n')[0].trim(), paras(s.problem));
         }
 
         if (s.solution) {
@@ -358,12 +358,12 @@
           if (p.demoVideo) {
             solContent += '<video class="prv-video" src="' + p.demoVideo + '" autoplay muted loop playsinline controls></video>';
           }
-          sectionsHTML += makeSection('solution', 'Solution', s.solution.split('\n\n')[0].trim(), solContent);
+          sectionsHTML += makeSection('solution', 'Solution', 'Solution', s.solution.split('\n\n')[0].trim(), solContent);
         }
 
         if (s.process && s.process.images && s.process.images.length) {
           var procContent = paras(s.process.text) + imgRow(s.process.images);
-          sectionsHTML += makeSection('process', 'Process', 'Process', procContent);
+          sectionsHTML += makeSection('process', 'Process', 'Process', 'Process', procContent);
         }
 
         if (s.customSections && s.customSections.length) {
@@ -376,6 +376,7 @@
               '<section id="' + id + '" class="prv-section">' +
                 '<div class="prv-container">' +
                   '<div class="prv-section-num">' + String(num++).padStart(2,'0') + ' — ' + esc(cs.label) + '</div>' +
+                  '<h2>' + esc(cs.label) + '</h2>' +
                   imgHTML +
                 '</div>' +
               '</section>';
@@ -388,7 +389,7 @@
             takContent += '<img class="prv-img" src="' + s.takeawayImage + '" alt="' + esc(s.takeawayImageCaption || '') + '" loading="lazy" />';
             if (s.takeawayImageCaption) takContent += '<p class="prv-img-caption">' + esc(s.takeawayImageCaption) + '</p>';
           }
-          sectionsHTML += makeSection('reflections', 'Reflections', 'Reflections', takContent);
+          sectionsHTML += makeSection('reflections', 'Reflections', 'Reflections', 'Reflections', takContent);
         }
       }
 
