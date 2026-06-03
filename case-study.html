@@ -4,20 +4,205 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="page-title">Case Study — Kari Wu</title>
-  <meta name="description"       id="page-desc"    content="Case study by Kari Wu — UX Designer." />
-  <meta property="og:title"      id="page-og-title" content="Case Study — Kari Wu" />
-  <meta property="og:description" id="page-og-desc" content="Case study by Kari Wu — UX Designer." />
+  <meta name="description"        id="page-desc"     content="Case study by Kari Wu — UX Designer." />
+  <meta property="og:title"       id="page-og-title"  content="Case Study — Kari Wu" />
+  <meta property="og:description" id="page-og-desc"   content="Case study by Kari Wu — UX Designer." />
   <meta property="og:type"        content="website" />
   <link rel="icon" href="images/logo/catlogo-3.svg" type="image/svg+xml" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="styles/nav.css" />
   <link rel="stylesheet" href="styles/animations.css" />
-  <link rel="stylesheet" href="styles/cards.css" />
-  <link rel="stylesheet" href="styles/case-study.css" />
+
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --cs-navy:   #1b2a4a;
+      --cs-accent: #C93A2C;
+      --cs-text:   #1b2a4a;
+      --cs-muted:  #6b7a99;
+      --cs-border: #e5e8ef;
+    }
+
+    body.is-dark {
+      --cs-navy:   #f0ede7;
+      --cs-accent: #ffcb58;
+      --cs-text:   #f0ede7;
+      --cs-muted:  #9a96b8;
+      --cs-border: #504e68;
+    }
+
+    body.is-dark .prv-page        { background: transparent; color: #f0ede7; }
+    body.is-dark .prv-page p      { color: #c8c4d8; }
+    body.is-dark .prv-page h2     { color: #f0ede7; }
+    body.is-dark .prv-decision p  { color: #c8c4d8; }
+    body.is-dark .prv-img         { box-shadow: 0 4px 32px rgba(0,0,0,0.3); }
+
+    /* ── Page ── */
+    .prv-page {
+      padding-top: var(--nav-height);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--cs-text);
+      line-height: 1.6;
+    }
+
+    .prv-page h1, .prv-page h2, .prv-page h3 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 400;
+    }
+
+    /* ── Sidebar ── */
+    .prv-sidebar {
+      position: fixed;
+      top: calc(var(--nav-height) + 16px);
+      left: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 50;
+    }
+    .prv-sidebar a {
+      display: block;
+      text-decoration: none;
+      white-space: nowrap;
+      color: #c8cdd9;
+      font-size: 13px;
+      font-family: 'Andale Mono', 'Courier New', monospace;
+      padding: 2px 0;
+      transition: color 0.15s;
+    }
+    .prv-sidebar a:hover  { color: var(--cs-navy); }
+    .prv-sidebar a.active { color: var(--cs-navy); }
+
+    @media (max-width: 1100px) { .prv-sidebar { display: none; } }
+
+    /* ── Layout ── */
+    .prv-container      { max-width: 800px;  margin: 0 auto; padding: 0 32px; }
+    .prv-container-wide { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Hero ── */
+    .prv-hero { padding: 0 0 56px; }
+    .prv-hero-meta { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .prv-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cs-accent); }
+    .prv-hero h1 { font-size: clamp(22px, 3vw, 36px); color: var(--cs-navy); line-height: 1.15; margin-bottom: 16px; }
+    .prv-hero h1 em { font-style: italic; }
+    .prv-hero-summary { font-size: 17px; color: var(--cs-muted); max-width: 600px; margin-bottom: 32px; line-height: 1.6; }
+    .prv-hero-attrs { display: flex; gap: 40px; padding: 20px 0; border-top: 1px solid var(--cs-border); flex-wrap: wrap; }
+    .prv-attr-label { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 4px; }
+    .prv-attr-val { font-size: 13px; font-weight: 600; color: var(--cs-navy); }
+
+    /* ── Hero image ── */
+    .prv-hero-img { width: 100%; display: block; }
+
+    /* ── Sections ── */
+    .prv-section { padding: 72px 0; border-bottom: 1px solid var(--cs-border); }
+    .prv-section:last-of-type { border-bottom: none; }
+    .prv-section-num { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cs-accent); margin-bottom: 10px; }
+    .prv-page h2 { font-size: 30px; color: var(--cs-navy); margin-bottom: 20px; }
+    .prv-page p  { font-size: 15px; color: #3a4a6a; margin-bottom: 16px; max-width: 660px; line-height: 1.7; }
+    .prv-page p:last-child { margin-bottom: 0; }
+
+    body.is-dark .prv-page p { color: #c8c4d8; }
+
+    /* ── Images ── */
+    .prv-img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid var(--cs-border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      margin-top: 32px;
+    }
+
+    .prv-img-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .prv-img-row .prv-img-wrap { flex: 1 1 200px; min-width: 0; }
+    .prv-img-row .prv-img-wrap img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid var(--cs-border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .prv-img-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .prv-img-grid img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid var(--cs-border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    @media (max-width: 640px) {
+      .prv-img-grid { grid-template-columns: 1fr 1fr; }
+      .prv-img-row  { flex-direction: column; }
+    }
+
+    .prv-img-caption {
+      font-size: 12px;
+      color: var(--cs-muted);
+      margin-top: 6px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ── Video ── */
+    .prv-video {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid var(--cs-border);
+      margin-top: 32px;
+    }
+
+    /* ── Project sub-label (BOBA) ── */
+    .prv-project-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cs-muted);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--cs-border);
+    }
+
+    /* ── Next ── */
+    .prv-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); padding: 48px 0 0; transition: color 0.15s; }
+    .prv-back:hover { color: var(--color-ink); }
+
+    .prv-next { margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--cs-border); text-align: right; }
+    .prv-next-label { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 8px; max-width: none; }
+    .prv-next-link { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 400; letter-spacing: -0.01em; color: var(--cs-navy); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3em; transition: color 0.15s; }
+    .prv-next-link:hover { color: var(--cs-accent); }
+    .prv-next-link span { font-size: 0.75em; transition: transform 0.2s; }
+    .prv-next-link:hover span { transform: translate(3px, -3px); }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .prv-container,
+      .prv-container-wide { padding: 0 20px; }
+      .prv-hero h1 { font-size: clamp(18px, 6vw, 28px); }
+      .prv-hero-attrs { gap: 20px; }
+      .prv-section { padding: 48px 0; }
+      .prv-page h2 { font-size: 22px; }
+      .prv-next { text-align: left; }
+      .prv-hero-summary { font-size: 15px; }
+    }
+  </style>
 </head>
 <body>
   <script>
@@ -38,287 +223,265 @@
   </script>
 
   <div id="nav-placeholder"></div>
-
-  <main id="cs-main">
-    <!-- Rendered dynamically by JS below -->
-  </main>
-
+  <div id="cs-sidebar" class="prv-sidebar"></div>
+  <div id="cs-main" class="prv-page"></div>
   <div id="footer-placeholder"></div>
 
-  <!-- ── Scripts ─────────────────────────────────────────────────────────── -->
   <script src="js/projects.js"></script>
   <script src="js/art-data.js"></script>
   <script src="js/transitions.js"></script>
   <script src="js/main.js"></script>
 
   <script>
-    function esc(str) {
+    function esc(s) {
       var d = document.createElement('div');
-      d.textContent = str;
+      d.textContent = s;
       return d.innerHTML;
     }
 
+    function paras(str) {
+      if (!str) return '';
+      return str.split('\n\n').map(function(t) {
+        t = t.trim();
+        return t ? '<p>' + esc(t) + '</p>' : '';
+      }).join('');
+    }
+
+    function imgRow(images) {
+      if (!images || !images.length) return '';
+      if (images.length === 1) {
+        var img = images[0];
+        return '<img class="prv-img" src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" />' +
+          (img.caption ? '<p class="prv-img-caption">' + esc(img.caption) + '</p>' : '');
+      }
+      var html = '<div class="prv-img-row">';
+      images.forEach(function(img) {
+        html += '<div class="prv-img-wrap">' +
+          '<img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" />' +
+          (img.caption ? '<p class="prv-img-caption">' + esc(img.caption) + '</p>' : '') +
+          '</div>';
+      });
+      html += '</div>';
+      return html;
+    }
+
+    function imgGrid(images) {
+      if (!images || !images.length) return '';
+      var html = '<div class="prv-img-grid">';
+      images.forEach(function(img) {
+        html += '<img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" />';
+      });
+      html += '</div>';
+      return html;
+    }
+
+    function fmtCat(cat) {
+      if (cat === 'ui-projects')       return 'UI Design';
+      if (cat === 'product-design')    return 'Product Design';
+      if (cat === 'branding-concepts') return 'Branding';
+      return cat;
+    }
+
     function renderCaseStudy(p) {
-      /* Update meta */
-      document.getElementById('page-title').textContent      = p.title + ' — Kari Wu';
-      document.getElementById('page-desc').content           = p.title + ': ' + p.blurb;
-      document.getElementById('page-og-title').content       = p.title + ' — Kari Wu';
-      document.getElementById('page-og-desc').content        = p.title + ': ' + p.blurb;
+      document.getElementById('page-title').textContent   = p.title + ' — Kari Wu';
+      document.getElementById('page-desc').content        = p.title + ': ' + p.blurb;
+      document.getElementById('page-og-title').content    = p.title + ' — Kari Wu';
+      document.getElementById('page-og-desc').content     = p.title + ': ' + p.blurb;
 
       var s = p.sections || {};
-      var skillsStr = (p.skills || []).join(', ');
-      var toolsStr  = (p.tools  || []).join(', ');
+      var sidebarItems = [{ id: 'hero', label: 'Overview' }];
+      var sectionsHTML = '';
+      var num = 1;
 
-      /* ── Header ── */
-      var headerHTML =
-        '<div class="container">' +
-          '<header class="cs-header">' +
-            '<h1 class="cs-title">' + esc(p.title) + '</h1>' +
-            '<div class="cs-badges">' +
-              '<div class="cs-badge"><span class="cs-badge__label">Role</span><span class="cs-badge__value">' + esc(p.role) + '</span></div>' +
-              '<div class="cs-badge"><span class="cs-badge__label">Timeline</span><span class="cs-badge__value">' + esc(p.timeline) + '</span></div>' +
-              '<div class="cs-badge"><span class="cs-badge__label">Skills</span><span class="cs-badge__value">' + esc(skillsStr) + '</span></div>' +
-              '<div class="cs-badge"><span class="cs-badge__label">Tools</span><span class="cs-badge__value">' + esc(toolsStr) + '</span></div>' +
-            '</div>' +
-          '</header>' +
-        '</div>';
-
-      /* ── Hero Image ── */
-      var heroHTML =
-        '<img class="cs-hero-image" src="' + p.heroImage + '" alt="' + esc(p.title) + ' hero" />';
-
-      /* ── Content Sections ── */
-      function section(label, contentHTML) {
-        if (!contentHTML) return '';
+      function makeSection(id, numLabel, heading, contentHTML) {
+        sidebarItems.push({ id: id, label: heading });
         return (
-          '<div class="cs-section reveal">' +
-            '<div class="cs-section__label">' + label + '</div>' +
-            '<div class="cs-section__content">' + contentHTML + '</div>' +
-          '</div>'
+          '<section id="' + id + '" class="prv-section">' +
+            '<div class="prv-container">' +
+              '<div class="prv-section-num">' + String(num++).padStart(2,'0') + ' — ' + esc(numLabel) + '</div>' +
+              '<h2>' + esc(heading) + '</h2>' +
+              contentHTML +
+            '</div>' +
+          '</section>'
         );
       }
 
-      function paras(str) {
-        if (!str) return '';
-        return str.split('\n\n').map(function(p) {
-          var t = p.trim();
-          return t ? '<p>' + esc(t) + '</p>' : '';
-        }).join('');
-      }
-
-      var contextHTML  = paras(s.context);
-      var problemHTML  = paras(s.problem);
-      var solutionHTML = '';
-      if (s.solution) {
-        var solutionText = paras(s.solution);
-        if (p.demoVideo) {
-          solutionHTML =
-            '<div class="cs-solution-wrap">' +
-              '<div class="cs-solution-text">' + solutionText + '</div>' +
-              '<video class="cs-solution-video" src="' + p.demoVideo + '" autoplay muted loop playsinline controls></video>' +
-            '</div>';
-        } else {
-          solutionHTML = solutionText;
-        }
-      }
-
-      var processHTML = '';
-      if (s.process) {
-        var imgGrid = '';
-        if (s.process.images && s.process.images.length) {
-          var gridClass = s.process.layout === 'row' ? 'cs-process-row cs-process-row--full' : 'cs-process-grid';
-          imgGrid = '<div class="' + gridClass + '">';
-          s.process.images.forEach(function (img) {
-            imgGrid +=
-              '<figure class="cs-process-item">' +
-                '<img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" />' +
-              '</figure>';
-          });
-          imgGrid += '</div>';
-        }
-        processHTML = paras(s.process.text) + imgGrid;
-      }
-
-      var resultsHTML = '';
-      if (s.results && s.results.length) {
-        resultsHTML = '<div class="cs-results-grid">';
-        s.results.forEach(function (r) {
-          resultsHTML +=
-            '<div class="cs-result-card">' +
-              '<img src="' + r.image + '" alt="' + esc(r.title) + '" loading="lazy" />' +
-              '<p class="cs-result-card__title">' + esc(r.title) + '</p>' +
-              '<p class="cs-result-card__caption">' + esc(r.caption) + '</p>' +
-            '</div>';
-        });
-        resultsHTML += '</div>';
-      }
-
-      var takeawaysHTML = '';
-      if (s.takeaways) {
-        var takeawaysText = paras(s.takeaways);
-        if (s.takeawayImage) {
-          takeawaysHTML =
-            '<div class="cs-takeaway-wrap">' +
-              '<div class="cs-solution-text">' + takeawaysText + '</div>' +
-              '<figure class="cs-process-item">' +
-                '<img src="' + s.takeawayImage + '" alt="' + esc(s.takeawayImageCaption || '') + '" loading="lazy" />' +
-                (s.takeawayImageCaption ? '<figcaption class="cs-process-caption">' + esc(s.takeawayImageCaption) + '</figcaption>' : '') +
-              '</figure>' +
-            '</div>';
-        } else {
-          takeawaysHTML = takeawaysText;
-        }
-      }
-
-      /* ── Multi-project sections (e.g. BOBA) ── */
-      function buildSections(proj, demoVideo) {
-        var pProblem = paras(proj.problem);
-        var pSolution = '';
-        if (proj.solution) {
-          var st = paras(proj.solution);
-          if (demoVideo) {
-            pSolution = '<div class="cs-solution-wrap">' + st +
-              '<video class="cs-solution-video" src="' + demoVideo + '" autoplay muted loop playsinline controls></video>' +
-              '</div>';
-          } else {
-            pSolution = st;
-          }
-        }
-        var pProcess = '';
-        if (proj.process) {
-          var brandHTML = '';
-          if (proj.process.brandImages && proj.process.brandImages.length) {
-            brandHTML = '<div class="cs-brand-images cs-process-row--full">';
-            proj.process.brandImages.forEach(function (img) {
-              brandHTML += '<figure class="cs-process-item">' +
-                '<img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" />' +
-                (img.caption ? '<figcaption class="cs-brand-item__label">' + esc(img.caption) + '</figcaption>' : '') +
-                '</figure>';
-            });
-            brandHTML += '</div>';
-          }
-          var colorHTML = '';
-          var screenGrid = '';
-          if (proj.process.screenImages && proj.process.screenImages.length) {
-            screenGrid = '<div class="cs-process-row cs-process-row--full">';
-            proj.process.screenImages.forEach(function (img) {
-              screenGrid += '<figure class="cs-process-item"><img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" /></figure>';
-            });
-            screenGrid += '</div>';
-          }
-          var grid = '';
-          if (proj.process.planningImage) {
-            grid += '<div class="cs-planning-wrap cs-process-row--full"><img src="' + proj.process.planningImage + '" alt="Planning" loading="lazy" /></div>';
-          }
-          if (proj.process.images && proj.process.images.length) {
-            var gridClass = proj.process.layout === 'row' ? 'cs-process-row cs-process-row--full' : 'cs-process-grid';
-            var imageGrid = '<div class="' + gridClass + '">';
-            proj.process.images.forEach(function (img) {
-              imageGrid += '<figure class="cs-process-item"><img src="' + img.src + '" alt="' + esc(img.caption || '') + '" loading="lazy" /></figure>';
-            });
-            imageGrid += '</div>';
-            grid += imageGrid;
-          }
-          pProcess = paras(proj.process.text) + brandHTML + colorHTML + screenGrid + grid;
-        }
-        var pTakeaways = paras(proj.takeaways);
-        return section('Problem',   pProblem) +
-               section('Solution',  pSolution) +
-               section('Process',   pProcess) +
-               section('Takeaways', pTakeaways);
-      }
-
-      var contentHTML = '';
+      /* ── Multi-project (BOBA) ── */
       if (p.projects && p.projects.length) {
-        p.projects.forEach(function (proj, i) {
-          contentHTML +=
-            '<div class="cs-project-divider' + (i === 0 ? ' cs-project-divider--first' : '') + '">' +
-              '<span class="cs-project-label">' + esc(proj.label) + '</span>' +
-            '</div>' +
-            buildSections(proj, null);
-        });
-      } else {
-        var customSectionsHTML = '';
-        if (s.customSections && s.customSections.length) {
-          s.customSections.forEach(function (cs) {
-            var cls = cs.layout === 'row' ? 'cs-process-row' : 'cs-process-grid';
-            var imgsHTML = '<div class="' + cls + '">';
-            cs.images.forEach(function (img) {
-              imgsHTML += '<figure class="cs-process-item"><img src="' + img.src + '" alt="" loading="lazy" />' +
-                (img.caption ? '<figcaption class="cs-process-caption">' + esc(img.caption) + '</figcaption>' : '') +
-                '</figure>';
-            });
-            imgsHTML += '</div>';
-            if (cs.subRow && cs.subRow.length) {
-              imgsHTML += '<div class="cs-process-grid-2">';
-              cs.subRow.forEach(function (img) {
-                imgsHTML += '<figure class="cs-process-item"><img src="' + img.src + '" alt="" loading="lazy" /></figure>';
-              });
-              imgsHTML += '</div>';
+        p.projects.forEach(function(proj, i) {
+          var shortLabel = proj.label.replace(/^Project \d+ — /, '');
+          var id = 'project-' + i;
+          sidebarItems.push({ id: id, label: shortLabel });
+
+          var content = '<div class="prv-project-label">' + esc(proj.label) + '</div>';
+          if (proj.problem)  content += paras(proj.problem);
+          if (proj.solution) content += paras(proj.solution);
+
+          if (proj.process) {
+            content += paras(proj.process.text);
+            if (proj.process.planningImage) {
+              content += '<img class="prv-img" src="' + proj.process.planningImage + '" alt="Planning" loading="lazy" />';
             }
-            customSectionsHTML += section(cs.label, imgsHTML);
+            if (proj.process.brandImages && proj.process.brandImages.length) {
+              content += imgRow(proj.process.brandImages);
+            }
+            if (proj.process.images && proj.process.images.length) {
+              content += imgRow(proj.process.images);
+            }
+            if (proj.process.screenImages && proj.process.screenImages.length) {
+              content += imgRow(proj.process.screenImages);
+            }
+          }
+
+          if (proj.takeaways) content += paras(proj.takeaways);
+
+          sectionsHTML +=
+            '<section id="' + id + '" class="prv-section">' +
+              '<div class="prv-container">' + content + '</div>' +
+            '</section>';
+          num++;
+        });
+
+      } else {
+        /* ── Single-project ── */
+
+        if (s.context) {
+          sectionsHTML += makeSection('context', 'Context', s.context.split('\n\n')[0].trim(), paras(s.context));
+        }
+
+        if (s.problem) {
+          sectionsHTML += makeSection('problem', 'The Problem', s.problem.split('\n\n')[0].trim(), paras(s.problem));
+        }
+
+        if (s.solution) {
+          var solContent = paras(s.solution);
+          if (p.demoVideo) {
+            solContent += '<video class="prv-video" src="' + p.demoVideo + '" autoplay muted loop playsinline controls></video>';
+          }
+          sectionsHTML += makeSection('solution', 'Solution', s.solution.split('\n\n')[0].trim(), solContent);
+        }
+
+        if (s.process && s.process.images && s.process.images.length) {
+          var procContent = paras(s.process.text) + imgRow(s.process.images);
+          sectionsHTML += makeSection('process', 'Process', 'Process', procContent);
+        }
+
+        if (s.customSections && s.customSections.length) {
+          s.customSections.forEach(function(cs, i) {
+            var id = 'custom-' + i;
+            var imgHTML = cs.layout === 'grid' ? imgGrid(cs.images) : imgRow(cs.images);
+            if (cs.subRow && cs.subRow.length) imgHTML += imgRow(cs.subRow);
+            sidebarItems.push({ id: id, label: cs.label });
+            sectionsHTML +=
+              '<section id="' + id + '" class="prv-section">' +
+                '<div class="prv-container">' +
+                  '<div class="prv-section-num">' + String(num++).padStart(2,'0') + ' — ' + esc(cs.label) + '</div>' +
+                  imgHTML +
+                '</div>' +
+              '</section>';
           });
         }
 
-        contentHTML =
-          section('Problem',   problemHTML)  +
-          section('Solution',  solutionHTML) +
-          (s.customSections && s.customSections.length ? customSectionsHTML : section('Process', processHTML)) +
-          section('Takeaways', takeawaysHTML);
+        if (s.takeaways) {
+          var takContent = paras(s.takeaways);
+          if (s.takeawayImage) {
+            takContent += '<img class="prv-img" src="' + s.takeawayImage + '" alt="' + esc(s.takeawayImageCaption || '') + '" loading="lazy" />';
+            if (s.takeawayImageCaption) takContent += '<p class="prv-img-caption">' + esc(s.takeawayImageCaption) + '</p>';
+          }
+          sectionsHTML += makeSection('reflections', 'Reflections', 'Reflections', takContent);
+        }
       }
 
-      /* ── Next Project ── */
-      var allProjects   = window.PROJECTS || [];
-      var currentIndex  = allProjects.findIndex(function (x) { return x.id === p.id; });
-      var nextProject   = allProjects[(currentIndex + 1) % allProjects.length];
+      /* ── Next project ── */
+      var allProjects  = window.PROJECTS || [];
+      var currentIndex = allProjects.findIndex(function(x) { return x.id === p.id; });
+      var nextProject  = allProjects[(currentIndex + 1) % allProjects.length];
+      var nextLink     = nextProject
+        ? (nextProject.id === 'preva' ? 'preva.html' : 'case-study.html?id=' + nextProject.id)
+        : '#';
 
-      var nextHTML = nextProject
-        ? '<div class="cs-next reveal">' +
-            '<div>' +
-              '<p class="cs-next__label">Next project</p>' +
-              '<a href="case-study.html?id=' + nextProject.id + '" class="cs-next__link">' +
-                esc(nextProject.title) +
-                '<span class="cs-next__arrow">↗</span>' +
-              '</a>' +
+      /* ── Hero ── */
+      var heroHTML =
+        '<section id="hero" style="border-bottom:1px solid var(--cs-border); padding-top:16px;">' +
+          '<div class="prv-container">' +
+            '<div class="prv-hero">' +
+              '<div class="prv-hero-meta">' +
+                '<span class="prv-hero-tag">' + esc(fmtCat(p.category)) + '</span>' +
+                '<span class="prv-hero-tag" style="color:var(--cs-muted);">·</span>' +
+                '<span class="prv-hero-tag" style="color:var(--cs-muted);font-weight:500;text-transform:none;letter-spacing:0;">Case Study</span>' +
+              '</div>' +
+              '<h1>' + esc(p.title) + '</h1>' +
+              '<div class="prv-hero-summary">' + esc(p.blurb) + '</div>' +
+              '<div class="prv-hero-attrs">' +
+                '<div><div class="prv-attr-label">Project</div><div class="prv-attr-val">' + esc(p.title) + '</div></div>' +
+                '<div><div class="prv-attr-label">Role</div><div class="prv-attr-val">' + esc(p.role) + '</div></div>' +
+                '<div><div class="prv-attr-label">Timeline</div><div class="prv-attr-val">' + esc(p.timeline) + '</div></div>' +
+              '</div>' +
             '</div>' +
-          '</div>'
-        : '';
-
-      var main = document.getElementById('cs-main');
-      main.innerHTML =
-        headerHTML +
-        heroHTML +
-        '<div class="container">' +
-          '<div class="cs-content">' +
-            section('Context', contextHTML) +
-            contentHTML +
           '</div>' +
-          nextHTML +
-        '</div>';
+          '<img class="prv-hero-img" src="' + p.heroImage + '" alt="' + esc(p.title) + '" />' +
+        '</section>';
 
-      /* Init accents after render */
-      document.fonts.ready.then(function () {
-        if (typeof initScrollReveal !== 'undefined') initScrollReveal();
-      });
+      /* ── Footer nav ── */
+      var footerHTML =
+        '<section class="prv-section">' +
+          '<div class="prv-container">' +
+            '<a href="index.html#work" class="prv-back">← Back to work</a>' +
+            (nextProject
+              ? '<div class="prv-next">' +
+                  '<p class="prv-next-label">Next project</p>' +
+                  '<a href="' + nextLink + '" class="prv-next-link">' + esc(nextProject.title) + ' <span>↗</span></a>' +
+                '</div>'
+              : '') +
+          '</div>' +
+        '</section>';
+
+      /* ── Inject ── */
+      document.getElementById('cs-main').innerHTML = heroHTML + sectionsHTML + footerHTML;
+
+      /* ── Sidebar ── */
+      var sidebarEl = document.getElementById('cs-sidebar');
+      sidebarEl.innerHTML = sidebarItems.map(function(item, i) {
+        return '<a href="#' + item.id + '"' + (i === 0 ? ' class="active"' : '') + '>' + esc(item.label) + '</a>';
+      }).join('');
+
+      /* ── Scroll spy ── */
+      var ids = sidebarItems.map(function(x) { return x.id; });
+      var links = Array.from(sidebarEl.querySelectorAll('a'));
+      function updateSpy() {
+        var navHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 64;
+        var threshold = window.scrollY + navHeight + 24;
+        var activeIdx = 0;
+        ids.forEach(function(id, i) {
+          var el = document.getElementById(id);
+          if (el && el.offsetTop <= threshold) activeIdx = i;
+        });
+        var top = Math.max(16, navHeight + 16 - window.scrollY);
+        sidebarEl.style.top = top + 'px';
+        links.forEach(function(a, i) {
+          a.classList.toggle('active', i === activeIdx);
+          a.style.display = 'block';
+        });
+      }
+      window.addEventListener('scroll', updateSpy, { passive: true });
+      updateSpy();
+
+      if (typeof initScrollReveal !== 'undefined') {
+        document.fonts.ready.then(function() { initScrollReveal(); });
+      }
     }
 
-    function notFound() {
-      document.getElementById('cs-main').innerHTML =
-        '<div style="padding:var(--space-32) var(--container-padding);text-align:center;">' +
-          '<h1 style="font-family:var(--font-display);font-size:var(--size-xl);margin-bottom:var(--space-8);">Project not found.</h1>' +
-          '<a href="work.html" style="color:var(--color-accent);text-decoration:underline;">← Back to Work</a>' +
-        '</div>';
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      var params  = new URLSearchParams(window.location.search);
-      var id      = params.get('id');
-      var project = (window.PROJECTS || []).find(function (p) { return p.id === id; });
-
+    document.addEventListener('DOMContentLoaded', function() {
+      var id      = new URLSearchParams(window.location.search).get('id');
+      var project = (window.PROJECTS || []).find(function(p) { return p.id === id; });
       if (project) {
         renderCaseStudy(project);
       } else {
-        notFound();
+        document.getElementById('cs-main').innerHTML =
+          '<div style="padding:var(--space-32) var(--container-padding);text-align:center;">' +
+            '<h1 style="font-family:\'EB Garamond\',serif;font-size:var(--size-xl);margin-bottom:var(--space-8);">Project not found.</h1>' +
+            '<a href="work.html" style="color:var(--color-accent);">← Back to Work</a>' +
+          '</div>';
       }
     });
   </script>
