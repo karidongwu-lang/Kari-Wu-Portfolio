@@ -1,4 +1,4 @@
-/* fonts loaded via <link> in each page's <head> */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
 
 /* ─── TOKENS ──────────────────────────────────────────────────────────────── */
 
@@ -12,9 +12,9 @@
   --color-faint:        #f0ede7;
   --color-overlay:      rgba(0, 0, 0, 0.88);
 
-  --font-display: 'EB Garamond', Georgia, serif;
-  --font-body:    'Inter', sans-serif;
-  --font-mono:    'Inter', sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Mono', monospace;
+  --font-mono:    'DM Mono', monospace;
 
   --size-xs:   0.5rem;
   --size-sm:   0.875rem;
@@ -196,9 +196,9 @@ body.is-dark .footer-logo {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: 0;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
 h1 { font-size: var(--size-xl); }
@@ -215,9 +215,9 @@ p {
 .display {
   font-family: var(--font-display);
   font-size: var(--size-hero);
-  font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: 0;
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
 }
 
 .text-muted  { color: var(--color-muted); }
