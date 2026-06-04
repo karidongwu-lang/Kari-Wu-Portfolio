@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=Alan+Sans:wght@400;700&display=swap');
 
 /* ─── TOKENS ──────────────────────────────────────────────────────────────── */
 
@@ -12,9 +12,9 @@
   --color-faint:        #f0ede7;
   --color-overlay:      rgba(0, 0, 0, 0.88);
 
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body:    'DM Mono', monospace;
-  --font-mono:    'DM Mono', monospace;
+  --font-display: 'Crimson Text', Georgia, serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'Inter', sans-serif;
 
   --size-xs:   0.5rem;
   --size-sm:   0.875rem;
