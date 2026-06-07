@@ -32,12 +32,12 @@
 
     .hero-line1 {
       font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3.4vw, 3.6rem);
+      font-size: clamp(2rem, 4.6vw, 5rem);
       font-weight: 400;
       line-height: 1.05;
       letter-spacing: -0.02em;
       color: var(--color-ink);
-      max-width: 50vw;
+      max-width: 70vw;
       opacity: 0;
       animation: fadeIn 0.7s ease 0.1s forwards;
     }
@@ -52,12 +52,12 @@
 
     .hero-line2 {
       font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3.4vw, 3.6rem);
+      font-size: clamp(2rem, 4.6vw, 5rem);
       font-weight: 400;
       line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--color-ink);
-      max-width: 50vw;
+      max-width: 70vw;
       margin-top: 0;
       opacity: 0;
       animation: fadeIn 0.7s ease 0.3s forwards;
@@ -232,11 +232,13 @@
     /* ─── SECTION LABEL ──────────────────────────────────────────────────────── */
 
     .sec-label {
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.8vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
       color: var(--color-ink);
       margin-bottom: var(--space-8);
-      padding-top: var(--space-16);
+      padding-top: var(--space-8);
     }
 
     /* ─── PROJECT LIST (legacy — not used) ──────────────────────────────────── */
@@ -427,8 +429,8 @@
     .proj-card {
       display: block;
       background: var(--color-bg);
-      border: 2px solid #1b1b1b;
-      border-radius: 0;
+      border: 1px solid #1b1b1b;
+      border-radius: 8px;
       padding: 10px 10px 28px;
       text-decoration: none;
       color: inherit;
@@ -462,6 +464,7 @@
       aspect-ratio: 4 / 3;
       overflow: hidden;
       background: var(--color-faint);
+      border-radius: 4px;
     }
 
     .proj-card-img img {
@@ -741,14 +744,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ─── SCRIBBLY DIVIDER ─────────────────────────────────────────────────── -->
-    <div class="scribble-divider" aria-hidden="true">
-      <svg class="scribble-line" viewBox="0 0 1200 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,15 C40,8 80,22 120,14 C160,6 200,20 240,13 C280,6 320,21 360,14 C400,7 440,20 480,13 C520,6 560,22 600,14 C640,6 680,21 720,13 C760,5 800,20 840,14 C880,8 920,21 960,13 C1000,5 1040,20 1080,14 C1120,8 1160,21 1200,15"
-              fill="none" stroke="var(--color-accent)" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>
-    </div>
 
     <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
     <section id="work" class="work-section">
