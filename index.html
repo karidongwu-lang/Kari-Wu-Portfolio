@@ -32,12 +32,12 @@
 
     .hero-line1 {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4.8vw, 4.8rem);
+      font-size: clamp(1.9rem, 4.2vw, 4.4rem);
       font-weight: 400;
       line-height: 1.05;
       letter-spacing: -0.02em;
       color: var(--color-ink);
-      max-width: 44vw;
+      max-width: 50vw;
       opacity: 0;
       animation: fadeIn 0.7s ease 0.1s forwards;
     }
@@ -52,12 +52,12 @@
 
     .hero-line2 {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4.8vw, 4.8rem);
+      font-size: clamp(1.9rem, 4.2vw, 4.4rem);
       font-weight: 400;
       line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--color-ink);
-      max-width: 44vw;
+      max-width: 50vw;
       margin-top: 0;
       opacity: 0;
       animation: fadeIn 0.7s ease 0.3s forwards;
@@ -384,17 +384,17 @@
     /* laptop background doodle */
     .laptop-bg-doodle {
       position: absolute;
-      right: -20px;
-      top: 0px;
-      width: clamp(220px, 28vw, 420px);
+      right: -10px;
+      top: 20px;
+      width: clamp(220px, 26vw, 400px);
       color: var(--color-accent);
-      opacity: 0.35;
+      opacity: 0.3;
       pointer-events: none;
       z-index: 0;
     }
 
     body.is-dark .laptop-bg-doodle {
-      opacity: 0.25;
+      opacity: 0.2;
     }
 
     .card-grid-wrap {
@@ -405,14 +405,14 @@
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px 24px;
+      gap: 28px 20px;
       align-items: start;
     }
 
     /* Row 2 overlaps row 1 upward */
     .card-grid .proj-card:nth-child(4),
     .card-grid .proj-card:nth-child(5) {
-      margin-top: -80px;
+      margin-top: -100px;
       z-index: 3;
     }
 
@@ -752,35 +752,35 @@
 
     <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
     <section id="work" class="work-section">
+      <!-- laptop background doodle — accent colored, faint -->
+      <svg class="laptop-bg-doodle" aria-hidden="true" viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Screen in perspective (tilted top view) -->
+        <path d="M60 60 L420 40 L460 200 L100 220 Z" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
+        <!-- Screen inner bezel -->
+        <path d="M80 72 L400 54 L438 188 L118 205 Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+        <!-- Screen surface lines -->
+        <line x1="86" y1="96" x2="414" y2="80" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        <line x1="90" y1="114" x2="420" y2="98" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        <line x1="94" y1="132" x2="426" y2="116" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        <line x1="98" y1="150" x2="432" y2="134" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        <line x1="102" y1="168" x2="436" y2="152" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        <!-- Hinge -->
+        <line x1="100" y1="220" x2="460" y2="200" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <!-- Keyboard base in perspective -->
+        <path d="M70 228 L470 208 L490 330 L50 350 Z" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
+        <!-- Keyboard rows -->
+        <path d="M84 242 L458 222" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M86 258 L460 238" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M88 274 L462 254" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M90 290 L464 270" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Trackpad -->
+        <path d="M210 298 L340 290 L344 326 L214 334 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <!-- Camera dot on screen top -->
+        <circle cx="260" cy="50" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+      </svg>
       <div class="container">
         <p class="sec-label reveal">Case Studies and Work</p>
         <div class="card-grid-wrap">
-          <!-- laptop background doodle -->
-          <svg class="laptop-bg-doodle" aria-hidden="true" viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Screen in perspective (tilted top view) -->
-            <path d="M60 60 L420 40 L460 200 L100 220 Z" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
-            <!-- Screen inner bezel -->
-            <path d="M80 72 L400 54 L438 188 L118 205 Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
-            <!-- Screen surface lines (faint horizontal lines suggesting display) -->
-            <line x1="86" y1="96" x2="414" y2="80" stroke="currentColor" stroke-width="1" opacity="0.4"/>
-            <line x1="90" y1="114" x2="420" y2="98" stroke="currentColor" stroke-width="1" opacity="0.4"/>
-            <line x1="94" y1="132" x2="426" y2="116" stroke="currentColor" stroke-width="1" opacity="0.4"/>
-            <line x1="98" y1="150" x2="432" y2="134" stroke="currentColor" stroke-width="1" opacity="0.4"/>
-            <line x1="102" y1="168" x2="436" y2="152" stroke="currentColor" stroke-width="1" opacity="0.4"/>
-            <!-- Hinge -->
-            <line x1="100" y1="220" x2="460" y2="200" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-            <!-- Keyboard base in perspective -->
-            <path d="M70 228 L470 208 L490 330 L50 350 Z" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
-            <!-- Keyboard rows -->
-            <path d="M84 242 L458 222" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M86 258 L460 238" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M88 274 L462 254" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M90 290 L464 270" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Trackpad -->
-            <path d="M210 298 L340 290 L344 326 L214 334 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
-            <!-- Camera dot on screen top -->
-            <circle cx="260" cy="50" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          </svg>
           <div class="card-grid" id="card-grid"></div>
         </div>
         <a href="art.html" class="view-all-link">check out some of my art <span>&#8599;</span></a>
