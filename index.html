@@ -242,7 +242,7 @@
     .proj-list {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      gap: 16px;
       align-items: start;
     }
 
@@ -250,7 +250,7 @@
       background: #fff;
       border-radius: 12px;
       border: 1.5px solid var(--color-border);
-      padding: 12px 12px 20px;
+      padding: 14px 14px 24px;
       text-decoration: none;
       color: inherit;
       display: flex;
@@ -268,11 +268,11 @@
     }
 
     /* each card gets a slight random tilt */
-    .proj-card:nth-child(1)  { transform: rotate(-1.2deg); }
-    .proj-card:nth-child(2)  { transform: rotate(0.8deg);  margin-top: 24px; }
-    .proj-card:nth-child(3)  { transform: rotate(-0.5deg); }
-    .proj-card:nth-child(4)  { transform: rotate(1deg);    margin-top: -12px; }
-    .proj-card:nth-child(5)  { transform: rotate(-0.7deg); margin-top: 16px; }
+    .proj-card:nth-child(1)  { transform: rotate(-2deg); }
+    .proj-card:nth-child(2)  { transform: rotate(1.5deg);  margin-top: 48px; }
+    .proj-card:nth-child(3)  { transform: rotate(-1deg);   margin-top: -20px; }
+    .proj-card:nth-child(4)  { transform: rotate(2deg);    margin-top: -40px; }
+    .proj-card:nth-child(5)  { transform: rotate(-1.2deg); margin-top: 32px; }
 
     .proj-card:hover {
       transform: rotate(0deg) translateY(-6px) !important;
@@ -286,7 +286,7 @@
 
     .proj-card-img {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 3 / 2;
       overflow: hidden;
       border-radius: 6px;
       background: var(--color-faint);
