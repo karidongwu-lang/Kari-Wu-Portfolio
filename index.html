@@ -26,18 +26,18 @@
       flex-direction: column;
       justify-content: flex-start;
       position: relative;
-      padding-top: calc(var(--nav-height) + var(--space-12));
-      padding-bottom: 120px;
+      padding-top: calc(var(--nav-height) + var(--space-16));
+      padding-bottom: 240px;
     }
 
     .hero-line1 {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5.5vw, 5.2rem);
+      font-size: clamp(2rem, 4.8vw, 4.8rem);
       font-weight: 400;
       line-height: 1.05;
       letter-spacing: -0.02em;
       color: var(--color-ink);
-      max-width: 52vw;
+      max-width: 44vw;
       opacity: 0;
       animation: fadeIn 0.7s ease 0.1s forwards;
     }
@@ -52,12 +52,12 @@
 
     .hero-line2 {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5.5vw, 5.2rem);
+      font-size: clamp(2rem, 4.8vw, 4.8rem);
       font-weight: 400;
-      line-height: 1.05;
+      line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--color-ink);
-      max-width: 52vw;
+      max-width: 44vw;
       margin-top: 0;
       opacity: 0;
       animation: fadeIn 0.7s ease 0.3s forwards;
@@ -65,9 +65,9 @@
 
     .hero-doodle {
       position: absolute;
-      right: 100px;
-      top: calc(var(--nav-height) + var(--space-12));
-      width: clamp(380px, 80vw, 820px);
+      right: 40px;
+      top: calc(var(--nav-height) + var(--space-4));
+      width: clamp(500px, 90vw, 1020px);
       aspect-ratio: 1920 / 1080;
       pointer-events: none;
       opacity: 0;
@@ -89,9 +89,9 @@
     /* night doodle — hidden by default, shown when dark */
     .hero-doodle-night {
       position: absolute;
-      right: 100px;
-      top: calc(var(--nav-height) + var(--space-12));
-      width: clamp(380px, 80vw, 820px);
+      right: 40px;
+      top: calc(var(--nav-height) + var(--space-4));
+      width: clamp(500px, 90vw, 1020px);
       aspect-ratio: 1920 / 1080;
       pointer-events: none;
       display: none;
@@ -162,11 +162,13 @@
 
     @media (max-width: 480px) {
       .hero-line1, .hero-line2 {
-        font-size: clamp(2rem, 9vw, 3rem);
-        max-width: 100%;
+        font-size: clamp(1.6rem, 8vw, 2.4rem);
       }
+      .proj-title { font-size: clamp(1.4rem, 7vw, 2rem); }
+      .proj-row { gap: var(--space-4); padding: var(--space-6) 0; }
       .play-row { gap: var(--space-4); padding: var(--space-6) 0; }
       .sec-label { padding-top: var(--space-8); }
+      .proj-thumb { width: 100px; }
     }
 
     /* ─── DARK TOGGLE ────────────────────────────────────────────────────────── */
@@ -230,71 +232,235 @@
     /* ─── SECTION LABEL ──────────────────────────────────────────────────────── */
 
     .sec-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-muted);
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      color: var(--color-ink);
       margin-bottom: var(--space-8);
       padding-top: var(--space-16);
     }
 
-    /* ─── PROJECT LIST ───────────────────────────────────────────────────────── */
+    /* ─── PROJECT LIST (legacy — not used) ──────────────────────────────────── */
 
     .proj-list {
+      display: none;
+    }
+
+    .proj-row {
+      display: flex;
+      align-items: stretch;
+      gap: var(--space-8);
+      padding: var(--space-12) 0;
+      border-top: 1px solid var(--color-border);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      z-index: 1;
+    }
+
+    .proj-row:hover {
+      z-index: 2;
+    }
+
+    .proj-row:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .proj-row-body {
+      flex: 1;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px 32px;
+      grid-template-columns: 1fr;
+      gap: var(--space-3) 0;
       align-items: start;
-      /* bleed wider than container */
-      margin-inline: calc(-1 * var(--container-padding));
-      padding-inline: var(--container-padding);
-      overflow: visible;
+      align-self: center;
+      min-width: 0;
+    }
+
+    .proj-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      padding-top: 0.35em;
+      grid-row: 1 / 3;
+      align-self: start;
+    }
+
+    .proj-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      transition: color 0.15s ease;
+    }
+
+    .proj-row:hover .proj-title { color: var(--color-accent); }
+
+    .proj-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .proj-year {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+    }
+
+    .proj-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+    }
+
+    .proj-desc {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+      margin-top: var(--space-3);
+      max-width: 48ch;
+    }
+
+    .proj-thumb {
+      flex-shrink: 0;
+      width: 320px;
+      overflow: hidden;
+      background: var(--color-faint);
+      margin-block: calc(-1 * var(--space-12) + var(--space-3));
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .proj-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .proj-row:hover .proj-thumb { transform: scale(1.12); }
+    .proj-row:hover .proj-thumb img { transform: scale(1.0); }
+
+    /* Alternate: even rows flip thumb to left, arrow moves between thumb and text */
+    .proj-row:nth-child(even) .proj-thumb { order: -2; }
+    .proj-row:nth-child(even) .proj-arrow { order: -1; }
+
+    .proj-arrow {
+      font-size: 1rem;
+      color: var(--color-muted);
+      flex-shrink: 0;
+      align-self: flex-start;
+      transition: transform 0.2s ease, color 0.15s ease;
+    }
+
+    .proj-row:hover .proj-arrow {
+      transform: translate(3px, -3px);
+      color: var(--color-accent);
+    }
+
+    .proj-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .proj-row:hover .proj-bar { transform: scaleX(1); }
+
+    /* ─── PROJECT CARDS (POLAROID GRID) ─────────────────────────────────────── */
+
+    .work-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* laptop background doodle */
+    .laptop-bg-doodle {
+      position: absolute;
+      right: -20px;
+      top: 0px;
+      width: clamp(220px, 28vw, 420px);
+      color: var(--color-accent);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.is-dark .laptop-bg-doodle {
+      opacity: 0.25;
+    }
+
+    .card-grid-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px 24px;
+      align-items: start;
+    }
+
+    /* Row 2 overlaps row 1 upward */
+    .card-grid .proj-card:nth-child(4),
+    .card-grid .proj-card:nth-child(5) {
+      margin-top: -80px;
+      z-index: 3;
+    }
+
+    .card-grid .proj-card:nth-child(4) {
+      grid-column: 1;
+    }
+
+    .card-grid .proj-card:nth-child(5) {
+      grid-column: 2;
     }
 
     .proj-card {
-      background: #fff;
-      border-radius: 14px;
-      border: 1.5px solid var(--color-border);
-      padding: 14px 14px 22px;
+      display: block;
+      background: var(--color-bg);
+      border: 2px solid #1b1b1b;
+      border-radius: 0;
+      padding: 10px 10px 28px;
       text-decoration: none;
       color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
       position: relative;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: none;
+      z-index: 1;
+      transition:
+        transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
     }
 
     body.is-dark .proj-card {
-      background: #2e2c42;
-      border-color: #504e68;
+      border-color: #f0ede7;
     }
 
-    /* Row 1: cards 1-3 — staggered up/down */
-    .proj-card:nth-child(1) { transform: rotate(-2deg);   margin-top: 0;     z-index: 2; }
-    .proj-card:nth-child(2) { transform: rotate(1.5deg);  margin-top: 60px;  z-index: 3; }
-    .proj-card:nth-child(3) { transform: rotate(-1deg);   margin-top: 10px;  z-index: 2; }
-    /* Row 2: cards 4-5 — overlap up into row 1 */
-    .proj-card:nth-child(4) { transform: rotate(2deg);    margin-top: -100px; z-index: 4; }
-    .proj-card:nth-child(5) { transform: rotate(-1.5deg); margin-top: -60px;  z-index: 4; }
+    /* Individual card tilts */
+    .proj-card:nth-child(1) { transform: rotate(-1.8deg); }
+    .proj-card:nth-child(2) { transform: rotate(1.2deg); }
+    .proj-card:nth-child(3) { transform: rotate(-0.8deg); }
+    .proj-card:nth-child(4) { transform: rotate(2.1deg); }
+    .proj-card:nth-child(5) { transform: rotate(-1.4deg); }
 
     .proj-card:hover {
       transform: rotate(0deg) translateY(-8px) !important;
-      box-shadow: 6px 8px 0px var(--color-accent);
-      z-index: 10 !important;
-    }
-
-    body.is-dark .proj-card:hover {
-      box-shadow: 6px 8px 0px #ffcb58;
+      box-shadow: 6px 10px 0 var(--color-accent);
+      z-index: 10;
     }
 
     .proj-card-img {
       width: 100%;
-      aspect-ratio: 3 / 2;
+      aspect-ratio: 4 / 3;
       overflow: hidden;
-      border-radius: 6px;
       background: var(--color-faint);
     }
 
@@ -311,49 +477,24 @@
     }
 
     .proj-card-body {
-      padding: 0 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      padding-top: 14px;
+      padding-inline: 4px;
     }
 
     .proj-card-title {
       font-family: var(--font-display);
-      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-size: clamp(1.1rem, 2vw, 1.55rem);
       font-weight: 400;
-      line-height: 1.2;
-      color: var(--color-ink);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      display: block;
+      margin-bottom: 6px;
     }
 
-    .proj-card-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .proj-card-tag {
+    .proj-card-meta {
       font-size: 0.6rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid var(--color-border);
-      border-radius: 99px;
-      padding: 3px 9px;
+      letter-spacing: 0.07em;
       color: var(--color-muted);
-    }
-
-    body.is-dark .proj-card-tag { border-color: #504e68; }
-
-    @media (pointer: coarse) { .proj-card { cursor: pointer; } }
-
-    @media (max-width: 900px) {
-      .proj-list { grid-template-columns: repeat(2, 1fr); }
-      .proj-card { margin: 0; }
-      .proj-card:nth-child(n) { transform: none; margin-top: 0; }
-      .proj-card:hover { transform: translateY(-4px) !important; }
-    }
-
-    @media (max-width: 560px) {
-      .proj-list { grid-template-columns: 1fr; }
     }
 
     /* ─── ART / PLAY LIST ────────────────────────────────────────────────────── */
@@ -480,12 +621,32 @@
     /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
 
     @media (max-width: 700px) {
+      .proj-desc { display: none; }
+      .proj-thumb { width: 140px; }
       .play-thumb { width: 84px; height: 60px; }
       .play-row-body { grid-template-columns: 1.5rem 1fr; }
+      .proj-row:nth-child(even) .proj-thumb { order: unset; }
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
+      }
+      .card-grid .proj-card:nth-child(4),
+      .card-grid .proj-card:nth-child(5) {
+        margin-top: -40px;
+      }
     }
 
     @media (max-width: 480px) {
-      .play-thumb { display: none; }
+      .proj-thumb, .play-thumb { display: none; }
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 12px;
+      }
+      .card-grid .proj-card:nth-child(4),
+      .card-grid .proj-card:nth-child(5) {
+        margin-top: -30px;
+      }
+      .laptop-bg-doodle { display: none; }
     }
 
     /* ── Line boil filter ──────────────────────────────────────────────────── */
@@ -581,11 +742,47 @@
       </div>
     </section>
 
+    <!-- ─── SCRIBBLY DIVIDER ─────────────────────────────────────────────────── -->
+    <div class="scribble-divider" aria-hidden="true">
+      <svg class="scribble-line" viewBox="0 0 1200 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,15 C40,8 80,22 120,14 C160,6 200,20 240,13 C280,6 320,21 360,14 C400,7 440,20 480,13 C520,6 560,22 600,14 C640,6 680,21 720,13 C760,5 800,20 840,14 C880,8 920,21 960,13 C1000,5 1040,20 1080,14 C1120,8 1160,21 1200,15"
+              fill="none" stroke="var(--color-accent)" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
-    <section id="work" style="overflow: hidden;">
+    <section id="work" class="work-section">
       <div class="container">
-        <p class="sec-label reveal">(selected work)</p>
-        <div class="proj-list" id="proj-list"></div>
+        <p class="sec-label reveal">Case Studies and Work</p>
+        <div class="card-grid-wrap">
+          <!-- laptop background doodle -->
+          <svg class="laptop-bg-doodle" aria-hidden="true" viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Screen in perspective (tilted top view) -->
+            <path d="M60 60 L420 40 L460 200 L100 220 Z" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
+            <!-- Screen inner bezel -->
+            <path d="M80 72 L400 54 L438 188 L118 205 Z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+            <!-- Screen surface lines (faint horizontal lines suggesting display) -->
+            <line x1="86" y1="96" x2="414" y2="80" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <line x1="90" y1="114" x2="420" y2="98" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <line x1="94" y1="132" x2="426" y2="116" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <line x1="98" y1="150" x2="432" y2="134" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <line x1="102" y1="168" x2="436" y2="152" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <!-- Hinge -->
+            <line x1="100" y1="220" x2="460" y2="200" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <!-- Keyboard base in perspective -->
+            <path d="M70 228 L470 208 L490 330 L50 350 Z" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
+            <!-- Keyboard rows -->
+            <path d="M84 242 L458 222" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M86 258 L460 238" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M88 274 L462 254" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M90 290 L464 270" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Trackpad -->
+            <path d="M210 298 L340 290 L344 326 L214 334 Z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+            <!-- Camera dot on screen top -->
+            <circle cx="260" cy="50" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/>
+          </svg>
+          <div class="card-grid" id="card-grid"></div>
+        </div>
         <a href="art.html" class="view-all-link">check out some of my art <span>&#8599;</span></a>
       </div>
     </section>
@@ -609,24 +806,21 @@
       return cat;
     }
 
-    /* ── Render project list ────────────────────────────────────────────────── */
+    /* ── Render polaroid card grid ──────────────────────────────────────────── */
     function renderProjects() {
-      var list = document.getElementById('proj-list');
-      if (!list || !window.PROJECTS) return;
+      var grid = document.getElementById('card-grid');
+      if (!grid || !window.PROJECTS) return;
 
       var ids = ['previa', 'smart-pill-dispenser', 'build-our-bridges', '3miu', 'blink'];
       var selected = ids.map(function (id) {
         return window.PROJECTS.find(function (p) { return p.id === id; });
       }).filter(Boolean);
 
-      selected.forEach(function (p, i) {
+      selected.forEach(function (p) {
         var card = document.createElement('a');
         card.href      = p.id === 'previa' ? 'preva.html' : 'case-study.html?id=' + p.id;
         card.className = 'proj-card';
         card.setAttribute('data-cursor', 'hover');
-
-        var tags = [fmtCat(p.category)];
-        if (p.year) tags.unshift(p.year);
 
         card.innerHTML =
           '<div class="proj-card-img">' +
@@ -634,12 +828,10 @@
           '</div>' +
           '<div class="proj-card-body">' +
             '<span class="proj-card-title">' + p.title + '</span>' +
-            '<div class="proj-card-tags">' +
-              tags.map(function(t){ return '<span class="proj-card-tag">' + t + '</span>'; }).join('') +
-            '</div>' +
+            '<span class="proj-card-meta">' + fmtCat(p.category) + ' · ' + p.year + '</span>' +
           '</div>';
 
-        list.appendChild(card);
+        grid.appendChild(card);
       });
     }
 
