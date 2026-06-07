@@ -244,6 +244,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
       align-items: start;
+      isolation: isolate;
     }
 
     .proj-card {
@@ -269,11 +270,11 @@
     }
 
     /* each card gets a slight random tilt */
-    .proj-card:nth-child(1)  { transform: rotate(-2deg);   margin-top: 0;      z-index: 3; }
-    .proj-card:nth-child(2)  { transform: rotate(1.5deg);  margin-top: 80px;   z-index: 3; }
-    .proj-card:nth-child(3)  { transform: rotate(-1deg);   margin-top: -40px;  z-index: 3; }
-    .proj-card:nth-child(4)  { transform: rotate(2deg);    margin-top: -80px;  z-index: 1; }
-    .proj-card:nth-child(5)  { transform: rotate(-1.5deg); margin-top: 60px;   z-index: 1; }
+    .proj-card:nth-child(1)  { transform: rotate(-2deg);   margin-top: 0;      z-index: 30; }
+    .proj-card:nth-child(2)  { transform: rotate(1.5deg);  margin-top: 80px;   z-index: 30; }
+    .proj-card:nth-child(3)  { transform: rotate(-1deg);   margin-top: -40px;  z-index: 30; }
+    .proj-card:nth-child(4)  { transform: rotate(2deg);    margin-top: -80px;  z-index: 10; }
+    .proj-card:nth-child(5)  { transform: rotate(-1.5deg); margin-top: 60px;   z-index: 10; }
 
     .proj-card:hover {
       transform: rotate(0deg) translateY(-8px) !important;
@@ -575,28 +576,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ─── SCRIBBLY DIVIDER ─────────────────────────────────────────────────── -->
-    <div class="scribble-divider" aria-hidden="true">
-      <svg class="scribble-line" viewBox="0 0 1200 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="boil-a" x="-5%" y="-5%" width="110%" height="110%">
-            <feTurbulence type="turbulence" baseFrequency="0.018 0.025" numOctaves="2" seed="1" result="noise"/>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <filter id="boil-b" x="-5%" y="-5%" width="110%" height="110%">
-            <feTurbulence type="turbulence" baseFrequency="0.022 0.018" numOctaves="2" seed="7" result="noise"/>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <filter id="boil-c" x="-5%" y="-5%" width="110%" height="110%">
-            <feTurbulence type="turbulence" baseFrequency="0.015 0.022" numOctaves="2" seed="13" result="noise"/>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-        </defs>
-        <path d="M0,15 C40,8 80,22 120,14 C160,6 200,20 240,13 C280,6 320,21 360,14 C400,7 440,20 480,13 C520,6 560,22 600,14 C640,6 680,21 720,13 C760,5 800,20 840,14 C880,8 920,21 960,13 C1000,5 1040,20 1080,14 C1120,8 1160,21 1200,15"
-              fill="none" stroke="var(--color-accent)" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>
-    </div>
 
     <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
     <section id="work">
