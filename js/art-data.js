@@ -23,7 +23,6 @@ window.ART_STUDIES = [
   { id: 'nainai',      title: 'Nainai',                  filename: 'images/art/studies/nainai.webp',              medium: 'Procreate on iPad', year: '2025' },
   { id: 'crayon1',     title: 'Profile Study',           filename: 'images/art/illustrations/Crayon1 (1).webp',  medium: 'Crayon',            year: '2023' },
   { id: 'graphite',    title: 'Garage Floor Study',      filename: 'images/art/studies/Graphite.webp',            medium: 'Graphite',          year: '2024' },
-  { id: 'charcoal',    title: 'Bust Study',              filename: 'images/art/studies/Charcoal.webp',            medium: 'Charcoal',          year: '2024' },
   { id: 'sf',          title: 'San Francisco',           filename: 'images/art/studies/sf.webp',                  medium: 'Procreate on iPad', year: '2023' },
   { id: 'shoes',       title: 'Shoes Study',             filename: 'images/art/studies/shoes.webp',               medium: 'Graphite',          year: '2023' },
   { id: 'self',        title: 'Adolescent Inspirations', filename: 'images/art/illustrations/self.webp',          medium: 'Mixed Media',       year: '2025' },
