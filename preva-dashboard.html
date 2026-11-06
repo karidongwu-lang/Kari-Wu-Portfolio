@@ -456,15 +456,12 @@
     height: 100%;
     border-radius: 2px;
   }
-  .conf-high   { color: var(--text-primary); }
-  .conf-medium { color: var(--text-primary); }
-  .conf-low    { color: var(--text-primary); }
-  .conf-bar-fill.conf-high   { background: #3b82f6; }
-  .conf-bar-fill.conf-medium { background: #3b82f6; }
-  .conf-bar-fill.conf-low    { background: #3b82f6; }
-  .conf-bar-fill.conf-high   { background: #1d4fa4; }
-  .conf-bar-fill.conf-medium { background: #1d4fa4; }
-  .conf-bar-fill.conf-low    { background: #1d4fa4; }
+  .conf-high   { color: var(--text-secondary); }
+  .conf-medium { color: var(--text-secondary); }
+  .conf-low    { color: var(--text-secondary); }
+  .conf-bar-fill.conf-high   { background: #cbd5e1; }
+  .conf-bar-fill.conf-medium { background: #cbd5e1; }
+  .conf-bar-fill.conf-low    { background: #cbd5e1; }
 
   /* Status chips — no dot */
   .sc {
@@ -628,14 +625,13 @@
     transition: background .1s;
     font-family: 'Inter', sans-serif;
   }
-  .row-btn-submit  { color: #1d4fa4; border-color: #93c5fd; }
-  .row-btn-submit:hover  { background: #eff6ff; }
-  .row-btn-appeal  { color: #b91c1c; border-color: #fca5a5; }
-  .row-btn-appeal:hover  { background: #fef2f2; }
-  .row-btn-docs    { color: #92400e; border-color: #fcd34d; }
-  .row-btn-docs:hover    { background: #fffbeb; }
-  .row-btn-signoff { color: #6d28d9; border-color: #c4b5fd; }
-  .row-btn-signoff:hover { background: #f5f3ff; }
+  /* Urgency colors mirror the left row stripe */
+  .row-btn-high    { color: #b91c1c; border-color: #fca5a5; }
+  .row-btn-high:hover    { background: #fef2f2; }
+  .row-btn-med     { color: #92400e; border-color: #fcd34d; }
+  .row-btn-med:hover     { background: #fffbeb; }
+  .row-btn-low     { color: #1d4fa4; border-color: #93c5fd; }
+  .row-btn-low:hover     { background: #eff6ff; }
   .row-btn-waiting { color: #64748b; border-color: #e2e8f0; cursor: default; }
 
   /* ─── CARD VIEW ───────────────────────────────────── */
@@ -752,7 +748,13 @@
     border-radius: 3px;
   }
 
-  /* ─── SIDEBAR ─────────────────────────────────────── */
+  .auth-card-action {
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: flex-end;
+  }
   .sidebar { display: flex; flex-direction: column; gap: 16px; }
 
   .sidebar-card {
@@ -916,6 +918,109 @@
     white-space: nowrap;
     flex-shrink: 0;
   }
+  .icon-purple { background: #ede9fe; }
+
+  .replay-link {
+    color: #7c3aed;
+    font-weight: 600;
+    font-size: 11px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .replay-link:hover { text-decoration: underline; }
+
+  /* ─── REPLAY MODAL ────────────────────────────────── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(3px);
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 24px 64px rgba(0,0,0,.22), 0 4px 16px rgba(0,0,0,.1);
+    width: 100%;
+    max-width: 740px;
+    overflow: hidden;
+    outline: none;
+    animation: modalIn .18s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(.96) translateY(8px); }
+    to   { opacity: 1; transform: scale(1)  translateY(0); }
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .modal-title-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: #7c3aed;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .modal-title-icon svg { width: 14px; height: 14px; }
+  .modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .modal-close {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--text-secondary);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .1s, color .1s;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { background: #f1f5f9; color: var(--text-primary); }
+
+  .modal-video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0f172a;
+  }
+  .modal-video-wrap video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .modal-desc {
+    padding: 14px 20px 18px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
 </style>
 </head>
 <body>
@@ -1021,40 +1126,6 @@
     </div>
   </div>
 
-  <!-- PRIORITY ACTION BAND -->
-  <div class="priority-band">
-    <div class="priority-band-label">
-      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5.5 1v3M5.5 7v3M1 5.5h9"/><circle cx="5.5" cy="5.5" r="1.5" fill="currentColor" stroke="none"/></svg>
-      Needs Action
-    </div>
-    <div class="priority-band-items">
-      <div class="priority-band-item" onclick="location.href='preva-detail.html'">
-        <div class="pbi-dot pbi-dot-red"></div>
-        <div class="pbi-content">
-          <div class="pbi-name">Maria Gonzalez</div>
-          <div class="pbi-desc">Renewal Due · Aetna · <strong style="color:#fca5a5">Due Nov 08</strong></div>
-        </div>
-        <button class="pbi-btn pbi-btn-red" onclick="event.stopPropagation(); location.href='preva-detail.html'">Submit Renewal →</button>
-      </div>
-      <div class="priority-band-item" onclick="location.href='preva-denied.html'">
-        <div class="pbi-dot pbi-dot-red"></div>
-        <div class="pbi-content">
-          <div class="pbi-name">James Carter</div>
-          <div class="pbi-desc">Denied · CO-197 · <strong style="color:#fca5a5">Appeal Due Nov 08</strong></div>
-        </div>
-        <button class="pbi-btn pbi-btn-red" onclick="event.stopPropagation(); location.href='preva-denied.html'">File Appeal →</button>
-      </div>
-      <div class="priority-band-item">
-        <div class="pbi-dot pbi-dot-amber"></div>
-        <div class="pbi-content">
-          <div class="pbi-name">Lucas Martinez</div>
-          <div class="pbi-desc">Docs Missing · Humana · <strong style="color:#fcd34d">Due Nov 09</strong></div>
-        </div>
-        <button class="pbi-btn pbi-btn-amber" onclick="event.stopPropagation()">Upload Docs →</button>
-      </div>
-    </div>
-  </div>
-
   <!-- CONTENT GRID -->
   <div class="content-grid">
 
@@ -1101,12 +1172,12 @@
             <th style="width:90px">Visits</th>
             <th>Description</th>
             <th style="width:140px">Confidence</th>
-            <th style="width:68px">Payer</th>
             <th style="width:112px">Alert Date</th>
             <th style="width:130px">Action</th>
           </tr>
         </thead>
         <tbody>
+          <!-- ── HIGH urgency (red) ── sorted by Alert Date ── -->
           <tr class="row-high" onclick="location.href='preva-detail.html'" style="cursor:pointer;">
             <td><span class="sc sc-expired">Renewal Due</span></td>
             <td class="patient-name">Maria Gonzalez</td>
@@ -1118,99 +1189,8 @@
                 <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:97%"></div></div>
               </div>
             </td>
-            <td class="payer-text">Aetna</td>
             <td class="date-text">Nov 08, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-submit" onclick="event.stopPropagation(); location.href='preva-detail.html'">Submit →</button></td>
-          </tr>
-          <tr class="row-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
-            <td><span class="sc sc-denied">Denied</span></td>
-            <td class="patient-name">Daniel Müller</td>
-            <td class="visits-text">1 / 8</td>
-            <td class="description-text">Denied · CO-50 · appeal open</td>
-            <td>
-              <div class="conf-cell">
-                <span class="conf-score conf-medium">82%</span>
-                <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:82%"></div></div>
-              </div>
-            </td>
-            <td class="payer-text">UHC</td>
-            <td class="date-text">Nov 09, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-appeal" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button></td>
-          </tr>
-          <tr class="row-med">
-            <td><span class="sc sc-pending">Pending</span></td>
-            <td class="patient-name">Timothy Allen</td>
-            <td class="visits-text">5 / 12</td>
-            <td class="description-text">Physician sign-off needed</td>
-            <td>
-              <div class="conf-cell">
-                <span class="conf-score conf-high">91%</span>
-                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:91%"></div></div>
-              </div>
-            </td>
-            <td class="payer-text">BCBS</td>
-            <td class="date-text">Nov 10, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-signoff" onclick="event.stopPropagation()">Request →</button></td>
-          </tr>
-          <tr class="row-high">
-            <td><span class="sc sc-docs">Docs Missing</span></td>
-            <td class="patient-name">Lucas Martinez</td>
-            <td class="visits-text">0 / 10</td>
-            <td class="description-text">Diagnosis codes missing</td>
-            <td>
-              <div class="conf-cell">
-                <span class="conf-score conf-medium">88%</span>
-                <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:88%"></div></div>
-              </div>
-            </td>
-            <td class="payer-text">Humana</td>
-            <td class="date-text">Nov 09, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-docs" onclick="event.stopPropagation()">Upload →</button></td>
-          </tr>
-          <tr class="row-med">
-            <td><span class="sc sc-docs">Docs Missing</span></td>
-            <td class="patient-name">Hannah Lee</td>
-            <td class="visits-text">4 / 8</td>
-            <td class="description-text">Prior records needed</td>
-            <td>
-              <div class="conf-cell">
-                <span class="conf-score conf-low">76%</span>
-                <div class="conf-bar-track"><div class="conf-bar-fill conf-low" style="width:76%"></div></div>
-              </div>
-            </td>
-            <td class="payer-text">Cigna</td>
-            <td class="date-text">Nov 12, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-docs" onclick="event.stopPropagation()">Upload →</button></td>
-          </tr>
-          <tr class="row-low">
-            <td><span class="sc sc-submitted">Submitted</span></td>
-            <td class="patient-name">Emma Kowalski</td>
-            <td class="visits-text">7 / 10</td>
-            <td class="description-text">Submitted · pending approval</td>
-            <td>
-              <div class="conf-cell">
-                <span class="conf-score conf-high">95%</span>
-                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:95%"></div></div>
-              </div>
-            </td>
-            <td class="payer-text">Aetna</td>
-            <td class="date-text">Nov 14, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-waiting">Awaiting</button></td>
-          </tr>
-          <tr class="row-med">
-            <td><span class="sc sc-docs">Docs Missing</span></td>
-            <td class="patient-name">Sofia Reyes</td>
-            <td class="visits-text">1 / 6</td>
-            <td class="description-text">Referral form incomplete</td>
-            <td>
-              <div class="conf-cell">
-                <span class="conf-score conf-low">73%</span>
-                <div class="conf-bar-track"><div class="conf-bar-fill conf-low" style="width:73%"></div></div>
-              </div>
-            </td>
-            <td class="payer-text">BCBS</td>
-            <td class="date-text">Nov 11, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-docs" onclick="event.stopPropagation()">Upload →</button></td>
+            <td class="action-cell"><button class="row-btn row-btn-high" onclick="event.stopPropagation(); location.href='preva-detail.html'">Submit →</button></td>
           </tr>
           <tr class="row-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
             <td><span class="sc sc-denied">Denied</span></td>
@@ -1223,10 +1203,81 @@
                 <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:84%"></div></div>
               </div>
             </td>
-            <td class="payer-text">UHC</td>
             <td class="date-text">Nov 08, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-appeal" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button></td>
+            <td class="action-cell"><button class="row-btn row-btn-high" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button></td>
           </tr>
+          <tr class="row-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
+            <td><span class="sc sc-denied">Denied</span></td>
+            <td class="patient-name">Daniel Müller</td>
+            <td class="visits-text">1 / 8</td>
+            <td class="description-text">Denied · CO-50 · appeal open</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-medium">82%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:82%"></div></div>
+              </div>
+            </td>
+            <td class="date-text">Nov 09, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-high" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button></td>
+          </tr>
+          <tr class="row-high">
+            <td><span class="sc sc-docs">Docs Missing</span></td>
+            <td class="patient-name">Lucas Martinez</td>
+            <td class="visits-text">0 / 10</td>
+            <td class="description-text">Diagnosis codes missing</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-medium">88%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:88%"></div></div>
+              </div>
+            </td>
+            <td class="date-text">Nov 09, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-high" onclick="event.stopPropagation()">Upload →</button></td>
+          </tr>
+          <!-- ── MED urgency (amber) ── sorted by Alert Date ── -->
+          <tr class="row-med">
+            <td><span class="sc sc-pending">Pending</span></td>
+            <td class="patient-name">Timothy Allen</td>
+            <td class="visits-text">5 / 12</td>
+            <td class="description-text">Physician sign-off needed</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-high">91%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:91%"></div></div>
+              </div>
+            </td>
+            <td class="date-text">Nov 10, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-med" onclick="event.stopPropagation()">Request →</button></td>
+          </tr>
+          <tr class="row-med">
+            <td><span class="sc sc-docs">Docs Missing</span></td>
+            <td class="patient-name">Sofia Reyes</td>
+            <td class="visits-text">1 / 6</td>
+            <td class="description-text">Referral form incomplete</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-low">73%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-low" style="width:73%"></div></div>
+              </div>
+            </td>
+            <td class="date-text">Nov 11, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-med" onclick="event.stopPropagation()">Upload →</button></td>
+          </tr>
+          <tr class="row-med">
+            <td><span class="sc sc-docs">Docs Missing</span></td>
+            <td class="patient-name">Hannah Lee</td>
+            <td class="visits-text">4 / 8</td>
+            <td class="description-text">Prior records needed</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-low">76%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-low" style="width:76%"></div></div>
+              </div>
+            </td>
+            <td class="date-text">Nov 12, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-med" onclick="event.stopPropagation()">Upload →</button></td>
+          </tr>
+          <!-- ── LOW urgency (blue) ── sorted by Alert Date ── -->
           <tr class="row-low">
             <td><span class="sc sc-submitted">Submitted</span></td>
             <td class="patient-name">Priya Nair</td>
@@ -1238,9 +1289,22 @@
                 <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:92%"></div></div>
               </div>
             </td>
-            <td class="payer-text">Cigna</td>
             <td class="date-text">Nov 13, 2026</td>
-            <td class="action-cell"><button class="row-btn row-btn-waiting">Awaiting</button></td>
+            <td class="action-cell"><button class="row-btn row-btn-low" onclick="event.stopPropagation()">Awaiting</button></td>
+          </tr>
+          <tr class="row-low">
+            <td><span class="sc sc-submitted">Submitted</span></td>
+            <td class="patient-name">Emma Kowalski</td>
+            <td class="visits-text">7 / 10</td>
+            <td class="description-text">Submitted · pending approval</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-high">95%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:95%"></div></div>
+              </div>
+            </td>
+            <td class="date-text">Nov 14, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-low" onclick="event.stopPropagation()">Awaiting</button></td>
           </tr>
         </tbody>
       </table>
@@ -1250,11 +1314,12 @@
       <!-- CARD GRID VIEW -->
       <div class="card-grid" id="card-grid">
 
-        <div class="auth-card priority-high" onclick="location.href='preva-detail.html'">
+        <!-- ── HIGH urgency ── -->
+        <div class="auth-card priority-high" onclick="location.href='preva-detail.html'" style="cursor:pointer;">
           <div class="auth-card-header">
             <div>
               <div class="auth-card-name">Maria Gonzalez</div>
-              <div class="auth-card-payer">Aetna &nbsp;·&nbsp; 2 / 10 visits</div>
+              <div class="auth-card-payer">2 / 10 visits</div>
             </div>
             <span class="badge high">High</span>
           </div>
@@ -1272,17 +1337,47 @@
               <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:97%"></div></div>
             </div>
           </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-high" onclick="event.stopPropagation(); location.href='preva-detail.html'">Submit →</button>
+          </div>
         </div>
 
-        <div class="auth-card priority-high">
+        <div class="auth-card priority-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
           <div class="auth-card-header">
             <div>
-              <div class="auth-card-name">Daniel Müller</div>
-              <div class="auth-card-payer">UHC &nbsp;·&nbsp; 1 / 8 visits</div>
+              <div class="auth-card-name">James Carter</div>
+              <div class="auth-card-payer">0 / 8 visits</div>
             </div>
             <span class="badge high">High</span>
           </div>
-          <div class="auth-card-desc">Missing clinical notes</div>
+          <div class="auth-card-desc">Denied · CO-197 · appeal open</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 08, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-medium" style="font-size:12px">84%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-medium" style="width:84%"></div></div>
+            </div>
+          </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-high" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button>
+          </div>
+        </div>
+
+        <div class="auth-card priority-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Daniel Müller</div>
+              <div class="auth-card-payer">1 / 8 visits</div>
+            </div>
+            <span class="badge high">High</span>
+          </div>
+          <div class="auth-card-desc">Denied · CO-50 · appeal open</div>
           <div class="auth-card-meta">
             <div class="auth-card-meta-item">
               <span class="auth-card-meta-label">Alert Date</span>
@@ -1296,29 +1391,8 @@
               <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-medium" style="width:82%"></div></div>
             </div>
           </div>
-        </div>
-
-        <div class="auth-card priority-med">
-          <div class="auth-card-header">
-            <div>
-              <div class="auth-card-name">Timothy Allen</div>
-              <div class="auth-card-payer">BCBS &nbsp;·&nbsp; 5 / 12 visits</div>
-            </div>
-            <span class="badge med">Med</span>
-          </div>
-          <div class="auth-card-desc">Physician sign-off needed</div>
-          <div class="auth-card-meta">
-            <div class="auth-card-meta-item">
-              <span class="auth-card-meta-label">Alert Date</span>
-              <span class="auth-card-meta-value">Nov 10, 2026</span>
-            </div>
-            <div class="auth-card-conf">
-              <div class="auth-card-conf-row">
-                <span class="auth-card-meta-label">Confidence</span>
-                <span class="conf-score conf-high" style="font-size:12px">91%</span>
-              </div>
-              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:91%"></div></div>
-            </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-high" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button>
           </div>
         </div>
 
@@ -1326,7 +1400,7 @@
           <div class="auth-card-header">
             <div>
               <div class="auth-card-name">Lucas Martinez</div>
-              <div class="auth-card-payer">Humana &nbsp;·&nbsp; 0 / 10 visits</div>
+              <div class="auth-card-payer">0 / 10 visits</div>
             </div>
             <span class="badge high">High</span>
           </div>
@@ -1344,53 +1418,36 @@
               <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-medium" style="width:88%"></div></div>
             </div>
           </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-high" onclick="event.stopPropagation()">Upload →</button>
+          </div>
         </div>
 
+        <!-- ── MED urgency ── -->
         <div class="auth-card priority-med">
           <div class="auth-card-header">
             <div>
-              <div class="auth-card-name">Hannah Lee</div>
-              <div class="auth-card-payer">Cigna &nbsp;·&nbsp; 4 / 8 visits</div>
+              <div class="auth-card-name">Timothy Allen</div>
+              <div class="auth-card-payer">5 / 12 visits</div>
             </div>
             <span class="badge med">Med</span>
           </div>
-          <div class="auth-card-desc">Prior records needed</div>
+          <div class="auth-card-desc">Physician sign-off needed</div>
           <div class="auth-card-meta">
             <div class="auth-card-meta-item">
               <span class="auth-card-meta-label">Alert Date</span>
-              <span class="auth-card-meta-value">Nov 12, 2026</span>
+              <span class="auth-card-meta-value">Nov 10, 2026</span>
             </div>
             <div class="auth-card-conf">
               <div class="auth-card-conf-row">
                 <span class="auth-card-meta-label">Confidence</span>
-                <span class="conf-score conf-low" style="font-size:12px">76%</span>
+                <span class="conf-score conf-high" style="font-size:12px">91%</span>
               </div>
-              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-low" style="width:76%"></div></div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:91%"></div></div>
             </div>
           </div>
-        </div>
-
-        <div class="auth-card priority-low">
-          <div class="auth-card-header">
-            <div>
-              <div class="auth-card-name">Emma Kowalski</div>
-              <div class="auth-card-payer">Aetna &nbsp;·&nbsp; 7 / 10 visits</div>
-            </div>
-            <span class="badge low">Low</span>
-          </div>
-          <div class="auth-card-desc">Resubmission pending</div>
-          <div class="auth-card-meta">
-            <div class="auth-card-meta-item">
-              <span class="auth-card-meta-label">Alert Date</span>
-              <span class="auth-card-meta-value">Nov 14, 2026</span>
-            </div>
-            <div class="auth-card-conf">
-              <div class="auth-card-conf-row">
-                <span class="auth-card-meta-label">Confidence</span>
-                <span class="conf-score conf-high" style="font-size:12px">95%</span>
-              </div>
-              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:95%"></div></div>
-            </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-med" onclick="event.stopPropagation()">Request →</button>
           </div>
         </div>
 
@@ -1398,7 +1455,7 @@
           <div class="auth-card-header">
             <div>
               <div class="auth-card-name">Sofia Reyes</div>
-              <div class="auth-card-payer">BCBS &nbsp;·&nbsp; 1 / 6 visits</div>
+              <div class="auth-card-payer">1 / 6 visits</div>
             </div>
             <span class="badge med">Med</span>
           </div>
@@ -1416,37 +1473,44 @@
               <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-low" style="width:73%"></div></div>
             </div>
           </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-med" onclick="event.stopPropagation()">Upload →</button>
+          </div>
         </div>
 
-        <div class="auth-card priority-high">
+        <div class="auth-card priority-med">
           <div class="auth-card-header">
             <div>
-              <div class="auth-card-name">James Carter</div>
-              <div class="auth-card-payer">UHC &nbsp;·&nbsp; 0 / 8 visits</div>
+              <div class="auth-card-name">Hannah Lee</div>
+              <div class="auth-card-payer">4 / 8 visits</div>
             </div>
-            <span class="badge high">High</span>
+            <span class="badge med">Med</span>
           </div>
-          <div class="auth-card-desc">Missing auth from PCP</div>
+          <div class="auth-card-desc">Prior records needed</div>
           <div class="auth-card-meta">
             <div class="auth-card-meta-item">
               <span class="auth-card-meta-label">Alert Date</span>
-              <span class="auth-card-meta-value">Nov 08, 2026</span>
+              <span class="auth-card-meta-value">Nov 12, 2026</span>
             </div>
             <div class="auth-card-conf">
               <div class="auth-card-conf-row">
                 <span class="auth-card-meta-label">Confidence</span>
-                <span class="conf-score conf-medium" style="font-size:12px">84%</span>
+                <span class="conf-score conf-low" style="font-size:12px">76%</span>
               </div>
-              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-medium" style="width:84%"></div></div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-low" style="width:76%"></div></div>
             </div>
+          </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-med" onclick="event.stopPropagation()">Upload →</button>
           </div>
         </div>
 
+        <!-- ── LOW urgency ── -->
         <div class="auth-card priority-low">
           <div class="auth-card-header">
             <div>
               <div class="auth-card-name">Priya Nair</div>
-              <div class="auth-card-payer">Cigna &nbsp;·&nbsp; 3 / 10 visits</div>
+              <div class="auth-card-payer">3 / 10 visits</div>
             </div>
             <span class="badge low">Low</span>
           </div>
@@ -1463,6 +1527,36 @@
               </div>
               <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:92%"></div></div>
             </div>
+          </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-low" onclick="event.stopPropagation()">Awaiting</button>
+          </div>
+        </div>
+
+        <div class="auth-card priority-low">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Emma Kowalski</div>
+              <div class="auth-card-payer">7 / 10 visits</div>
+            </div>
+            <span class="badge low">Low</span>
+          </div>
+          <div class="auth-card-desc">Submitted · pending approval</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 14, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-high" style="font-size:12px">95%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:95%"></div></div>
+            </div>
+          </div>
+          <div class="auth-card-action">
+            <button class="row-btn row-btn-low" onclick="event.stopPropagation()">Awaiting</button>
           </div>
         </div>
 
@@ -1488,20 +1582,27 @@
       <div class="sidebar-card">
         <div class="sidebar-title">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <rect width="16" height="16" rx="4" fill="url(#sidebarGrad)"/>
+            <rect width="16" height="16" rx="4" fill="#7c3aed"/>
             <path d="M5 5.5L8 3l3 2.5-1.5 2.5H6.5L5 5.5z" fill="white" opacity=".9"/>
             <path d="M6.5 8l1.5 4.5L9.5 8" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
-            <defs>
-              <linearGradient id="sidebarGrad" x1="0" y1="0" x2="16" y2="16">
-                <stop stop-color="#1d4fa4"/><stop offset="1" stop-color="#7c3aed"/>
-              </linearGradient>
-            </defs>
           </svg>
           Preva's Activity
-          <span class="ai-badge">
-            <span class="ai-pulse"></span>
-            Live
-          </span>
+        </div>
+
+        <div class="activity-item" onclick="openReplayModal()" style="cursor:pointer;">
+          <div class="activity-icon icon-purple">
+            <svg viewBox="0 0 11 11" fill="none"><polygon points="3,2 9,5.5 3,9" fill="#7c3aed"/></svg>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">PA form prepared by Preva Agent</div>
+            <div class="activity-sub">
+              <span class="replay-link">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><polygon points="2,1.5 8,4.5 2,7.5" fill="#7c3aed"/></svg>
+                View agent replay
+              </span>
+            </div>
+          </div>
+          <div class="activity-time">1m ago</div>
         </div>
 
         <div class="activity-item">
@@ -1601,7 +1702,57 @@
   </div><!-- /content-grid -->
 
 </main>
+<!-- REPLAY MODAL -->
+<div id="replay-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title-row">
+        <div class="modal-title-icon">
+          <svg viewBox="0 0 14 14" fill="none"><polygon points="3,2 12,7 3,12" fill="white"/></svg>
+        </div>
+        <span class="modal-title" id="modal-title">Preva Agent — Automation Replay</span>
+      </div>
+      <button class="modal-close" onclick="closeReplayModal()" aria-label="Close">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l10 10M11 1L1 11"/></svg>
+      </button>
+    </div>
+    <div class="modal-video-wrap">
+      <video id="replay-video" controls preload="metadata" src="prevademo_automation.mp4"></video>
+    </div>
+    <p class="modal-desc">Preva collected clinical information from the EMR and populated the payer authorization form.</p>
+  </div>
+</div>
+
 <script>
+  function openReplayModal() {
+    const modal = document.getElementById('replay-modal');
+    const video = document.getElementById('replay-video');
+    modal.classList.add('open');
+    modal.focus();
+    document.addEventListener('keydown', handleModalKey);
+    document.body.style.overflow = 'hidden';
+    video.load();
+    video.play().catch(() => {});
+  }
+
+  function closeReplayModal() {
+    const modal = document.getElementById('replay-modal');
+    const video = document.getElementById('replay-video');
+    modal.classList.remove('open');
+    video.pause();
+    document.removeEventListener('keydown', handleModalKey);
+    document.body.style.overflow = '';
+  }
+
+  function handleModalKey(e) {
+    if (e.key === 'Escape') closeReplayModal();
+  }
+
+  // close when clicking the backdrop (outside the modal box)
+  document.getElementById('replay-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeReplayModal();
+  });
+
   function setView(mode) {
     const tableWrap = document.getElementById('table-wrap');
     const cardGrid  = document.getElementById('card-grid');
