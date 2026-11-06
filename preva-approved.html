@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1453">
+<title>Preva — Maria Gonzalez · Approved</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --border: #e8eaed;
+    --border-light: #f3f4f6;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+    --blue: #1d4fa4;
+    --green: #059669;
+    --amber: #d97706;
+    --red: #dc2626;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────── */
+  nav {
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  .nav-logo { display:flex; align-items:center; gap:9px; text-decoration:none; flex-shrink:0; }
+  .nav-logo-text { font-size:17px; font-weight:700; letter-spacing:2.5px; color:#ffffff; }
+  .nav-links { display:flex; gap:2px; margin-left:36px; }
+  .nav-link {
+    display:flex; align-items:center; gap:6px;
+    padding:6px 14px; border-radius:7px;
+    font-size:13px; font-weight:500;
+    color:#94a3b8; text-decoration:none;
+    transition: background .15s;
+  }
+  .nav-link:hover { background: rgba(255,255,255,.07); color: #e2e8f0; }
+  .nav-link.active { background: rgba(255,255,255,.1); color: #ffffff; font-weight:600; }
+  .nav-link svg { width:13px; height:13px; flex-shrink:0; }
+  .nav-right { margin-left:auto; display:flex; align-items:center; gap:4px; }
+  .nav-icon-btn { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .nav-icon-btn:hover { background: rgba(255,255,255,.07); }
+  .nav-divider { width:1px; height:22px; background:#334155; margin:0 8px; }
+  .nav-user { display:flex; align-items:center; gap:8px; padding:4px 10px 4px 4px; border-radius:8px; cursor:pointer; }
+  .nav-user:hover { background: rgba(255,255,255,.07); }
+  .nav-avatar { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,#1d4fa4,#6e2bd0); color:white; font-size:10.5px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nav-username { font-size:13px; font-weight:600; color:#e2e8f0; }
+
+  /* ─── MAIN ─────────────────────────────────────────── */
+  main { max-width: 1390px; margin: 0 auto; padding: 14px 40px 48px; }
+
+  .breadcrumb {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 12px; font-size: 12px; color: var(--text-muted);
+  }
+  .breadcrumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .breadcrumb a:hover { color: #1a3d8f; }
+  .breadcrumb .sep { font-size: 11px; }
+  .breadcrumb .current { color: var(--blue); font-weight: 600; }
+
+  /* ─── PAGE BAND ─────────────────────────────────────── */
+  .page-band {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .page-band-inner { max-width: 1390px; margin: 0 auto; padding: 0 40px; }
+  .page-header { margin-bottom: 0; }
+  .page-header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .ph-avatar {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: linear-gradient(135deg, #1d4fa4, #6e2bd0);
+    color: white; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ph-title-row { display: flex; align-items: center; gap: 10px; flex: 1; }
+  .page-title { font-size: 19px; font-weight: 700; color: var(--text-primary); letter-spacing: -.3px; }
+  .page-meta {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    font-size: 12.5px; color: var(--text-secondary); margin-top: 6px; margin-bottom: 0;
+  }
+  .pm-sep { color: var(--text-muted); font-size: 11px; }
+  .pm-chip {
+    display: inline-flex; align-items: center; padding: 2px 8px;
+    border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+  .pm-approved  { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+  .pm-denied    { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+  .pm-submitted { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+
+  .detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 248px;
+    gap: 18px;
+    align-items: start;
+  }
+
+  /* ─── APPROVAL BANNER ───────────────────────────────── */
+  .approval-banner {
+    background: linear-gradient(135deg, #dcfce7 0%, #d1fae5 55%, #f0fdf4 100%);
+    border: 1px solid #86efac;
+    border-left: 3px solid #16a34a;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .approval-banner::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,197,94,.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .appr-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .appr-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: #14532d;
+  }
+  .appr-title .check-ico {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #16a34a;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .appr-title .check-ico svg { width: 11px; height: 11px; }
+  .appr-ai-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px 2px 6px;
+    background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.22);
+    border-radius: 20px; font-size: 10.5px; font-weight: 600; color: #6d28d9;
+  }
+  .ai-dot-sm { width: 5px; height: 5px; border-radius: 50%; background: #7c3aed; animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .appr-date { font-size: 11.5px; color: #166534; opacity: .7; }
+  .appr-body {
+    font-size: 13.5px; line-height: 1.75; color: #14532d;
+    margin-bottom: 16px;
+  }
+  .appr-body strong { font-weight: 700; color: #052e16; }
+  .appr-body .hl { color: #15803d; font-weight: 500; text-decoration: underline; text-decoration-color: #86efac; cursor: pointer; }
+  .appr-stats {
+    display: flex; align-items: center; gap: 20px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(134,239,172,.5);
+    flex-wrap: wrap;
+  }
+  .appr-stat { display: flex; flex-direction: column; gap: 1px; }
+  .appr-stat-label { font-size: 9.5px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: #166534; opacity: .7; }
+  .appr-stat-value { font-size: 13.5px; font-weight: 700; color: #14532d; }
+  .appr-stat-value.accent { color: #16a34a; }
+  .appr-divider { width: 1px; height: 30px; background: rgba(134,239,172,.5); }
+  .preva-accuracy {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.6);
+    border: 1px solid rgba(124,58,237,.18);
+    border-radius: 10px;
+    padding: 6px 12px;
+  }
+  .pa-icon { width: 26px; height: 26px; border-radius: 7px; background: rgba(124,58,237,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .pa-icon svg { width: 12px; height: 12px; }
+  .pa-text { font-size: 11.5px; color: #64748b; }
+  .pa-text b { font-weight: 700; color: #6d28d9; }
+
+  /* ─── SECTION CARD ──────────────────────────────────── */
+  .section-card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13.5px; font-weight: 700; color: var(--text-primary);
+  }
+  .section-title svg { width:15px; height:15px; color:var(--text-secondary); flex-shrink:0; }
+  .section-sub { font-size: 11.5px; color: var(--text-muted); }
+  .section-sub.green { color: var(--green); font-weight: 600; }
+
+  /* ─── PATIENT BLOCK ─────────────────────────────────── */
+  .patient-block {
+    padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .patient-avatar {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: linear-gradient(135deg, #1d4fa4, #6e2bd0);
+    color: white; font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .p-name { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+  .p-meta { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+  .p-tags { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+  }
+  .tag.status-approved { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; }
+  .tag.payer           { background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; }
+  .tag.specialty       { background:#f5f3ff; color:#6d28d9; border:1px solid #ddd6fe; }
+
+  .badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+  .badge.approved { background:#d1fae5; color:#065f46; }
+
+  /* ─── INFO GRID ─────────────────────────────────────── */
+  .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0 20px; }
+  .info-cell {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border-light);
+    padding-right: 20px;
+  }
+  .info-cell:nth-child(3n) { padding-right: 0; }
+  .info-cell:nth-last-child(-n+3) { border-bottom: none; }
+  .info-label { font-size:9.5px; font-weight:700; letter-spacing:0.7px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+  .info-value { font-size:13px; font-weight:500; color:var(--text-primary); }
+
+  /* ─── AUTH DETAILS GRID ──────────────────────────────── */
+  .auth-grid { display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 20px 4px; }
+  .auth-cell {
+    padding: 12px 16px 12px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .auth-cell:nth-child(4n) { padding-right: 0; }
+  .auth-cell:nth-last-child(-n+4) { border-bottom: none; }
+  .f-label { font-size:9px; font-weight:700; letter-spacing:0.7px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+  .f-value { font-size:12.5px; font-weight:500; color:var(--text-primary); display:flex; align-items:center; gap:5px; }
+  .f-value.ok { color: var(--green); font-weight: 600; }
+  .fdot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .fdot-green { background:#22c55e; }
+
+  /* ─── BOTTOM ROW ────────────────────────────────────── */
+  .bottom-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-bottom: 0;
+  }
+  .bottom-row .section-card { margin-bottom: 0; }
+
+  /* Doc checklist */
+  .doc-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 20px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .doc-item:last-child { border-bottom: none; }
+  .doc-icon { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .doc-icon.done { background: #d1fae5; }
+  .doc-icon svg { width: 11px; height: 11px; }
+  .doc-info { flex: 1; min-width: 0; }
+  .doc-name { font-size: 12.5px; font-weight: 600; color: var(--text-primary); }
+  .doc-date { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .btn-doc { padding: 5px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 600; cursor: pointer; border: none; font-family: 'Inter', sans-serif; flex-shrink: 0; transition: background .1s; }
+  .btn-view { background: #f1f5f9; color: var(--text-secondary); }
+  .btn-view:hover { background: #e2e8f0; }
+
+  /* Payer requirements */
+  .req-item {
+    display: flex; align-items: flex-start; gap: 9px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 12.5px;
+  }
+  .req-item:last-child { border-bottom: none; }
+  .req-item.met { color: var(--text-muted); text-decoration: line-through; text-decoration-color: #cbd5e1; }
+  .req-icon { flex-shrink: 0; }
+  .req-icon svg { width: 14px; height: 14px; display: block; }
+
+  /* ─── SIDEBAR ────────────────────────────────────────── */
+  .sidebar { display: flex; flex-direction: column; gap: 14px; }
+  .sidebar-card {
+    background: var(--card); border-radius: 14px;
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm); overflow: hidden;
+  }
+  .sc-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sc-title { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
+  .sc-link  { font-size: 11.5px; font-weight: 600; color: var(--blue); text-decoration: none; cursor: pointer; }
+
+  /* Auth status ring */
+  .ring-body { padding: 16px; text-align: center; }
+  .ring-wrap { position: relative; width: 84px; height: 84px; margin: 0 auto 12px; }
+  .ring-wrap svg { width: 84px; height: 84px; }
+  .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .ring-num { font-family: 'Crimson Text', serif; font-size: 28px; font-weight: 600; color: #059669; line-height: 1; }
+  .ring-lbl { font-size: 7.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); }
+  .ring-status-name { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .ring-status-ref  { font-size: 11px; color: var(--text-muted); margin-top: 2px; margin-bottom: 14px; }
+  .ring-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; text-align: center; padding: 12px 0 4px; border-top: 1px solid var(--border-light); }
+  .rs-val { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+  .rs-lbl { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-top: 1px; }
+  .vbar-wrap { padding: 0 16px 14px; }
+  .vbar-labels { display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-bottom:5px; }
+  .vbar-val { font-weight:600; color:var(--text-primary); }
+  .vbar-track { height: 5px; background: #e8edf5; border-radius: 3px; }
+  .vbar-fill  { height: 5px; background: var(--green); border-radius: 3px; }
+
+  /* Auth history */
+  .hist-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border-light); }
+  .hist-item:last-child { border-bottom: none; }
+  .hist-ico { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .hist-ico.expired { background: #fee2e2; }
+  .hist-ico.approved { background: #d1fae5; }
+  .hist-ico svg { width: 10px; height: 10px; display: block; }
+  .hist-ref  { font-size: 12px; font-weight: 700; color: var(--text-primary); }
+  .hist-date { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .hist-stats { display: flex; gap: 12px; margin-top: 5px; }
+  .hist-stat  { font-size: 11px; color: var(--text-secondary); }
+  .hist-stat b { font-weight: 600; color: var(--text-primary); }
+
+  /* Payer info */
+  .pi-row { display: flex; align-items: baseline; padding: 8px 16px; border-bottom: 1px solid var(--border-light); }
+  .pi-row:last-child { border-bottom: none; }
+  .pi-key { font-size: 11.5px; color: var(--text-muted); width: 90px; flex-shrink: 0; }
+  .pi-val { font-size: 11.5px; font-weight: 500; color: var(--text-primary); }
+  .pi-val a { color: var(--blue); text-decoration: none; }
+  .pi-val.green { color: var(--green); font-weight: 600; }
+
+  /* Renewal reminder */
+  .renewal-card {
+    background: linear-gradient(135deg, #ddd6fe 0%, #ede9fe 50%, #faf5ff 100%);
+    border: 1px solid #c4b5fd;
+    border-left: 3px solid #7c3aed;
+    border-radius: 14px;
+    padding: 14px 16px;
+    overflow: hidden;
+  }
+  .ren-header { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #6d28d9; margin-bottom: 8px; }
+  .ren-header svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .ren-body { font-size: 12px; color: #1e293b; line-height: 1.65; }
+  .ren-body strong { font-weight: 700; color: #6d28d9; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="preva-dashboard.html">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="7" fill="url(#ng)"/>
+      <path d="M8 7h6.5c2.485 0 4.5 2.015 4.5 4.5S16.985 16 14.5 16H11v5H8V7z" fill="white"/>
+      <path d="M11 10v3h3.5a1.5 1.5 0 0 0 0-3H11z" fill="url(#ng)"/>
+      <defs><linearGradient id="ng" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#1d4fa4"/><stop offset="1" stop-color="#6e2bd0"/></linearGradient></defs>
+    </svg>
+    <span class="nav-logo-text">PREVA</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="preva-dashboard.html">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="4.5" r="2.5"/><path d="M1.5 12.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5"/></svg>
+      Patients
+    </a>
+    <a class="nav-link" href="#"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5"/><path d="M4.5 7h5M4.5 4.5h5M4.5 9.5h3"/></svg> Payers</a>
+    <a class="nav-link" href="#"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 10 4.5 6.5 7.5 8.5 13 2.5"/></svg> Reports</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-icon-btn"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="#64748b" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="m12.5 12.5 3 3"/></svg></div>
+    <div class="nav-icon-btn"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="#64748b" stroke-width="1.5"><path d="M9 1.5a5.5 5.5 0 0 0-5.5 5.5v2L2 12h14l-1.5-3V7A5.5 5.5 0 0 0 9 1.5z"/><path d="M7 15.5a2 2 0 0 0 4 0"/></svg></div>
+    <div class="nav-divider"></div>
+    <div class="nav-user">
+      <div class="nav-avatar">MC</div>
+      <span class="nav-username">Maya Chen</span>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#94a3b8" stroke-width="1.5"><path d="M2.5 3.5l2.5 3 2.5-3"/></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- ── PAGE BAND ────────────────────────────────────────── -->
+<div class="page-band">
+  <div class="page-band-inner">
+    <div class="breadcrumb">
+      <a href="preva-dashboard.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span class="current">Prior Authorization: Maria Gonzalez</span>
+    </div>
+    <div class="page-header">
+      <div class="page-header-top">
+        <div class="ph-avatar">MG</div>
+        <div style="flex:1">
+          <div class="ph-title-row">
+            <h1 class="page-title">Prior Authorization</h1>
+            <span class="pm-chip pm-approved" style="margin-left:auto">Approved</span>
+          </div>
+          <span style="font-size:13px;font-weight:500;color:var(--text-secondary);margin-top:2px;display:block">Maria Gonzalez</span>
+        </div>
+      </div>
+      <div class="page-meta">
+        <span class="pm-chip pm-approved">Auth Active</span>
+        <span class="pm-sep">·</span>
+        <span>PA-2026-0041</span>
+        <span class="pm-sep">·</span>
+        <span>Aetna PPO</span>
+        <span class="pm-sep">·</span>
+        <span>Valid through <strong>Jan 06, 2027</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ─────────────────────────────────────────────── -->
+<main>
+
+  <div class="detail-layout">
+
+    <!-- ── LEFT ─────────────────────────────────────── -->
+    <div>
+
+      <!-- APPROVAL BANNER -->
+      <div class="approval-banner">
+        <div class="appr-header">
+          <div class="appr-title">
+            <div class="check-ico">
+              <svg viewBox="0 0 11 11" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M1.5 5.5l2.5 3 5.5-5.5"/></svg>
+            </div>
+            Authorization Approved by Aetna PPO
+            <span class="appr-ai-chip"><span class="ai-dot-sm"></span>Preva AI · 97% Accurate</span>
+          </div>
+          <span class="appr-date">Approved Nov 05, 2026 · 11:42 AM</span>
+        </div>
+        <p class="appr-body">
+          Aetna PPO approved <strong>10 PT visits</strong> for <span class="hl">Maria Gonzalez (M54.5 — low back pain)</span>. Coverage is now active, effective <strong>Nov 05, 2026</strong> through <strong>Feb 05, 2027</strong>. Preva's 97% confidence prediction was confirmed — the renewal was approved in <strong>1 business day</strong>. No further action is needed for this authorization.
+        </p>
+        <div class="appr-stats">
+          <div class="appr-stat">
+            <div class="appr-stat-label">Auth Number</div>
+            <div class="appr-stat-value">PA-2026-0041</div>
+          </div>
+          <div class="appr-divider"></div>
+          <div class="appr-stat">
+            <div class="appr-stat-label">Status</div>
+            <div class="appr-stat-value accent">Active ✓</div>
+          </div>
+          <div class="appr-divider"></div>
+          <div class="appr-stat">
+            <div class="appr-stat-label">Visits Approved</div>
+            <div class="appr-stat-value">10 PT visits</div>
+          </div>
+          <div class="appr-divider"></div>
+          <div class="appr-stat">
+            <div class="appr-stat-label">Valid Through</div>
+            <div class="appr-stat-value">Feb 05, 2027</div>
+          </div>
+          <div class="preva-accuracy">
+            <div class="pa-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="#7c3aed"><path d="M6 .5l1.35 3.73H11L8.18 6.4l1.08 3.6L6 8.1 2.74 10l1.08-3.6L1 4.23h3.65z"/></svg>
+            </div>
+            <div class="pa-text">Preva predicted <b>97%</b> — confirmed accurate</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUTHORIZATION DETAILS -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-title">
+            <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="11" height="13" rx="1.5"/><path d="M5 5h5M5 7.5h5M5 10h3"/></svg>
+            Authorization Details
+          </span>
+          <span class="section-sub" style="color:var(--green);font-weight:600">Approved · Active</span>
+        </div>
+        <div class="auth-grid">
+          <div class="auth-cell"><div class="f-label">Auth Number</div><div class="f-value">PA-2026-0041</div></div>
+          <div class="auth-cell"><div class="f-label">Type</div><div class="f-value">Concurrent</div></div>
+          <div class="auth-cell"><div class="f-label">Payer</div><div class="f-value">Aetna PPO</div></div>
+          <div class="auth-cell"><div class="f-label">Approval Date</div><div class="f-value ok">Nov 05, 2026</div></div>
+          <div class="auth-cell"><div class="f-label">Diagnosis</div><div class="f-value">M54.5 — Low back pain</div></div>
+          <div class="auth-cell"><div class="f-label">CPT Codes</div><div class="f-value">97110, 97530, 97035</div></div>
+          <div class="auth-cell"><div class="f-label">Authorization Status</div><div class="f-value ok"><span class="fdot fdot-green"></span> Approved</div></div>
+          <div class="auth-cell"><div class="f-label">Approved By</div><div class="f-value">Aetna PPO</div></div>
+          <div class="auth-cell"><div class="f-label">Visits Approved</div><div class="f-value ok">10 visits</div></div>
+          <div class="auth-cell"><div class="f-label">Effective Date</div><div class="f-value">Nov 05, 2026</div></div>
+          <div class="auth-cell"><div class="f-label">Expiration Date</div><div class="f-value">Feb 05, 2027</div></div>
+          <div class="auth-cell"><div class="f-label">Visits Used</div><div class="f-value">0 of 10</div></div>
+        </div>
+      </div>
+
+      <!-- DOCS + PAYER REQUIREMENTS -->
+      <div class="bottom-row">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-title">
+              <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="11" height="13" rx="1.5"/><path d="M5 5h5M5 7.5h5M5 10h3"/></svg>
+              Documentation Checklist
+            </span>
+            <span class="section-sub">Accepted by Aetna</span>
+          </div>
+          <div class="doc-item"><div class="doc-icon done"><svg viewBox="0 0 11 11" fill="none" stroke="#059669" stroke-width="1.7"><path d="M2 5.5l2 2.5 5-4"/></svg></div><div class="doc-info"><div class="doc-name">Physician Referral</div><div class="doc-date">Accepted</div></div><button class="btn-doc btn-view">View</button></div>
+          <div class="doc-item"><div class="doc-icon done"><svg viewBox="0 0 11 11" fill="none" stroke="#059669" stroke-width="1.7"><path d="M2 5.5l2 2.5 5-4"/></svg></div><div class="doc-info"><div class="doc-name">Initial PT Assessment</div><div class="doc-date">Accepted</div></div><button class="btn-doc btn-view">View</button></div>
+          <div class="doc-item"><div class="doc-icon done"><svg viewBox="0 0 11 11" fill="none" stroke="#059669" stroke-width="1.7"><path d="M2 5.5l2 2.5 5-4"/></svg></div><div class="doc-info"><div class="doc-name">Functional Limitation Narrative</div><div class="doc-date">Accepted</div></div><button class="btn-doc btn-view">View</button></div>
+          <div class="doc-item"><div class="doc-icon done"><svg viewBox="0 0 11 11" fill="none" stroke="#059669" stroke-width="1.7"><path d="M2 5.5l2 2.5 5-4"/></svg></div><div class="doc-info"><div class="doc-name">Insurance Card Copy</div><div class="doc-date">Accepted</div></div><button class="btn-doc btn-view">View</button></div>
+          <div class="doc-item"><div class="doc-icon done"><svg viewBox="0 0 11 11" fill="none" stroke="#059669" stroke-width="1.7"><path d="M2 5.5l2 2.5 5-4"/></svg></div><div class="doc-info"><div class="doc-name">Prior Treatment Records</div><div class="doc-date">Accepted</div></div><button class="btn-doc btn-view">View</button></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-title">
+              <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5h11M2 7h11M2 10.5h6"/><circle cx="12.5" cy="11.5" r="2"/><path d="M12.5 10.5v1l.7.7"/></svg>
+              Payer Requirements
+            </span>
+            <span class="section-sub green">5 of 5 met</span>
+          </div>
+          <div class="req-item met"><span class="req-icon"><svg viewBox="0 0 14 14" fill="none" stroke="#22c55e" stroke-width="2"><path d="M2 7l3.5 3.5 7-7"/></svg></span>Physician referral on file</div>
+          <div class="req-item met"><span class="req-icon"><svg viewBox="0 0 14 14" fill="none" stroke="#22c55e" stroke-width="2"><path d="M2 7l3.5 3.5 7-7"/></svg></span>Initial PT evaluation completed within 30 days</div>
+          <div class="req-item met"><span class="req-icon"><svg viewBox="0 0 14 14" fill="none" stroke="#22c55e" stroke-width="2"><path d="M2 7l3.5 3.5 7-7"/></svg></span>Diagnosis code matches covered conditions</div>
+          <div class="req-item met"><span class="req-icon"><svg viewBox="0 0 14 14" fill="none" stroke="#22c55e" stroke-width="2"><path d="M2 7l3.5 3.5 7-7"/></svg></span>Functional limitation narrative provided</div>
+          <div class="req-item met"><span class="req-icon"><svg viewBox="0 0 14 14" fill="none" stroke="#22c55e" stroke-width="2"><path d="M2 7l3.5 3.5 7-7"/></svg></span>Treating provider NPI verified in-network</div>
+        </div>
+      </div>
+
+    </div><!-- /left -->
+
+    <!-- ── SIDEBAR ─────────────────────────────────── -->
+    <div class="sidebar">
+
+      <!-- AUTH STATUS RING — now green/active -->
+      <div class="sidebar-card">
+        <div class="sc-header"><span class="sc-title">Authorization Status</span></div>
+        <div class="ring-body">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 84 84" fill="none">
+              <circle cx="42" cy="42" r="36" stroke="#e8edf5" stroke-width="7"/>
+              <!-- full ring = all 10 visits available, none used yet -->
+              <circle cx="42" cy="42" r="36"
+                stroke="#059669" stroke-width="7"
+                stroke-dasharray="226 0"
+                stroke-linecap="round"
+                transform="rotate(-90 42 42)"/>
+            </svg>
+            <div class="ring-center">
+              <div class="ring-num" style="font-size:22px">10/10</div>
+              <div class="ring-lbl">visits</div>
+            </div>
+          </div>
+          <div class="ring-status-name" style="color:var(--green)">Active ✓</div>
+          <div class="ring-status-ref">Auth #PA-2026-0041 · Aetna PPO</div>
+          <div class="ring-stats">
+            <div><div class="rs-val">0</div><div class="rs-lbl">Used</div></div>
+            <div><div class="rs-val" style="color:var(--green)">10</div><div class="rs-lbl">Approved</div></div>
+            <div><div class="rs-val">Feb 05</div><div class="rs-lbl">Expires</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUTH HISTORY — updated -->
+      <div class="sidebar-card">
+        <div class="sc-header">
+          <span class="sc-title">Auth History</span>
+          <a class="sc-link" href="#">View all</a>
+        </div>
+        <div class="hist-item">
+          <div class="hist-ico approved">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 5l2 2.5 5-4"/></svg>
+          </div>
+          <div>
+            <div class="hist-ref">Auth #PA-2026-0041 — Approved</div>
+            <div class="hist-date">Nov 05, 2026 — Feb 05, 2027</div>
+            <div class="hist-stats">
+              <span class="hist-stat"><b>10</b> approved</span>
+              <span class="hist-stat"><b>0</b> used</span>
+            </div>
+          </div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-ico expired">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#dc2626" stroke-width="1.6"><path d="M2 2l6 6M8 2l-6 6"/></svg>
+          </div>
+          <div>
+            <div class="hist-ref">Auth #PA-2026-0039 — Expired</div>
+            <div class="hist-date">Sep 10 – Oct 15, 2026</div>
+            <div class="hist-stats">
+              <span class="hist-stat"><b>10</b> approved</span>
+              <span class="hist-stat"><b>2</b> used</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREVA RENEWAL REMINDER -->
+      <div class="renewal-card">
+        <div class="ren-header">
+          <svg viewBox="0 0 12 12" fill="#7c3aed"><path d="M6 .5l1.35 3.73H11L8.18 6.4l1.08 3.6L6 8.1 2.74 10l1.08-3.6L1 4.23h3.65z"/></svg>
+          Preva Renewal Reminder Set
+        </div>
+        <div class="ren-body">
+          Preva will alert you <strong>30 days before expiration</strong> on <strong>Jan 06, 2027</strong> and auto-prepare a renewal draft so you're never caught off guard again.
+        </div>
+      </div>
+
+      <!-- PAYER INFO -->
+      <div class="sidebar-card" style="padding-bottom: 20px">
+        <div class="sc-header"><span class="sc-title">Payer Info</span></div>
+        <div class="pi-row"><span class="pi-key">Payer</span><span class="pi-val">Aetna PPO</span></div>
+        <div class="pi-row"><span class="pi-key">Decision</span><span class="pi-val green">Approved ✓</span></div>
+        <div class="pi-row"><span class="pi-key">Member ID</span><span class="pi-val">AET-8821-004</span></div>
+        <div class="pi-row"><span class="pi-key">Group #</span><span class="pi-val">GRP-44092</span></div>
+        <div class="pi-row"><span class="pi-key">Response</span><span class="pi-val">1 business day</span></div>
+        <div class="pi-row"><span class="pi-key">Next Renewal</span><span class="pi-val">Jan 06, 2027</span></div>
+      </div>
+
+    </div><!-- /sidebar -->
+  </div><!-- /detail-layout -->
+</main>
+</body>
+</html>

@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1453">
+<title>Preva — Prior Authorization Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --border: #e8eaed;
+    --border-light: #f3f4f6;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+
+    --card-blue:   #1d4fa4;
+    --card-red:    #c01e1e;
+    --card-amber:  #b85e07;
+    --card-green:  #0a7a54;
+    --card-violet: #6e2bd0;
+
+    --high-bg: #ffe4e4; --high-text: #b83232;
+    --med-bg:  #fef3c7; --med-text:  #92400e;
+    --low-bg:  #dcfce7; --low-text:  #166534;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────── */
+  nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .nav-logo-icon {
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+  }
+  .nav-logo-text {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--text-primary);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2px;
+    margin-left: 36px;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .nav-link:hover { background: var(--bg); }
+  .nav-link.active {
+    background: #eff6ff;
+    color: #1d4fa4;
+    font-weight: 600;
+  }
+  .nav-link svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  .nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-icon-btn {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: background .15s;
+  }
+  .nav-icon-btn:hover { background: var(--bg); }
+  .nav-icon-btn svg { width: 17px; height: 17px; color: var(--text-secondary); }
+  .notif-dot {
+    width: 7px; height: 7px;
+    background: #ef4444;
+    border-radius: 50%;
+    position: absolute;
+    top: 7px; right: 7px;
+    border: 1.5px solid white;
+  }
+  .nav-divider {
+    width: 1px; height: 22px;
+    background: var(--border);
+    margin: 0 8px;
+  }
+  .nav-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px 4px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .nav-user:hover { background: var(--bg); }
+  .nav-avatar {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #1d4fa4 0%, #6e2bd0 100%);
+    color: white;
+    font-size: 10.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+  }
+  .nav-username {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .nav-chevron { color: var(--text-muted); }
+
+  /* ─── MAIN ───────────────────────────────────────── */
+  main {
+    max-width: 1390px;
+    margin: 0 auto;
+    padding: 28px 40px 48px;
+  }
+
+  /* ─── PAGE HEADER ─────────────────────────────────── */
+  .page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .page-greeting {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+  .page-greeting em {
+    font-style: italic;
+    font-weight: 700;
+    color: #1d4fa4;
+  }
+  .page-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+  }
+  .sync-dot {
+    width: 6px; height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: #1d4fa4;
+    color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(29,79,164,.3);
+    transition: background .15s, box-shadow .15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary:hover { background: #174088; box-shadow: 0 2px 6px rgba(29,79,164,.35); }
+  .btn-primary svg { width: 13px; height: 13px; }
+
+  /* ─── STAT CARDS ──────────────────────────────────── */
+  .stat-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    border-radius: 14px;
+    padding: 20px 22px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    cursor: default;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    bottom: -18px; right: -18px;
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.10);
+  }
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: 30px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .stat-card.blue   { background: linear-gradient(135deg, #1d4fa4 0%, #2563eb 100%); }
+  .stat-card.red    { background: linear-gradient(135deg, #c01e1e 0%, #dc2626 100%); }
+  .stat-card.amber  { background: linear-gradient(135deg, #b85e07 0%, #d97706 100%); }
+  .stat-card.green  { background: linear-gradient(135deg, #0a7a54 0%, #059669 100%); }
+  .stat-card.violet { background: linear-gradient(135deg, #6e2bd0 0%, #7c3aed 100%); }
+
+  .stat-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+  .stat-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-sub {
+    font-size: 10px;
+    opacity: 0.72;
+    font-weight: 400;
+  }
+
+  /* ─── CONTENT GRID ────────────────────────────────── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 316px;
+    gap: 18px;
+    align-items: start;
+  }
+
+  /* ─── TABLE CARD ──────────────────────────────────── */
+  .table-card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .table-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 11px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background .1s;
+  }
+  .filter-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+  .filter-btn svg { width: 11px; height: 11px; }
+
+  .toolbar-spacer { flex: 1; }
+
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 210px;
+    transition: border-color .15s;
+  }
+  .search-box:focus-within { border-color: #93c5fd; }
+  .search-box svg { width: 13px; height: 13px; color: var(--text-muted); flex-shrink: 0; }
+  .search-box input {
+    border: none;
+    outline: none;
+    font-size: 12px;
+    color: var(--text-secondary);
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    background: transparent;
+  }
+  .search-box input::placeholder { color: var(--text-muted); }
+
+  .view-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .view-btn {
+    width: 30px; height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    border: none;
+    background: white;
+    font-family: 'Inter', sans-serif;
+  }
+  .view-btn.active { background: #f1f5f9; color: var(--text-secondary); }
+  .view-btn svg { width: 12px; height: 12px; }
+
+  /* TABLE */
+  .auth-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .auth-table th {
+    padding: 9px 14px;
+    text-align: left;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    background: #fafbfc;
+    white-space: nowrap;
+  }
+  .auth-table th.sortable { cursor: pointer; }
+  .auth-table th.sortable:hover { color: var(--text-secondary); }
+
+  .auth-table td {
+    padding: 11px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+  }
+  .auth-table tr:last-child td { border-bottom: none; }
+  .auth-table tbody tr {
+    cursor: pointer;
+    transition: background .1s;
+  }
+  .auth-table tbody tr:hover td {
+    background: #f8faff;
+  }
+  .auth-table tbody tr:hover td:first-child {
+    box-shadow: inset 3px 0 0 #1d4fa4;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+  .badge.high { background: var(--high-bg); color: var(--high-text); }
+  .badge.med  { background: var(--med-bg);  color: var(--med-text); }
+  .badge.low  { background: var(--low-bg);  color: var(--low-text); }
+
+  /* Cell types */
+  .patient-name { font-weight: 600; font-size: 13px; }
+  .visits-text  { color: var(--text-secondary); font-size: 12.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .description-text { color: var(--text-secondary); font-size: 12.5px; }
+  .payer-text   { font-size: 12.5px; color: var(--text-secondary); }
+  .date-text    { font-size: 12px; color: var(--text-secondary); white-space: nowrap; }
+
+  /* Confidence score with mini bar */
+  .conf-cell { display: flex; align-items: center; gap: 7px; }
+  .conf-score {
+    font-weight: 400;
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    min-width: 32px;
+    color: var(--text-primary);
+  }
+  .conf-bar-track {
+    flex: 1;
+    height: 4px;
+    background: #f1f5f9;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .conf-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .conf-high   { color: var(--text-primary); }
+  .conf-medium { color: var(--text-primary); }
+  .conf-low    { color: var(--text-primary); }
+  .conf-bar-fill.conf-high   { background: #3b82f6; }
+  .conf-bar-fill.conf-medium { background: #3b82f6; }
+  .conf-bar-fill.conf-low    { background: #3b82f6; }
+  .conf-bar-fill.conf-high   { background: #1d4fa4; }
+  .conf-bar-fill.conf-medium { background: #1d4fa4; }
+  .conf-bar-fill.conf-low    { background: #1d4fa4; }
+
+  /* Status chips — no dot */
+  .sc {
+    display: inline-flex; align-items: center;
+    padding: 3px 8px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .sc-denied    { background:#fee2e2; color:#991b1b; }
+  .sc-expired   { background:#fef3c7; color:#92400e; }
+  .sc-submitted { background:#dbeafe; color:#1e40af; }
+  .sc-pending   { background:#fef3c7; color:#92400e; }
+  .sc-docs      { background:#ffedd5; color:#9a3412; }
+  .sc-active    { background:#d1fae5; color:#065f46; }
+
+  /* Priority row stripes */
+  .row-high { box-shadow: inset 3px 0 0 #ef4444; }
+  .row-med  { box-shadow: inset 3px 0 0 #f59e0b; }
+  .row-low  { box-shadow: inset 3px 0 0 #3b82f6; }
+
+  /* Table footer */
+  .table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 18px;
+    border-top: 1px solid var(--border);
+  }
+  .page-meta { font-size: 11.5px; color: var(--text-muted); }
+  .pagination { display: flex; gap: 3px; }
+  .page-btn {
+    min-width: 28px; height: 28px;
+    padding: 0 4px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background .1s, border-color .1s;
+    font-family: 'Inter', sans-serif;
+  }
+  .page-btn:hover { background: #f8fafc; }
+  .page-btn.active {
+    background: #1d4fa4;
+    color: white;
+    border-color: #1d4fa4;
+  }
+  .page-btn svg { width: 9px; height: 9px; }
+  .view-all-link {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #1d4fa4;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .view-all-link:hover { text-decoration: underline; }
+
+  /* ─── CARD VIEW ───────────────────────────────────── */
+  .card-grid {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    padding: 18px;
+    background: #e8ebf0;
+  }
+  .card-grid.active { display: grid; }
+  .auth-table-wrap { display: block; }
+  .auth-table-wrap.hidden { display: none; }
+
+  .auth-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: box-shadow .15s, border-color .15s, transform .1s;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  }
+  .auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+  .auth-card.priority-high::before { background: #ef4444; }
+  .auth-card.priority-med::before  { background: #f59e0b; }
+  .auth-card.priority-low::before  { background: #22c55e; }
+  .auth-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.06);
+    border-color: #c7d7f0;
+    transform: translateY(-2px);
+  }
+
+  .auth-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .auth-card-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .auth-card-payer {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .auth-card-desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .auth-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+    gap: 8px;
+  }
+  .auth-card-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .auth-card-meta-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+  .auth-card-meta-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  .auth-card-conf {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+  }
+  .auth-card-conf-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .auth-card-conf-bar {
+    height: 5px;
+    background: #f1f5f9;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .auth-card-conf-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  /* ─── SIDEBAR ─────────────────────────────────────── */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+  .sidebar-card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sidebar-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .ai-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #7c3aed;
+    background: #f5f3ff;
+    border: 1px solid #ede9fe;
+    border-radius: 10px;
+    padding: 1px 7px 1px 5px;
+    margin-left: auto;
+  }
+  .ai-pulse {
+    width: 5px; height: 5px;
+    background: #7c3aed;
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+  }
+
+  /* Activity items */
+  .activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f8fafc;
+    cursor: pointer;
+    transition: background .1s;
+    border-radius: 6px;
+    margin: 0 -6px;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-item:hover { background: #f8faff; }
+
+  .activity-icon {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-blue   { background: #dbeafe; }
+  .icon-green  { background: #d1fae5; }
+  .icon-amber  { background: #fef3c7; }
+  .icon-red    { background: #fee2e2; }
+  .activity-icon svg { width: 11px; height: 11px; }
+
+  .activity-content { flex: 1; min-width: 0; }
+  .activity-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+  .activity-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .activity-time {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Deadlines */
+  .deadline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .deadline-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .deadline-link {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1d4fa4;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .deadline-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 0;
+    border-bottom: 1px solid #f8fafc;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 0 -6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    transition: background .1s;
+  }
+  .deadline-item:last-child { border-bottom: none; }
+  .deadline-item:hover { background: #f8faff; }
+  .deadline-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .deadline-date {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    width: 36px;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .deadline-name {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex: 1;
+  }
+  .missing-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: #fee2e2;
+    color: #b91c1c;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <!-- PREVA wordmark with P icon -->
+    <svg class="nav-logo-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="7" fill="url(#navGrad)"/>
+      <path d="M8 7h6.5c2.485 0 4.5 2.015 4.5 4.5S16.985 16 14.5 16H11v5H8V7z" fill="white"/>
+      <path d="M11 10v3h3.5a1.5 1.5 0 0 0 0-3H11z" fill="url(#navGrad)"/>
+      <defs>
+        <linearGradient id="navGrad" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#1d4fa4"/>
+          <stop offset="1" stop-color="#6e2bd0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="nav-logo-text">PREVA</span>
+  </a>
+
+  <div class="nav-links">
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="4.5" r="2.5"/><path d="M1.5 12.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5"/></svg>
+      Patients
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5"/><path d="M4.5 7h5M4.5 4.5h5M4.5 9.5h3"/></svg>
+      Payers
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 10 4.5 6.5 7.5 8.5 13 2.5"/></svg>
+      Reports
+    </a>
+  </div>
+
+  <div class="nav-right">
+    <div class="nav-icon-btn" title="Search">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="m12.5 12.5 3 3"/></svg>
+    </div>
+    <div class="nav-icon-btn" title="Notifications">
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 1.5a5.5 5.5 0 0 0-5.5 5.5v2L2 12h14l-1.5-3V7A5.5 5.5 0 0 0 9 1.5z"/><path d="M7 15.5a2 2 0 0 0 4 0"/></svg>
+      <div class="notif-dot"></div>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-user">
+      <div class="nav-avatar">MC</div>
+      <span class="nav-username">Maya Chen</span>
+      <svg class="nav-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 3.5l2.5 3 2.5-3"/></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <h1 class="page-greeting">Good morning, <em>Maya</em></h1>
+      <p class="page-subtitle">
+        <span class="sync-dot"></span>
+        EMR synced 4 minutes ago &nbsp;·&nbsp; 7 active records
+      </p>
+    </div>
+    <button class="btn-primary">
+      <svg viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.5 1v11M1 6.5h11"/></svg>
+      New Authorization
+    </button>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-cards">
+    <div class="stat-card blue">
+      <div class="stat-label">Total Active Cases</div>
+      <div class="stat-number">7</div>
+      <div class="stat-sub">authorizations</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-label">Denied</div>
+      <div class="stat-number">2</div>
+      <div class="stat-sub">appeal window open</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-label">At Risk of Delay</div>
+      <div class="stat-number">2</div>
+      <div class="stat-sub">within this week</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-label">Docs Missing</div>
+      <div class="stat-number">5</div>
+      <div class="stat-sub">across 3 patients</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label">Submitted</div>
+      <div class="stat-number">3</div>
+      <div class="stat-sub">pending approval</div>
+    </div>
+  </div>
+
+  <!-- CONTENT GRID -->
+  <div class="content-grid">
+
+    <!-- TABLE -->
+    <div class="table-card">
+      <div class="table-toolbar">
+        <button class="filter-btn">
+          <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 2.5h9M2.5 5.5h6M4 8.5h3"/></svg>
+          Priority
+        </button>
+        <button class="filter-btn">
+          <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="9" height="9" rx="1.5"/><path d="M3.5 4.5h4M3.5 6.5h2.5"/></svg>
+          Payer
+        </button>
+        <button class="filter-btn">
+          <svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="5.5" cy="5.5" r="3"/><path d="M5.5 3.5v2l1.2 1.2"/></svg>
+          More filters
+        </button>
+
+        <div class="toolbar-spacer"></div>
+
+        <div class="toolbar-right">
+          <div class="search-box">
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 2.5 2.5"/></svg>
+            <input type="text" placeholder="Search patient, payer, DOB…">
+          </div>
+          <div class="view-toggle">
+            <button class="view-btn active" id="btn-list" title="List view" onclick="setView('list')">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1.5 3h9M1.5 6h9M1.5 9h9"/></svg>
+            </button>
+            <button class="view-btn" id="btn-grid" title="Card view" onclick="setView('grid')">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="4" height="4" rx=".5"/><rect x="7" y="1" width="4" height="4" rx=".5"/><rect x="1" y="7" width="4" height="4" rx=".5"/><rect x="7" y="7" width="4" height="4" rx=".5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-table-wrap" id="table-wrap">
+      <table class="auth-table">
+        <thead>
+          <tr>
+            <th style="width:110px">Status</th>
+            <th class="sortable" style="width:148px">Patient ↕</th>
+            <th style="width:90px">Visits</th>
+            <th>Description</th>
+            <th style="width:140px">Confidence</th>
+            <th style="width:68px">Payer</th>
+            <th style="width:112px">Alert Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-high" onclick="location.href='preva-detail.html'" style="cursor:pointer;">
+            <td><span class="sc sc-expired">Renewal Due</span></td>
+            <td class="patient-name">Maria Gonzalez</td>
+            <td class="visits-text">2 / 10</td>
+            <td class="description-text">Auth expired · renewal due</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-high">97%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:97%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">Aetna</td>
+            <td class="date-text">Nov 08, 2026</td>
+          </tr>
+          <tr class="row-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
+            <td><span class="sc sc-denied">Denied</span></td>
+            <td class="patient-name">Daniel Müller</td>
+            <td class="visits-text">1 / 8</td>
+            <td class="description-text">Denied · CO-50 · appeal open</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-medium">82%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:82%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">UHC</td>
+            <td class="date-text">Nov 09, 2026</td>
+          </tr>
+          <tr class="row-med">
+            <td><span class="sc sc-pending">Pending</span></td>
+            <td class="patient-name">Timothy Allen</td>
+            <td class="visits-text">5 / 12</td>
+            <td class="description-text">Physician sign-off needed</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-high">91%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:91%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">BCBS</td>
+            <td class="date-text">Nov 10, 2026</td>
+          </tr>
+          <tr class="row-high">
+            <td><span class="sc sc-docs">Docs Missing</span></td>
+            <td class="patient-name">Lucas Martinez</td>
+            <td class="visits-text">0 / 10</td>
+            <td class="description-text">Diagnosis codes missing</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-medium">88%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:88%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">Humana</td>
+            <td class="date-text">Nov 09, 2026</td>
+          </tr>
+          <tr class="row-med">
+            <td><span class="sc sc-docs">Docs Missing</span></td>
+            <td class="patient-name">Hannah Lee</td>
+            <td class="visits-text">4 / 8</td>
+            <td class="description-text">Prior records needed</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-low">76%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-low" style="width:76%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">Cigna</td>
+            <td class="date-text">Nov 12, 2026</td>
+          </tr>
+          <tr class="row-low">
+            <td><span class="sc sc-submitted">Submitted</span></td>
+            <td class="patient-name">Emma Kowalski</td>
+            <td class="visits-text">7 / 10</td>
+            <td class="description-text">Submitted · pending approval</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-high">95%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:95%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">Aetna</td>
+            <td class="date-text">Nov 14, 2026</td>
+          </tr>
+          <tr class="row-med">
+            <td><span class="sc sc-docs">Docs Missing</span></td>
+            <td class="patient-name">Sofia Reyes</td>
+            <td class="visits-text">1 / 6</td>
+            <td class="description-text">Referral form incomplete</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-low">73%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-low" style="width:73%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">BCBS</td>
+            <td class="date-text">Nov 11, 2026</td>
+          </tr>
+          <tr class="row-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
+            <td><span class="sc sc-denied">Denied</span></td>
+            <td class="patient-name">James Carter</td>
+            <td class="visits-text">0 / 8</td>
+            <td class="description-text">Denied · CO-197 · appeal open</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-medium">84%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-medium" style="width:84%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">UHC</td>
+            <td class="date-text">Nov 08, 2026</td>
+          </tr>
+          <tr class="row-low">
+            <td><span class="sc sc-submitted">Submitted</span></td>
+            <td class="patient-name">Priya Nair</td>
+            <td class="visits-text">3 / 10</td>
+            <td class="description-text">Documents under review</td>
+            <td>
+              <div class="conf-cell">
+                <span class="conf-score conf-high">92%</span>
+                <div class="conf-bar-track"><div class="conf-bar-fill conf-high" style="width:92%"></div></div>
+              </div>
+            </td>
+            <td class="payer-text">Cigna</td>
+            <td class="date-text">Nov 13, 2026</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </div><!-- /auth-table-wrap -->
+
+      <!-- CARD GRID VIEW -->
+      <div class="card-grid" id="card-grid">
+
+        <div class="auth-card priority-high" onclick="location.href='preva-detail.html'">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Maria Gonzalez</div>
+              <div class="auth-card-payer">Aetna &nbsp;·&nbsp; 2 / 10 visits</div>
+            </div>
+            <span class="badge high">High</span>
+          </div>
+          <div class="auth-card-desc">Auth expired · renewal due</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 08, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-high" style="font-size:12px">97%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:97%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-high">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Daniel Müller</div>
+              <div class="auth-card-payer">UHC &nbsp;·&nbsp; 1 / 8 visits</div>
+            </div>
+            <span class="badge high">High</span>
+          </div>
+          <div class="auth-card-desc">Missing clinical notes</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 09, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-medium" style="font-size:12px">82%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-medium" style="width:82%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-med">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Timothy Allen</div>
+              <div class="auth-card-payer">BCBS &nbsp;·&nbsp; 5 / 12 visits</div>
+            </div>
+            <span class="badge med">Med</span>
+          </div>
+          <div class="auth-card-desc">Physician sign-off needed</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 10, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-high" style="font-size:12px">91%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:91%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-high">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Lucas Martinez</div>
+              <div class="auth-card-payer">Humana &nbsp;·&nbsp; 0 / 10 visits</div>
+            </div>
+            <span class="badge high">High</span>
+          </div>
+          <div class="auth-card-desc">Diagnosis codes missing</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 09, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-medium" style="font-size:12px">88%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-medium" style="width:88%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-med">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Hannah Lee</div>
+              <div class="auth-card-payer">Cigna &nbsp;·&nbsp; 4 / 8 visits</div>
+            </div>
+            <span class="badge med">Med</span>
+          </div>
+          <div class="auth-card-desc">Prior records needed</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 12, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-low" style="font-size:12px">76%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-low" style="width:76%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-low">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Emma Kowalski</div>
+              <div class="auth-card-payer">Aetna &nbsp;·&nbsp; 7 / 10 visits</div>
+            </div>
+            <span class="badge low">Low</span>
+          </div>
+          <div class="auth-card-desc">Resubmission pending</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 14, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-high" style="font-size:12px">95%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:95%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-med">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Sofia Reyes</div>
+              <div class="auth-card-payer">BCBS &nbsp;·&nbsp; 1 / 6 visits</div>
+            </div>
+            <span class="badge med">Med</span>
+          </div>
+          <div class="auth-card-desc">Referral form incomplete</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 11, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-low" style="font-size:12px">73%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-low" style="width:73%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-high">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">James Carter</div>
+              <div class="auth-card-payer">UHC &nbsp;·&nbsp; 0 / 8 visits</div>
+            </div>
+            <span class="badge high">High</span>
+          </div>
+          <div class="auth-card-desc">Missing auth from PCP</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 08, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-medium" style="font-size:12px">84%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-medium" style="width:84%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card priority-low">
+          <div class="auth-card-header">
+            <div>
+              <div class="auth-card-name">Priya Nair</div>
+              <div class="auth-card-payer">Cigna &nbsp;·&nbsp; 3 / 10 visits</div>
+            </div>
+            <span class="badge low">Low</span>
+          </div>
+          <div class="auth-card-desc">Documents under review</div>
+          <div class="auth-card-meta">
+            <div class="auth-card-meta-item">
+              <span class="auth-card-meta-label">Alert Date</span>
+              <span class="auth-card-meta-value">Nov 13, 2026</span>
+            </div>
+            <div class="auth-card-conf">
+              <div class="auth-card-conf-row">
+                <span class="auth-card-meta-label">Confidence</span>
+                <span class="conf-score conf-high" style="font-size:12px">92%</span>
+              </div>
+              <div class="auth-card-conf-bar"><div class="auth-card-conf-fill conf-bar-fill conf-high" style="width:92%"></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /card-grid -->
+
+      <div class="table-footer">
+        <span class="page-meta">1–7 of 7 results</span>
+        <div class="pagination">
+          <div class="page-btn"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5.5 2L3 4.5l2.5 2.5"/></svg></div>
+          <div class="page-btn active">1</div>
+          <div class="page-btn">2</div>
+          <div class="page-btn">3</div>
+          <div class="page-btn"><svg viewBox="0 0 9 9" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 2L6 4.5l-2.5 2.5"/></svg></div>
+        </div>
+        <a class="view-all-link" href="#">View All</a>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- ACTIVITY -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect width="16" height="16" rx="4" fill="url(#sidebarGrad)"/>
+            <path d="M5 5.5L8 3l3 2.5-1.5 2.5H6.5L5 5.5z" fill="white" opacity=".9"/>
+            <path d="M6.5 8l1.5 4.5L9.5 8" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="sidebarGrad" x1="0" y1="0" x2="16" y2="16">
+                <stop stop-color="#1d4fa4"/><stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          Preva's Activity
+          <span class="ai-badge">
+            <span class="ai-pulse"></span>
+            Live
+          </span>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon icon-blue">
+            <svg viewBox="0 0 11 11" fill="none" stroke="#3b82f6" stroke-width="1.4"><circle cx="5.5" cy="5.5" r="3.5"/><path d="M5.5 3v2.5l1.5 1"/></svg>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Extracting — Audrey Chung</div>
+            <div class="activity-sub">Pulling clinical notes from EMR</div>
+          </div>
+          <div class="activity-time">Now</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon icon-green">
+            <svg viewBox="0 0 11 11" fill="none" stroke="#059669" stroke-width="1.5"><path d="M2 5.5l2 2.5 5-4"/></svg>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Submitted — Maria Gonzalez</div>
+            <div class="activity-sub">Auth request sent to Aetna</div>
+          </div>
+          <div class="activity-time">2m ago</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon icon-amber">
+            <svg viewBox="0 0 11 11" fill="none" stroke="#d97706" stroke-width="1.4"><rect x="2" y="2" width="7" height="7" rx="1"/><path d="M4 5.5h3M4 4h1.5"/></svg>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Draft ready — Emma Lee</div>
+            <div class="activity-sub">Awaiting your review</div>
+          </div>
+          <div class="activity-time">4m ago</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon icon-red">
+            <svg viewBox="0 0 11 11" fill="none" stroke="#dc2626" stroke-width="1.4"><path d="M2 2h7l-1 5H3L2 2z"/><circle cx="5.5" cy="9.5" r=".5" fill="#dc2626"/></svg>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Flagged — Daniel Müller</div>
+            <div class="activity-sub">Clinical docs missing</div>
+          </div>
+          <div class="activity-time">6m ago</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon icon-red">
+            <svg viewBox="0 0 11 11" fill="none" stroke="#dc2626" stroke-width="1.4"><circle cx="5.5" cy="5.5" r="3.5"/><path d="M3.5 3.5l4 4M7.5 3.5l-4 4"/></svg>
+          </div>
+          <div class="activity-content">
+            <div class="activity-title">Blocked — Alex Rivera</div>
+            <div class="activity-sub">Referral signature missing</div>
+          </div>
+          <div class="activity-time">4m ago</div>
+        </div>
+
+      </div>
+
+      <!-- DEADLINES -->
+      <div class="sidebar-card">
+        <div class="deadline-header">
+          <span class="deadline-section-title">Upcoming Deadlines</span>
+          <a class="deadline-link" href="#">View all</a>
+        </div>
+
+        <div class="deadline-item">
+          <div class="deadline-dot" style="background:#ef4444"></div>
+          <div class="deadline-date">Nov 08</div>
+          <div class="deadline-name">Daniel Müller</div>
+          <span class="missing-tag">1 missing</span>
+        </div>
+        <div class="deadline-item">
+          <div class="deadline-dot" style="background:#f97316"></div>
+          <div class="deadline-date">Nov 09</div>
+          <div class="deadline-name">Timothy Allen</div>
+        </div>
+        <div class="deadline-item">
+          <div class="deadline-dot" style="background:#f97316"></div>
+          <div class="deadline-date">Nov 10</div>
+          <div class="deadline-name">Lucas Martinez</div>
+        </div>
+        <div class="deadline-item">
+          <div class="deadline-dot" style="background:#3b82f6"></div>
+          <div class="deadline-date">Nov 12</div>
+          <div class="deadline-name">Hannah Lee</div>
+        </div>
+        <div class="deadline-item">
+          <div class="deadline-dot" style="background:#3b82f6"></div>
+          <div class="deadline-date">Nov 13</div>
+          <div class="deadline-name">Emma Kowalski</div>
+          <span class="missing-tag">2 missing</span>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+  </div><!-- /content-grid -->
+
+</main>
+<script>
+  function setView(mode) {
+    const tableWrap = document.getElementById('table-wrap');
+    const cardGrid  = document.getElementById('card-grid');
+    const btnList   = document.getElementById('btn-list');
+    const btnGrid   = document.getElementById('btn-grid');
+    if (mode === 'grid') {
+      tableWrap.classList.add('hidden');
+      cardGrid.classList.add('active');
+      btnList.classList.remove('active');
+      btnGrid.classList.add('active');
+    } else {
+      tableWrap.classList.remove('hidden');
+      cardGrid.classList.remove('active');
+      btnList.classList.add('active');
+      btnGrid.classList.remove('active');
+    }
+  }
+</script>
+</body>
+</html>

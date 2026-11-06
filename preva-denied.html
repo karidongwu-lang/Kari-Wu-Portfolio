@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1453">
+<title>Preva — Maria Gonzalez · Denied</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --border: #e8eaed;
+    --border-light: #f3f4f6;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+    --blue: #1d4fa4;
+    --green: #059669;
+    --amber: #d97706;
+    --red: #dc2626;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────── */
+  nav {
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  .nav-logo { display:flex; align-items:center; gap:9px; text-decoration:none; flex-shrink:0; }
+  .nav-logo-text { font-size:17px; font-weight:700; letter-spacing:2.5px; color:#ffffff; }
+  .nav-links { display:flex; gap:2px; margin-left:36px; }
+  .nav-link {
+    display:flex; align-items:center; gap:6px;
+    padding:6px 14px; border-radius:7px;
+    font-size:13px; font-weight:500;
+    color:#94a3b8; text-decoration:none;
+    transition: background .15s;
+  }
+  .nav-link:hover { background: rgba(255,255,255,.07); color: #e2e8f0; }
+  .nav-link.active { background: rgba(255,255,255,.1); color: #ffffff; font-weight:600; }
+  .nav-link svg { width:13px; height:13px; flex-shrink:0; }
+  .nav-right { margin-left:auto; display:flex; align-items:center; gap:4px; }
+  .nav-icon-btn { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .nav-icon-btn:hover { background: rgba(255,255,255,.07); }
+  .nav-divider { width:1px; height:22px; background:#334155; margin:0 8px; }
+  .nav-user { display:flex; align-items:center; gap:8px; padding:4px 10px 4px 4px; border-radius:8px; cursor:pointer; }
+  .nav-user:hover { background: rgba(255,255,255,.07); }
+  .nav-avatar { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,#1d4fa4,#6e2bd0); color:white; font-size:10.5px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nav-username { font-size:13px; font-weight:600; color:#e2e8f0; }
+
+  /* ─── MAIN ─────────────────────────────────────────── */
+  main { max-width: 1390px; margin: 0 auto; padding: 14px 40px 48px; }
+
+  .breadcrumb {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 12px; font-size: 12px; color: var(--text-muted);
+  }
+  .breadcrumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .breadcrumb a:hover { color: #1a3d8f; }
+  .breadcrumb .sep { font-size: 11px; }
+  .breadcrumb .current { color: var(--blue); font-weight: 600; }
+
+  /* ─── PAGE BAND ─────────────────────────────────────── */
+  .page-band {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .page-band-inner { max-width: 1390px; margin: 0 auto; padding: 0 40px; }
+  .page-header { margin-bottom: 0; }
+  .page-header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .ph-avatar {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: linear-gradient(135deg, #1d4fa4, #6e2bd0);
+    color: white; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ph-title-row { display: flex; align-items: center; gap: 10px; flex: 1; }
+  .page-title { font-size: 19px; font-weight: 700; color: var(--text-primary); letter-spacing: -.3px; }
+  .page-meta {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    font-size: 12.5px; color: var(--text-secondary); margin-top: 6px; margin-bottom: 0;
+  }
+  .pm-sep { color: var(--text-muted); font-size: 11px; }
+  .pm-chip {
+    display: inline-flex; align-items: center; padding: 2px 8px;
+    border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+  .pm-approved  { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+  .pm-denied    { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+  .pm-submitted { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+
+  .detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 248px;
+    gap: 18px;
+    align-items: start;
+  }
+
+  /* ─── DENIAL BANNER ──────────────────────────────────── */
+
+
+  /* ─── PREVA APPEAL BANNER ────────────────────────────── */
+  .appeal-banner {
+    background: linear-gradient(135deg, #ddd6fe 0%, #ede9fe 50%, #faf5ff 100%);
+    border: 1px solid #c4b5fd;
+    border-left: 3px solid #7c3aed;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .appeal-banner::before {
+    content: '';
+    position: absolute;
+    top: -25px; right: -25px;
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .x-ico-sm {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #dc2626;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .x-ico-sm svg { width: 8px; height: 8px; }
+  /* Denial facts strip */
+  .denial-facts {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 0 14px;
+    border-bottom: 1px solid rgba(196,181,253,.4);
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+  .df-stat { display: flex; flex-direction: column; gap: 1px; }
+  .df-label { font-size: 9.5px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text-muted); opacity: .9; }
+  .df-val { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .df-val.red   { color: #dc2626; }
+  .df-val.amber { color: #b45309; }
+  .df-div { width: 1px; height: 28px; background: rgba(196,181,253,.5); }
+  .ab-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .ab-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: #0f172a;
+  }
+  .ab-title svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .ai-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px 2px 6px;
+    background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.22);
+    border-radius: 20px; font-size: 10.5px; font-weight: 600; color: #6d28d9;
+  }
+  .ai-dot { width: 5px; height: 5px; border-radius: 50%; background: #7c3aed; animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+  /* Analysis rows */
+  .ab-analysis { margin-bottom: 16px; }
+  .analysis-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(196,181,253,.3);
+  }
+  .analysis-row:last-child { border-bottom: none; }
+  .ar-ico { width: 20px; height: 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .ar-ico.red   { background: #fee2e2; }
+  .ar-ico.amber { background: #fef3c7; }
+  .ar-ico.green { background: #d1fae5; }
+  .ar-ico svg { width: 10px; height: 10px; }
+  .ar-text { flex: 1; min-width: 0; }
+  .ar-label { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+  .ar-sub   { font-size: 11.5px; color: var(--text-secondary); margin-top: 1px; }
+
+  /* Appeal confidence bar */
+  .ab-confidence {
+    background: rgba(255,255,255,.55);
+    border: 1px solid #c4b5fd;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .conf-ring-wrap { position: relative; width: 52px; height: 52px; flex-shrink: 0; }
+  .conf-ring-wrap svg { width: 52px; height: 52px; }
+  .conf-ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .conf-pct { font-family: 'Crimson Text', serif; font-size: 17px; font-weight: 600; color: #6d28d9; line-height: 1; }
+  .conf-lbl { font-size: 6.5px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #7c3aed; }
+  .conf-text { flex: 1; }
+  .conf-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+  .conf-body  { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+  .conf-body strong { font-weight: 700; color: var(--text-primary); }
+
+  /* Appeal action buttons */
+  .ab-actions { display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
+  .btn-appeal {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 10px 20px; border-radius: 9px; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
+    background: linear-gradient(135deg, #6d28d9, #7c3aed);
+    color: white;
+    box-shadow: 0 2px 8px rgba(109,40,217,.35);
+    transition: box-shadow .15s, transform .1s;
+  }
+  .btn-appeal:hover { box-shadow: 0 4px 14px rgba(109,40,217,.45); transform: translateY(-1px); }
+  .btn-appeal svg { width: 13px; height: 13px; }
+  .btn-download {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 16px; border-radius: 9px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    background: rgba(255,255,255,.7); color: #6d28d9;
+    border: 1px solid #c4b5fd;
+    transition: background .15s;
+  }
+  .btn-download:hover { background: rgba(255,255,255,.95); }
+  .btn-download svg { width: 12px; height: 12px; }
+  .btn-contact {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 16px; border-radius: 9px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--border);
+    transition: background .15s;
+  }
+  .btn-contact:hover { background: var(--bg); }
+  .btn-contact svg { width: 12px; height: 12px; }
+
+  /* ─── SECTION CARD ──────────────────────────────────── */
+  .section-card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13.5px; font-weight: 700; color: var(--text-primary);
+  }
+  .section-title svg { width:15px; height:15px; color:var(--text-secondary); flex-shrink:0; }
+  .section-sub { font-size: 11.5px; color: var(--text-muted); }
+
+  /* ─── PATIENT BLOCK ─────────────────────────────────── */
+  .patient-block {
+    padding: 16px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .patient-avatar {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: linear-gradient(135deg, #1d4fa4, #6e2bd0);
+    color: white; font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .p-name { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+  .p-meta { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+  .p-tags { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+  }
+  .tag.status-denied { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; }
+  .tag.payer         { background:#fef3f2; color:#9a3412; border:1px solid #fed7aa; }
+  .tag.specialty     { background:#f5f3ff; color:#6d28d9; border:1px solid #ddd6fe; }
+
+  .badge { display:inline-flex; align-items:center; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+  .badge.denied { background:#fee2e2; color:#991b1b; }
+
+  /* ─── INFO GRID ─────────────────────────────────────── */
+  .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); padding: 0 20px; }
+  .info-cell {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border-light);
+    padding-right: 20px;
+  }
+  .info-cell:nth-child(3n) { padding-right: 0; }
+  .info-cell:nth-last-child(-n+3) { border-bottom: none; }
+  .info-label { font-size:9.5px; font-weight:700; letter-spacing:0.7px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+  .info-value { font-size:13px; font-weight:500; color:var(--text-primary); }
+
+  /* ─── AUTH DETAILS GRID ──────────────────────────────── */
+  .auth-grid { display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 20px 4px; }
+  .auth-cell {
+    padding: 12px 16px 12px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .auth-cell:nth-child(4n) { padding-right: 0; }
+  .auth-cell:nth-last-child(-n+4) { border-bottom: none; }
+  .f-label { font-size:9px; font-weight:700; letter-spacing:0.7px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+  .f-value { font-size:12.5px; font-weight:500; color:var(--text-primary); display:flex; align-items:center; gap:5px; }
+  .f-value.err { color: var(--red); font-weight: 600; }
+  .f-value.warn { color: var(--amber); font-weight: 600; }
+  .fdot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+  .fdot-red { background:#ef4444; }
+  .fdot-amber { background:#f59e0b; }
+
+  /* ─── WHAT PAYER CITED ──────────────────────────────── */
+  .cited-list { padding: 4px 20px 8px; }
+  .cited-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 12.5px;
+  }
+  .cited-item:last-child { border-bottom: none; }
+  .cited-num {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #fee2e2; color: #dc2626;
+    font-size: 9.5px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .cited-text { flex: 1; color: var(--text-primary); line-height: 1.55; }
+  .cited-text b { font-weight: 600; color: #7f1d1d; }
+  .cited-preva {
+    font-size: 11px; color: #6d28d9; font-weight: 500;
+    background: rgba(124,58,237,.07); border: 1px solid rgba(196,181,253,.5);
+    border-radius: 6px; padding: 2px 8px; white-space: nowrap; flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ─── BOTTOM ROW ────────────────────────────────────── */
+  .bottom-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-bottom: 0;
+  }
+  .bottom-row .section-card { margin-bottom: 0; }
+
+  /* Timeline inside card */
+  .timeline-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 20px;
+    position: relative;
+  }
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 28px; top: 32px; bottom: -12px;
+    width: 1px; background: var(--border-light);
+  }
+  .tl-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .tl-dot.done   { background: #fee2e2; border: 2px solid #dc2626; }
+  .tl-dot.active { background: #ede9fe; border: 2px solid #7c3aed; animation: ring-pulse 2s infinite; }
+  .tl-dot.todo   { background: var(--border-light); border: 2px solid var(--border); }
+  @keyframes ring-pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(124,58,237,.3); }
+    50%     { box-shadow: 0 0 0 5px rgba(124,58,237,.0); }
+  }
+  .tl-dot svg { width: 8px; height: 8px; }
+  .tl-label { font-size: 12.5px; font-weight: 600; color: var(--text-primary); }
+  .tl-sub   { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .tl-label.active { color: #6d28d9; }
+
+  /* ─── SIDEBAR ────────────────────────────────────────── */
+  .sidebar { display: flex; flex-direction: column; gap: 14px; }
+  .sidebar-card {
+    background: var(--card); border-radius: 14px;
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm); overflow: hidden;
+  }
+  .sc-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sc-title { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
+  .sc-link  { font-size: 11.5px; font-weight: 600; color: var(--blue); text-decoration: none; cursor: pointer; }
+
+  /* Auth status ring */
+  .ring-body { padding: 16px; text-align: center; }
+  .ring-wrap { position: relative; width: 84px; height: 84px; margin: 0 auto 12px; }
+  .ring-wrap svg { width: 84px; height: 84px; }
+  .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .ring-num { font-family: 'Crimson Text', serif; font-size: 28px; font-weight: 600; color: #dc2626; line-height: 1; }
+  .ring-num.purple { color: #7c3aed; }
+  .ring-lbl { font-size: 7.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); }
+  .ring-status-name { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .ring-status-name.red { color: var(--red); }
+  .ring-status-ref  { font-size: 11px; color: var(--text-muted); margin-top: 2px; margin-bottom: 14px; }
+  .ring-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; text-align: center; padding: 12px 0 4px; border-top: 1px solid var(--border-light); }
+  .rs-val { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+  .rs-val.red { color: var(--red); }
+  .rs-lbl { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-top: 1px; }
+
+  /* Appeal confidence ring (sidebar) */
+  .conf-sidebar {
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .conf-sidebar-ring { position: relative; width: 60px; height: 60px; flex-shrink: 0; }
+  .conf-sidebar-ring svg { width: 60px; height: 60px; }
+  .conf-sidebar-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .conf-sidebar-pct { font-family: 'Crimson Text', serif; font-size: 20px; font-weight: 600; color: #7c3aed; line-height: 1; }
+  .conf-sidebar-lbl { font-size: 6px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #7c3aed; }
+  .conf-sidebar-text .cst-title { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
+  .conf-sidebar-text .cst-sub   { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.45; }
+  .reviewer-strip {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 16px 14px;
+    font-size: 11px; color: var(--text-muted);
+  }
+  .reviewer-avatar { width: 20px; height: 20px; border-radius: 5px; background: linear-gradient(135deg,#6d28d9,#7c3aed); display:flex; align-items:center; justify-content:center; font-size:7.5px; font-weight:700; color:white; flex-shrink:0; }
+
+  /* Hist items */
+  .hist-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border-light); }
+  .hist-item:last-child { border-bottom: none; }
+  .hist-ico { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .hist-ico.expired { background: #fee2e2; }
+  .hist-ico.denied  { background: #fee2e2; }
+  .hist-ico svg { width: 10px; height: 10px; display: block; }
+  .hist-ref  { font-size: 12px; font-weight: 700; color: var(--text-primary); }
+  .hist-date { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .hist-stats { display: flex; gap: 12px; margin-top: 5px; }
+  .hist-stat  { font-size: 11px; color: var(--text-secondary); }
+  .hist-stat b { font-weight: 600; color: var(--text-primary); }
+
+  /* Payer info */
+  .pi-row { display: flex; align-items: baseline; padding: 8px 16px; border-bottom: 1px solid var(--border-light); }
+  .pi-row:last-child { border-bottom: none; }
+  .pi-key { font-size: 11.5px; color: var(--text-muted); width: 90px; flex-shrink: 0; }
+  .pi-val { font-size: 11.5px; font-weight: 500; color: var(--text-primary); }
+  .pi-val.red { color: var(--red); font-weight: 600; }
+  .pi-val.amber { color: var(--amber); font-weight: 600; }
+
+  /* ─── APPEAL MODAL ───────────────────────────────────── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(15,23,42,.35);
+    backdrop-filter: blur(2px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--card); border-radius: 18px;
+    width: 560px; max-width: 95vw; max-height: 90vh;
+    overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.18);
+    animation: modal-in .22s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes modal-in { from { opacity:0; transform:translateY(18px) scale(.97); } }
+  .modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: var(--card); z-index: 1;
+    border-radius: 18px 18px 0 0;
+  }
+  .modal-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+  .modal-close {
+    width: 28px; height: 28px; border-radius: 7px;
+    background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted);
+  }
+  .modal-close:hover { background: var(--bg); }
+  .modal-body { padding: 20px 22px; }
+  .modal-section { margin-bottom: 20px; }
+  .modal-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--text-muted); margin-bottom: 12px; }
+
+  /* Appeal package items */
+  .pkg-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: 9px;
+    background: var(--bg); border: 1px solid var(--border);
+    margin-bottom: 7px;
+  }
+  .pkg-item.added { background: #f0fdf4; border-color: #86efac; }
+  .pkg-check {
+    width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .pkg-check.done { background: #d1fae5; }
+  .pkg-check.ai   { background: rgba(124,58,237,.1); }
+  .pkg-check svg { width: 9px; height: 9px; }
+  .pkg-label { flex: 1; font-size: 12.5px; font-weight: 500; color: var(--text-primary); }
+  .pkg-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+  .pkg-badge.existing { background: #e0f2fe; color: #0369a1; }
+  .pkg-badge.ai-gen   { background: #ede9fe; color: #6d28d9; }
+
+  /* AI summary box inside modal */
+  .modal-ai-box {
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 60%, #faf5ff 100%);
+    border: 1px solid #c4b5fd;
+    border-left: 3px solid #7c3aed;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 20px;
+    font-size: 12.5px; color: var(--text-primary); line-height: 1.65;
+  }
+  .modal-ai-box b { font-weight: 700; }
+  .modal-ai-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: #7c3aed; margin-bottom: 6px; }
+
+  .modal-footer {
+    padding: 14px 22px 20px;
+    display: flex; gap: 10px; justify-content: flex-end;
+    border-top: 1px solid var(--border);
+  }
+  .btn-cancel {
+    padding: 9px 18px; border-radius: 9px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border);
+  }
+  .btn-submit-appeal {
+    padding: 9px 20px; border-radius: 9px; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
+    background: linear-gradient(135deg, #6d28d9, #7c3aed);
+    color: white; box-shadow: 0 2px 8px rgba(109,40,217,.35);
+  }
+  .btn-submit-appeal:hover { box-shadow: 0 4px 14px rgba(109,40,217,.45); }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="preva-dashboard.html">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="7" fill="url(#ng)"/>
+      <path d="M8 7h6.5c2.485 0 4.5 2.015 4.5 4.5S16.985 16 14.5 16H11v5H8V7z" fill="white"/>
+      <path d="M11 10v3h3.5a1.5 1.5 0 0 0 0-3H11z" fill="url(#ng)"/>
+      <defs><linearGradient id="ng" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#1d4fa4"/><stop offset="1" stop-color="#6e2bd0"/></linearGradient></defs>
+    </svg>
+    <span class="nav-logo-text">PREVA</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="preva-dashboard.html">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="4.5" r="2.5"/><path d="M1.5 12.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5"/></svg>
+      Patients
+    </a>
+    <a class="nav-link" href="#"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5"/><path d="M4.5 7h5M4.5 4.5h5M4.5 9.5h3"/></svg> Payers</a>
+    <a class="nav-link" href="#"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 10 4.5 6.5 7.5 8.5 13 2.5"/></svg> Reports</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-icon-btn"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="#64748b" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="m12.5 12.5 3 3"/></svg></div>
+    <div class="nav-icon-btn"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="#64748b" stroke-width="1.5"><path d="M9 1.5a5.5 5.5 0 0 0-5.5 5.5v2L2 12h14l-1.5-3V7A5.5 5.5 0 0 0 9 1.5z"/><path d="M7 15.5a2 2 0 0 0 4 0"/></svg></div>
+    <div class="nav-divider"></div>
+    <div class="nav-user">
+      <div class="nav-avatar">MC</div>
+      <span class="nav-username">Maya Chen</span>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#94a3b8" stroke-width="1.5"><path d="M2.5 3.5l2.5 3 2.5-3"/></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- ── PAGE BAND ────────────────────────────────────────── -->
+<div class="page-band">
+  <div class="page-band-inner">
+    <div class="breadcrumb">
+      <a href="preva-dashboard.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span class="current">Prior Authorization: Maria Gonzalez</span>
+    </div>
+    <div class="page-header">
+      <div class="page-header-top">
+        <div class="ph-avatar">MG</div>
+        <div style="flex:1">
+          <div class="ph-title-row">
+            <h1 class="page-title">Prior Authorization</h1>
+            <span class="pm-chip pm-denied" style="margin-left:auto">Denied</span>
+          </div>
+          <span style="font-size:13px;font-weight:500;color:var(--text-secondary);margin-top:2px;display:block">Maria Gonzalez</span>
+        </div>
+      </div>
+      <div class="page-meta">
+        <span class="pm-chip pm-denied">Auth Denied</span>
+        <span class="pm-sep">·</span>
+        <span>PA-2026-0041</span>
+        <span class="pm-sep">·</span>
+        <span>Aetna PPO</span>
+        <span class="pm-sep">·</span>
+        <span>Appeal by <strong>Dec 06, 2026</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ─────────────────────────────────────────────── -->
+<main>
+
+  <div class="detail-layout">
+
+    <!-- ── LEFT ─────────────────────────────────────── -->
+    <div>
+
+      <!-- PREVA APPEAL ASSISTANT BANNER -->
+      <div class="appeal-banner">
+        <div class="ab-header">
+          <div class="ab-title">
+            <div class="x-ico-sm">
+              <svg viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M2 2l6 6M8 2l-6 6"/></svg>
+            </div>
+            Aetna PPO Denied PA-2026-0041 — Preva Appeal Ready
+            <span class="ai-chip"><span class="ai-dot"></span>AI · Live</span>
+          </div>
+          <span style="font-size:11.5px;color:var(--text-muted);">Nov 06, 2026 · 9:14 AM</span>
+        </div>
+
+        <!-- Key denial facts row -->
+        <div class="denial-facts">
+          <div class="df-stat"><div class="df-label">Denial Code</div><div class="df-val red">CO-50</div></div>
+          <div class="df-div"></div>
+          <div class="df-stat"><div class="df-label">Reason</div><div class="df-val">Medical necessity not established</div></div>
+          <div class="df-div"></div>
+          <div class="df-stat"><div class="df-label">Payer</div><div class="df-val">Aetna PPO</div></div>
+          <div class="df-div"></div>
+          <div class="df-stat"><div class="df-label">Appeal Deadline</div><div class="df-val amber">Nov 27, 2026 · 21 days</div></div>
+        </div>
+
+        <div class="ab-analysis">
+          <div class="analysis-row">
+            <div class="ar-ico red"><svg viewBox="0 0 10 10" fill="none" stroke="#dc2626" stroke-width="1.8"><path d="M2 2l6 6M8 2l-6 6"/></svg></div>
+            <div class="ar-text">
+              <div class="ar-label">Missing functional outcome scores (Oswestry)</div>
+              <div class="ar-sub">Not included in initial assessment narrative</div>
+            </div>
+          </div>
+          <div class="analysis-row">
+            <div class="ar-ico amber"><svg viewBox="0 0 10 10" fill="none" stroke="#d97706" stroke-width="1.8"><path d="M5 2v4M5 7.5v.5"/></svg></div>
+            <div class="ar-text">
+              <div class="ar-label">No prior conservative treatment documented</div>
+              <div class="ar-sub">Dr. Gomez note (Oct 12) found — usable as evidence</div>
+            </div>
+          </div>
+          <div class="analysis-row">
+            <div class="ar-ico green"><svg viewBox="0 0 10 10" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 5l2 2.5 5-4"/></svg></div>
+            <div class="ar-text">
+              <div class="ar-label">79% of similar CO-50 / M54.5 cases overturned on appeal</div>
+              <div class="ar-sub">Preva has drafted the full appeal package</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="ab-actions">
+          <button class="btn-appeal" onclick="openAppeal()">
+            <svg viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L6.5 2l4.5 8"/><path d="M4 7.5h5"/></svg>
+            Prepare Appeal with Preva
+          </button>
+          <button class="btn-download">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 1v7M3.5 5.5L6 8l2.5-2.5"/><path d="M1.5 10h9"/></svg>
+            Download Denial Letter
+          </button>
+          <button class="btn-contact">
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="1" y="2.5" width="10" height="7" rx="1"/><path d="M1 3.5l5 3.5 5-3.5"/></svg>
+            Contact Payer
+          </button>
+        </div>
+      </div>
+
+      <!-- AUTHORIZATION DETAILS -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-title">
+            <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="11" height="13" rx="1.5"/><path d="M5 5h5M5 7.5h5M5 10h3"/></svg>
+            Authorization Details
+          </span>
+          <span class="section-sub" style="color:var(--red);font-weight:600">Denied</span>
+        </div>
+        <div class="auth-grid">
+          <div class="auth-cell"><div class="f-label">Auth Number</div><div class="f-value">PA-2026-0041</div></div>
+          <div class="auth-cell"><div class="f-label">Type</div><div class="f-value">Concurrent</div></div>
+          <div class="auth-cell"><div class="f-label">Payer</div><div class="f-value">Aetna PPO</div></div>
+          <div class="auth-cell"><div class="f-label">Denial Date</div><div class="f-value err">Nov 06, 2026</div></div>
+          <div class="auth-cell"><div class="f-label">Diagnosis</div><div class="f-value">M54.5 — Low back pain</div></div>
+          <div class="auth-cell"><div class="f-label">CPT Codes</div><div class="f-value">97110, 97530, 97035</div></div>
+          <div class="auth-cell"><div class="f-label">Authorization Status</div><div class="f-value err"><span class="fdot fdot-red"></span> Denied</div></div>
+          <div class="auth-cell"><div class="f-label">Denial Code</div><div class="f-value err">CO-50</div></div>
+          <div class="auth-cell"><div class="f-label">Visits Requested</div><div class="f-value">10 visits</div></div>
+          <div class="auth-cell"><div class="f-label">Submitted</div><div class="f-value">Nov 05, 2026</div></div>
+          <div class="auth-cell"><div class="f-label">Appeal Deadline</div><div class="f-value warn"><span class="fdot fdot-amber"></span> Nov 27, 2026</div></div>
+          <div class="auth-cell"><div class="f-label">Days to Appeal</div><div class="f-value warn">21 days left</div></div>
+        </div>
+      </div>
+
+      <!-- WHAT PAYER CITED + APPEAL TIMELINE -->
+      <div class="bottom-row">
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-title">
+              <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5h11M2 7h11M2 10.5h6"/><circle cx="12.5" cy="11.5" r="2"/><path d="M12.5 10.5v1l.7.7"/></svg>
+              What Aetna Cited
+            </span>
+          </div>
+          <div class="cited-list">
+            <div class="cited-item">
+              <div class="cited-num">1</div>
+              <div class="cited-text"><b>Insufficient functional limitation documentation</b> — narrative did not include standardized outcome scores (Oswestry, PSFS, or equivalent)</div>
+              <div class="cited-preva">Preva: fixable</div>
+            </div>
+            <div class="cited-item">
+              <div class="cited-num">2</div>
+              <div class="cited-text"><b>No documentation of failed conservative treatment</b> prior to initiating PT</div>
+              <div class="cited-preva">Preva: found evidence</div>
+            </div>
+            <div class="cited-item">
+              <div class="cited-num">3</div>
+              <div class="cited-text"><b>Treatment plan goals not measurable</b> — payer requires SMART goals (Specific, Measurable, Achievable, Relevant, Time-bound)</div>
+              <div class="cited-preva">Preva: drafted</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <span class="section-title">
+              <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M7.5 4v4l2.5 2"/></svg>
+              Appeal Timeline
+            </span>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot done"><svg viewBox="0 0 8 8" fill="none" stroke="#dc2626" stroke-width="1.8"><path d="M1.5 4l1.5 2 4-4"/></svg></div>
+            <div>
+              <div class="tl-label">Authorization Denied</div>
+              <div class="tl-sub">Nov 06, 2026 · CO-50</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot active"></div>
+            <div>
+              <div class="tl-label active">Appeal Preparation</div>
+              <div class="tl-sub">Preva building package · In progress</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot todo"></div>
+            <div>
+              <div class="tl-label" style="color:var(--text-muted)">Appeal Filed</div>
+              <div class="tl-sub">Target: Nov 10, 2026</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot todo"></div>
+            <div>
+              <div class="tl-label" style="color:var(--text-muted)">Payer Review</div>
+              <div class="tl-sub">Aetna · 7–14 business days</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot todo"></div>
+            <div>
+              <div class="tl-label" style="color:var(--text-muted)">Appeal Decision</div>
+              <div class="tl-sub">Deadline Nov 27, 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /left -->
+
+    <!-- ── SIDEBAR ─────────────────────────────────── -->
+    <div class="sidebar">
+
+      <!-- AUTH STATUS RING — denied -->
+      <div class="sidebar-card">
+        <div class="sc-header"><span class="sc-title">Authorization Status</span></div>
+        <div class="ring-body">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 84 84" fill="none">
+              <circle cx="42" cy="42" r="36" stroke="#e8edf5" stroke-width="7"/>
+              <circle cx="42" cy="42" r="36"
+                stroke="#ef4444" stroke-width="7"
+                stroke-dasharray="226 0"
+                stroke-linecap="round"
+                transform="rotate(-90 42 42)"/>
+            </svg>
+            <div class="ring-center">
+              <div class="ring-num">✕</div>
+            </div>
+          </div>
+          <div class="ring-status-name red">Denied</div>
+          <div class="ring-status-ref">Auth #PA-2026-0041 · CO-50</div>
+          <div class="ring-stats">
+            <div><div class="rs-val rs-val">10</div><div class="rs-lbl">Requested</div></div>
+            <div><div class="rs-val red">0</div><div class="rs-lbl">Approved</div></div>
+            <div><div class="rs-val" style="color:var(--amber)">21d</div><div class="rs-lbl">To Appeal</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPEAL CONFIDENCE -->
+      <div class="sidebar-card">
+        <div class="sc-header"><span class="sc-title">Preva Appeal Confidence</span></div>
+        <div class="conf-sidebar">
+          <div class="conf-sidebar-ring">
+            <svg viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="24" stroke="#e8edf5" stroke-width="5.5"/>
+              <circle cx="30" cy="30" r="24"
+                stroke="#7c3aed" stroke-width="5.5"
+                stroke-dasharray="119 32"
+                stroke-linecap="round"
+                transform="rotate(-90 30 30)"/>
+            </svg>
+            <div class="conf-sidebar-center">
+              <div class="conf-sidebar-pct">79%</div>
+              <div class="conf-sidebar-lbl">win rate</div>
+            </div>
+          </div>
+          <div class="conf-sidebar-text">
+            <div class="cst-title">High Appeal Chance</div>
+            <div class="cst-sub">34 similar CO-50 cases with Aetna. 79% overturned with supplemental docs.</div>
+          </div>
+        </div>
+        <div class="reviewer-strip">
+          <div class="reviewer-avatar">MC</div>
+          Maya Chen · Preva appeal package ready
+        </div>
+      </div>
+
+      <!-- AUTH HISTORY -->
+      <div class="sidebar-card">
+        <div class="sc-header">
+          <span class="sc-title">Auth History</span>
+          <a class="sc-link" href="#">View all</a>
+        </div>
+        <div class="hist-item">
+          <div class="hist-ico denied">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#dc2626" stroke-width="1.8"><path d="M2 2l6 6M8 2l-6 6"/></svg>
+          </div>
+          <div>
+            <div class="hist-ref">Auth #PA-2026-0041 — Denied</div>
+            <div class="hist-date">Submitted Nov 05, 2026</div>
+            <div class="hist-stats">
+              <span class="hist-stat" style="color:var(--red)"><b>Denied</b> · CO-50</span>
+              <span class="hist-stat">Appeal due <b>Nov 27</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-ico expired">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#dc2626" stroke-width="1.6"><path d="M2 2l6 6M8 2l-6 6"/></svg>
+          </div>
+          <div>
+            <div class="hist-ref">Auth #PA-2026-0039 — Expired</div>
+            <div class="hist-date">Sep 10 – Oct 15, 2026</div>
+            <div class="hist-stats">
+              <span class="hist-stat"><b>10</b> approved</span>
+              <span class="hist-stat"><b>2</b> used</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYER INFO -->
+      <div class="sidebar-card" style="padding-bottom: 20px">
+        <div class="sc-header"><span class="sc-title">Payer Info</span></div>
+        <div class="pi-row"><span class="pi-key">Payer</span><span class="pi-val">Aetna PPO</span></div>
+        <div class="pi-row"><span class="pi-key">Decision</span><span class="pi-val red">Denied ✕</span></div>
+        <div class="pi-row"><span class="pi-key">Denial Code</span><span class="pi-val red">CO-50</span></div>
+        <div class="pi-row"><span class="pi-key">Member ID</span><span class="pi-val">AET-8821-004</span></div>
+        <div class="pi-row"><span class="pi-key">Group #</span><span class="pi-val">GRP-44092</span></div>
+        <div class="pi-row"><span class="pi-key">Appeal By</span><span class="pi-val amber">Nov 27, 2026</span></div>
+      </div>
+
+    </div><!-- /sidebar -->
+  </div><!-- /detail-layout -->
+</main>
+
+<!-- ── APPEAL MODAL ──────────────────────────────────────── -->
+<div class="modal-overlay" id="appeal-modal" onclick="handleBackdropClick(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">Prepare Appeal — PA-2026-0041</div>
+      <button class="modal-close" onclick="closeAppeal()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 2l10 10M12 2L2 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <div class="modal-section-title">Preva Appeal Summary</div>
+        <div class="modal-ai-box">
+          <div class="modal-ai-label">AI · Generated</div>
+          Preva analyzed this CO-50 denial against <b>34 similar Aetna PPO cases</b> for M54.5. The denial is addressable: payer objected to missing Oswestry scores and unmeasurable goals — both are documented in Dr. Park's session notes. Preva has drafted a letter of medical necessity with quantified scores and SMART goals, and located Dr. Gomez's Oct 12 referral note documenting failed conservative care. With this package, appeal success probability is <b>79%</b>.
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Appeal Package (5 documents)</div>
+
+        <div class="pkg-item">
+          <div class="pkg-check done"><svg viewBox="0 0 9 9" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 4.5l2 2.5 4.5-4"/></svg></div>
+          <div class="pkg-label">Original PA request + denial letter</div>
+          <div class="pkg-badge existing">On file</div>
+        </div>
+        <div class="pkg-item added">
+          <div class="pkg-check ai"><svg viewBox="0 0 9 9" fill="#7c3aed"><path d="M4.5.5l1 2.9h3l-2.4 1.7.9 2.9L4.5 6.4l-2.5 1.6.9-2.9L.5 3.4h3z"/></svg></div>
+          <div class="pkg-label">Letter of Medical Necessity (with Oswestry scores)</div>
+          <div class="pkg-badge ai-gen">Preva drafted</div>
+        </div>
+        <div class="pkg-item added">
+          <div class="pkg-check ai"><svg viewBox="0 0 9 9" fill="#7c3aed"><path d="M4.5.5l1 2.9h3l-2.4 1.7.9 2.9L4.5 6.4l-2.5 1.6.9-2.9L.5 3.4h3z"/></svg></div>
+          <div class="pkg-label">Updated PT assessment with SMART goals</div>
+          <div class="pkg-badge ai-gen">Preva drafted</div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-check done"><svg viewBox="0 0 9 9" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 4.5l2 2.5 4.5-4"/></svg></div>
+          <div class="pkg-label">Dr. Gomez referral — failed conservative treatment note (Oct 12)</div>
+          <div class="pkg-badge existing">Preva found</div>
+        </div>
+        <div class="pkg-item added">
+          <div class="pkg-check ai"><svg viewBox="0 0 9 9" fill="#7c3aed"><path d="M4.5.5l1 2.9h3l-2.4 1.7.9 2.9L4.5 6.4l-2.5 1.6.9-2.9L.5 3.4h3z"/></svg></div>
+          <div class="pkg-label">Physician attestation letter (Dr. Gomez)</div>
+          <div class="pkg-badge ai-gen">Preva drafted</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeAppeal()">Cancel</button>
+      <button class="btn-submit-appeal">Submit Appeal to Aetna</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openAppeal() {
+    document.getElementById('appeal-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAppeal() {
+    document.getElementById('appeal-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('appeal-modal')) closeAppeal();
+  }
+</script>
+
+</body>
+</html>

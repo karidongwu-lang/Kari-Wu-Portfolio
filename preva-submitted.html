@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1453">
+<title>Preva — Submitted · PA-2026-0041</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --border: #e8eaed;
+    --border-light: #f3f4f6;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+    --blue: #1d4fa4;
+    --green: #059669;
+    --amber: #d97706;
+    --purple: #6d28d9;
+    --purple-mid: #7c3aed;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─────────────────────────────────────────── */
+  nav {
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  .nav-logo { display:flex; align-items:center; gap:9px; text-decoration:none; flex-shrink:0; }
+  .nav-logo-text { font-size:17px; font-weight:700; letter-spacing:2.5px; color:#ffffff; }
+  .nav-links { display:flex; gap:2px; margin-left:36px; }
+  .nav-link {
+    display:flex; align-items:center; gap:6px;
+    padding:6px 14px; border-radius:7px;
+    font-size:13px; font-weight:500;
+    color:#94a3b8; text-decoration:none;
+    transition: background .15s;
+  }
+  .nav-link:hover { background: rgba(255,255,255,.07); color: #e2e8f0; }
+  .nav-link.active { background: rgba(255,255,255,.1); color: #ffffff; font-weight:600; }
+  .nav-link svg { width:13px; height:13px; flex-shrink:0; }
+  .nav-right { margin-left:auto; display:flex; align-items:center; gap:4px; }
+  .nav-icon-btn { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .nav-icon-btn:hover { background: rgba(255,255,255,.07); }
+  .nav-divider { width:1px; height:22px; background:#334155; margin:0 8px; }
+  .nav-user { display:flex; align-items:center; gap:8px; padding:4px 10px 4px 4px; border-radius:8px; cursor:pointer; }
+  .nav-user:hover { background: rgba(255,255,255,.07); }
+  .nav-avatar { width:28px; height:28px; border-radius:7px; background:linear-gradient(135deg,#1d4fa4,#6e2bd0); color:white; font-size:10.5px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .nav-username { font-size:13px; font-weight:600; color:#e2e8f0; }
+
+  /* ─── MAIN ─────────────────────────────────────────── */
+  main { max-width: 1390px; margin: 0 auto; padding: 14px 40px 48px; }
+
+  .breadcrumb {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 12px; font-size: 12px; color: var(--text-muted);
+  }
+  .breadcrumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .breadcrumb a:hover { color: #1a3d8f; }
+  .breadcrumb .sep { font-size: 11px; }
+  .breadcrumb .current { color: var(--blue); font-weight: 600; }
+
+  /* ─── PAGE BAND ─────────────────────────────────────── */
+  .page-band {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .page-band-inner { max-width: 1390px; margin: 0 auto; padding: 0 40px; }
+  .page-header { margin-bottom: 0; }
+  .page-header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .ph-avatar {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: linear-gradient(135deg, #1d4fa4, #6e2bd0);
+    color: white; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ph-title-row { display: flex; align-items: center; gap: 10px; flex: 1; }
+  .page-title { font-size: 19px; font-weight: 700; color: var(--text-primary); letter-spacing: -.3px; }
+  .page-meta {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    font-size: 12.5px; color: var(--text-secondary); margin-top: 6px; margin-bottom: 0;
+  }
+  .pm-sep { color: var(--text-muted); font-size: 11px; }
+  .pm-chip {
+    display: inline-flex; align-items: center; padding: 2px 8px;
+    border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+  .pm-approved  { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+  .pm-denied    { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+  .pm-submitted { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+
+  /* ─── HERO ─────────────────────────────────────────── */
+  .hero {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,197,94,.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; right: 80px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .check-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #059669, #10b981);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 8px rgba(5,150,105,.10), 0 4px 16px rgba(5,150,105,.25);
+    animation: pop .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes pop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .check-circle svg { width: 32px; height: 32px; }
+
+  .hero-text { flex: 1; }
+  .hero-title {
+    font-size: 22px; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 6px;
+    letter-spacing: -.3px;
+  }
+  .hero-sub {
+    font-size: 13.5px; color: var(--text-secondary);
+    line-height: 1.6; margin-bottom: 10px;
+  }
+  .hero-meta {
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 11.5px; font-weight: 600;
+  }
+  .chip-green { background: #d1fae5; color: #065f46; }
+  .chip-purple {
+    background: rgba(124,58,237,.08);
+    border: 1px solid rgba(124,58,237,.2);
+    color: #6d28d9;
+  }
+  .chip-purple .ai-dot { width:5px; height:5px; border-radius:50%; background:#7c3aed; animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+  .hero-time { font-size: 12px; color: var(--text-muted); }
+
+  .hero-actions {
+    display: flex; gap: 10px; flex-shrink: 0;
+  }
+  .btn-primary {
+    padding: 9px 20px;
+    background: var(--blue); color: white;
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+    border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+    box-shadow: 0 1px 2px rgba(29,79,164,.3);
+    transition: background .15s;
+  }
+  .btn-primary:hover { background: #174088; }
+  .btn-denied {
+    padding: 9px 20px;
+    background: white; color: #dc2626;
+    border: 1px solid #fca5a5;
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+    transition: background .15s;
+  }
+  .btn-denied:hover { background: #fef2f2; }
+  .outcome-divider {
+    font-size: 11px; color: var(--text-muted);
+    align-self: center; padding: 0 2px; flex-shrink: 0;
+  }
+  .btn-outline {
+    padding: 9px 20px;
+    background: white; color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+    transition: background .1s;
+  }
+  .btn-outline:hover { background: var(--bg); color: var(--text-primary); }
+
+  /* ─── CONTENT GRID ──────────────────────────────────── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* ─── SECTION CARD ──────────────────────────────────── */
+  .section-card {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .section-card:last-child { margin-bottom: 0; }
+  .sc-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sc-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13.5px; font-weight: 700; color: var(--text-primary);
+  }
+  .sc-title svg { width:15px; height:15px; color: var(--text-secondary); flex-shrink:0; }
+  .sc-sub { font-size: 11.5px; color: var(--text-muted); }
+  .sc-sub.green { color: var(--green); font-weight: 600; }
+
+  /* Receipt grid */
+  .receipt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 4px 20px 8px;
+  }
+  .rc {
+    padding: 12px 16px 12px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .rc:nth-child(3n) { padding-right: 0; }
+  .rc:nth-last-child(-n+3) { border-bottom: none; }
+  .rc-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .rc-value { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .rc-value.green { color: var(--green); font-weight: 700; }
+  .rc-value.amber { color: var(--amber); font-weight: 600; }
+
+  /* Docs list */
+  .doc-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 12.5px;
+  }
+  .doc-row:last-child { border-bottom: none; }
+  .doc-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #d1fae5;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .doc-check svg { width: 10px; height: 10px; }
+  .doc-row-name { flex: 1; font-weight: 500; color: var(--text-primary); }
+  .doc-row-tag { font-size: 11px; color: var(--text-muted); }
+
+  /* ─── TIMELINE ──────────────────────────────────────── */
+  .timeline { padding: 16px 20px; }
+  .tl-item {
+    display: flex; gap: 14px;
+    padding-bottom: 22px;
+    position: relative;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 13px; top: 28px;
+    width: 2px;
+    height: calc(100% - 18px);
+    background: var(--border);
+  }
+  .tl-item.done:not(:last-child)::after { background: #bbf7d0; }
+  .tl-item.active-step:not(:last-child)::after { background: linear-gradient(to bottom, #bbf7d0, var(--border)); }
+
+  .tl-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; z-index: 1;
+  }
+  .tl-dot.done    { background: #d1fae5; }
+  .tl-dot.active-step { background: #dbeafe; border: 2px solid #93c5fd; animation: ring-pulse 2s infinite; }
+  .tl-dot.pending { background: #f1f5f9; border: 2px solid var(--border); }
+  @keyframes ring-pulse { 0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.25)} 50%{box-shadow:0 0 0 5px rgba(59,130,246,.0)} }
+  .tl-dot svg { width: 12px; height: 12px; }
+
+  .tl-content { flex: 1; padding-top: 3px; }
+  .tl-label { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+  .tl-label.muted { color: var(--text-muted); font-weight: 500; }
+  .tl-desc  { font-size: 11.5px; color: var(--text-muted); line-height: 1.5; }
+  .tl-time  { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-top: 2px; }
+  .tl-time.amber { color: var(--amber); }
+
+  /* ─── PREVA MONITORING ──────────────────────────────── */
+  .preva-monitor {
+    background: linear-gradient(135deg, #ddd6fe 0%, #ede9fe 50%, #faf5ff 100%);
+    border: 1px solid #c4b5fd;
+    border-left: 3px solid #7c3aed;
+    border-radius: 14px;
+    padding: 16px 18px;
+    overflow: hidden;
+  }
+  .pm-header {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 12.5px; font-weight: 700; color: #6d28d9;
+    margin-bottom: 10px;
+  }
+  .pm-pulse { width: 6px; height: 6px; border-radius: 50%; background: #7c3aed; animation: pulse 1.8s infinite; }
+  .pm-body { font-size: 12.5px; color: #1e293b; line-height: 1.7; margin-bottom: 12px; }
+  .pm-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(196,181,253,.4);
+  }
+  .pm-stat-val { font-size: 17px; font-weight: 700; color: var(--text-primary); font-family: 'Crimson Text', serif; }
+  .pm-stat-lbl { font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: #7c3aed; opacity: .7; margin-top: 1px; }
+
+  /* ─── SIDEBAR ───────────────────────────────────────── */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+  .sb-card {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .sb-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sb-title { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
+
+  .detail-row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 9px 16px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 12.5px;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .dr-key { color: var(--text-muted); font-size: 11.5px; }
+  .dr-val { font-weight: 600; color: var(--text-primary); text-align: right; }
+  .dr-val.green { color: var(--green); }
+  .dr-val.amber { color: var(--amber); }
+  .dr-val.purple { color: #6d28d9; }
+
+  /* Confidence ring */
+  .conf-ring-wrap {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .ring-svg-wrap { position: relative; width: 80px; height: 80px; margin-bottom: 10px; }
+  .ring-svg-wrap svg { width: 80px; height: 80px; }
+  .ring-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .ring-pct { font-family: 'Crimson Text', serif; font-size: 26px; font-weight: 600; color: #6d28d9; line-height: 1; }
+  .ring-sub-lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--text-muted); }
+  .conf-label { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+  .conf-sub   { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+
+  /* What Maya did strip */
+  .maya-strip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--border-light);
+  }
+  .maya-avatar { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg,#1d4fa4,#6e2bd0); color:white; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .maya-text { font-size: 11.5px; color: var(--text-secondary); }
+  .maya-text b { font-weight: 600; color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="preva-dashboard.html">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect width="28" height="28" rx="7" fill="url(#ng)"/>
+      <path d="M8 7h6.5c2.485 0 4.5 2.015 4.5 4.5S16.985 16 14.5 16H11v5H8V7z" fill="white"/>
+      <path d="M11 10v3h3.5a1.5 1.5 0 0 0 0-3H11z" fill="url(#ng)"/>
+      <defs><linearGradient id="ng" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop stop-color="#1d4fa4"/><stop offset="1" stop-color="#6e2bd0"/></linearGradient></defs>
+    </svg>
+    <span class="nav-logo-text">PREVA</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="preva-dashboard.html">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-link active" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="4.5" r="2.5"/><path d="M1.5 12.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5"/></svg>
+      Patients
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5"/><path d="M4.5 7h5M4.5 4.5h5M4.5 9.5h3"/></svg>
+      Payers
+    </a>
+    <a class="nav-link" href="#">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 10 4.5 6.5 7.5 8.5 13 2.5"/></svg>
+      Reports
+    </a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-icon-btn"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="#64748b" stroke-width="1.5"><circle cx="8" cy="8" r="5.5"/><path d="m12.5 12.5 3 3"/></svg></div>
+    <div class="nav-icon-btn"><svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="#64748b" stroke-width="1.5"><path d="M9 1.5a5.5 5.5 0 0 0-5.5 5.5v2L2 12h14l-1.5-3V7A5.5 5.5 0 0 0 9 1.5z"/><path d="M7 15.5a2 2 0 0 0 4 0"/></svg></div>
+    <div class="nav-divider"></div>
+    <div class="nav-user">
+      <div class="nav-avatar">MC</div>
+      <span class="nav-username">Maya Chen</span>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#94a3b8" stroke-width="1.5"><path d="M2.5 3.5l2.5 3 2.5-3"/></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- ── PAGE BAND ────────────────────────────────────────── -->
+<div class="page-band">
+  <div class="page-band-inner">
+    <div class="breadcrumb">
+      <a href="preva-dashboard.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span class="current">Prior Authorization: Maria Gonzalez</span>
+    </div>
+    <div class="page-header">
+      <div class="page-header-top">
+        <div class="ph-avatar">MG</div>
+        <div style="flex:1">
+          <div class="ph-title-row">
+            <h1 class="page-title">Prior Authorization</h1>
+            <span class="pm-chip pm-submitted" style="margin-left:auto">Submitted</span>
+          </div>
+          <span style="font-size:13px;font-weight:500;color:var(--text-secondary);margin-top:2px;display:block">Maria Gonzalez</span>
+        </div>
+      </div>
+      <div class="page-meta">
+        <span class="pm-chip pm-submitted">Submitted</span>
+        <span class="pm-sep">·</span>
+        <span>PA-2026-0041</span>
+        <span class="pm-sep">·</span>
+        <span>Aetna PPO</span>
+        <span class="pm-sep">·</span>
+        <span>Nov 04, 2026 · <strong>9:18 AM</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN ─────────────────────────────────────────────── -->
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="check-circle">
+      <svg viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 16l7 8 13-14"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <div class="hero-title">Authorization Request Submitted</div>
+      <div class="hero-sub">PA-2026-0041 has been sent to Aetna PPO's authorization portal. Preva prepared and submitted this request on your behalf.</div>
+      <div class="hero-meta">
+        <span class="hero-chip chip-green">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 5l2.5 3 4.5-5.5"/></svg>
+          Delivered to Aetna
+        </span>
+        <span class="hero-chip chip-purple">
+          <span class="ai-dot"></span>
+          Preva AI · Assisted
+        </span>
+        <span class="hero-time">Nov 04, 2026 · 9:18 AM</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-outline" href="preva-detail.html">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 2L4 6l3 4"/></svg>
+        Back to Patient
+      </a>
+      <a class="btn-primary" href="preva-approved.html">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 6l3 3.5 6-7"/></svg>
+        View Approval
+      </a>
+      <span class="outcome-divider">or</span>
+      <a class="btn-denied" href="preva-denied.html">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 2l8 8M10 2l-8 8"/></svg>
+        View Denial
+      </a>
+    </div>
+  </div>
+
+  <!-- CONTENT GRID -->
+  <div class="content-grid">
+
+    <!-- ── LEFT ──────────────────────────────────────── -->
+    <div>
+
+      <!-- SUBMISSION RECEIPT -->
+      <div class="section-card">
+        <div class="sc-head">
+          <span class="sc-title">
+            <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="11" height="13" rx="1.5"/><path d="M5 5h5M5 7.5h5M5 10h3"/></svg>
+            Submission Receipt
+          </span>
+          <span class="sc-sub">Confirmation #AETNA-2026-PRV-00481</span>
+        </div>
+        <div class="receipt-grid">
+          <div class="rc">
+            <div class="rc-label">Patient</div>
+            <div class="rc-value">Maria Gonzalez</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">Auth Number</div>
+            <div class="rc-value">PA-2026-0041</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">Status</div>
+            <div class="rc-value green">Submitted ✓</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">Payer</div>
+            <div class="rc-value">Aetna PPO</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">Diagnosis</div>
+            <div class="rc-value">M54.5 — Low back pain</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">CPT Codes</div>
+            <div class="rc-value">97110, 97530, 97035</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">Visits Requested</div>
+            <div class="rc-value">10 PT visits</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">Submitted At</div>
+            <div class="rc-value">Nov 04, 2026 · 9:18 AM</div>
+          </div>
+          <div class="rc">
+            <div class="rc-label">Renewal Deadline</div>
+            <div class="rc-value amber">Nov 08, 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS INCLUDED -->
+      <div class="section-card">
+        <div class="sc-head">
+          <span class="sc-title">
+            <svg viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 1.5h5l3 3v9a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path d="M8.5 1.5v3h3"/></svg>
+            Documents Included
+          </span>
+          <span class="sc-sub green">5 of 5 attached</span>
+        </div>
+        <div class="doc-row">
+          <div class="doc-check"><svg viewBox="0 0 10 10" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 5l2 2.5 5-4"/></svg></div>
+          <span class="doc-row-name">Physician Referral</span>
+          <span class="doc-row-tag">PDF · 128 KB</span>
+        </div>
+        <div class="doc-row">
+          <div class="doc-check"><svg viewBox="0 0 10 10" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 5l2 2.5 5-4"/></svg></div>
+          <span class="doc-row-name">Initial PT Assessment</span>
+          <span class="doc-row-tag">PDF · 342 KB</span>
+        </div>
+        <div class="doc-row">
+          <div class="doc-check"><svg viewBox="0 0 10 10" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 5l2 2.5 5-4"/></svg></div>
+          <span class="doc-row-name">Functional Limitation Narrative</span>
+          <span class="doc-row-tag">PDF · 89 KB</span>
+        </div>
+        <div class="doc-row">
+          <div class="doc-check"><svg viewBox="0 0 10 10" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 5l2 2.5 5-4"/></svg></div>
+          <span class="doc-row-name">Insurance Card Copy</span>
+          <span class="doc-row-tag">PNG · 56 KB</span>
+        </div>
+        <div class="doc-row">
+          <div class="doc-check"><svg viewBox="0 0 10 10" fill="none" stroke="#059669" stroke-width="1.8"><path d="M1.5 5l2 2.5 5-4"/></svg></div>
+          <span class="doc-row-name">Prior Treatment Records</span>
+          <span class="doc-row-tag">PDF · 218 KB</span>
+        </div>
+      </div>
+
+      <!-- PREVA MONITORING -->
+      <div class="preva-monitor">
+        <div class="pm-header">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="#7c3aed"><path d="M6 .5l1.35 3.73H11L8.18 6.4l1.08 3.6L6 8.1 2.74 10l1.08-3.6L1 4.23h3.65z"/></svg>
+          Preva is Monitoring
+          <span class="pm-pulse"></span>
+        </div>
+        <div class="pm-body">
+          Preva is actively watching Aetna's authorization portal and will notify you the moment a decision is made. No manual follow-up needed — Preva handles the waiting.
+        </div>
+        <div class="pm-stats">
+          <div>
+            <div class="pm-stat-val">2–3</div>
+            <div class="pm-stat-lbl">Days Expected</div>
+          </div>
+          <div>
+            <div class="pm-stat-val">Nov 06</div>
+            <div class="pm-stat-lbl">Est. Response</div>
+          </div>
+          <div>
+            <div class="pm-stat-val">Nov 08</div>
+            <div class="pm-stat-lbl">Hard Deadline</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /left -->
+
+    <!-- ── SIDEBAR ─────────────────────────────────── -->
+    <div class="sidebar">
+
+      <!-- WHAT'S NEXT -->
+      <div class="sb-card">
+        <div class="sb-head">
+          <span class="sb-title">What Happens Next</span>
+        </div>
+        <div class="timeline">
+          <div class="tl-item done">
+            <div class="tl-dot done">
+              <svg viewBox="0 0 12 12" fill="none" stroke="#059669" stroke-width="2"><path d="M2 6l2.5 3 5.5-6"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label">Submitted to Aetna Portal</div>
+              <div class="tl-desc">Auth packet sent via NaviMedix with all 5 required documents.</div>
+              <div class="tl-time">Today · 9:18 AM</div>
+            </div>
+          </div>
+          <div class="tl-item active-step">
+            <div class="tl-dot active-step">
+              <svg viewBox="0 0 12 12" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="6" cy="6" r="2" fill="#3b82f6"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label">Payer Review</div>
+              <div class="tl-desc">Aetna is reviewing the request. Preva will monitor for updates.</div>
+              <div class="tl-time">Now — Nov 06, 2026</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot pending">
+              <svg viewBox="0 0 12 12" fill="none" stroke="#cbd5e1" stroke-width="1.5"><circle cx="6" cy="6" r="2"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label muted">Authorization Decision</div>
+              <div class="tl-desc">Aetna will respond with approval, denial, or a request for more info.</div>
+              <div class="tl-time amber">By Nov 06–08, 2026</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot pending">
+              <svg viewBox="0 0 12 12" fill="none" stroke="#cbd5e1" stroke-width="1.5"><path d="M2 6l2.5 3 5.5-6"/></svg>
+            </div>
+            <div class="tl-content">
+              <div class="tl-label muted">Coverage Active</div>
+              <div class="tl-desc">Upon approval, Maria's PT visits resume immediately.</div>
+              <div class="tl-time">Upon payer approval</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI CONFIDENCE -->
+      <div class="sb-card">
+        <div class="sb-head"><span class="sb-title">Preva's Confidence</span></div>
+        <div class="conf-ring-wrap">
+          <div class="ring-svg-wrap">
+            <svg viewBox="0 0 80 80" fill="none">
+              <circle cx="40" cy="40" r="34" stroke="#f0e9ff" stroke-width="7"/>
+              <circle cx="40" cy="40" r="34"
+                stroke="url(#conf-grad)" stroke-width="7"
+                stroke-dasharray="214 0"
+                stroke-linecap="round"
+                transform="rotate(-90 40 40)"/>
+              <defs>
+                <linearGradient id="conf-grad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#6d28d9"/>
+                  <stop offset="1" stop-color="#a78bfa"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ring-inner">
+              <div class="ring-pct">97%</div>
+              <div class="ring-sub-lbl">confidence</div>
+            </div>
+          </div>
+          <div class="conf-label">High Confidence</div>
+          <div class="conf-sub">All 5 payer requirements met.<br>No flags detected in submission.</div>
+        </div>
+        <div class="maya-strip">
+          <div class="maya-avatar">MC</div>
+          <div class="maya-text">Reviewed &amp; approved by <b>Maya Chen</b></div>
+        </div>
+      </div>
+
+      <!-- SUBMISSION DETAILS -->
+      <div class="sb-card" style="padding-bottom: 20px">
+        <div class="sb-head"><span class="sb-title">Submission Details</span></div>
+        <div class="detail-row"><span class="dr-key">Submitted via</span><span class="dr-val">NaviMedix Portal</span></div>
+        <div class="detail-row"><span class="dr-key">Provider NPI</span><span class="dr-val">1234567890</span></div>
+        <div class="detail-row"><span class="dr-key">Submitted by</span><span class="dr-val purple">Preva AI</span></div>
+        <div class="detail-row"><span class="dr-key">Reviewed by</span><span class="dr-val">Maya Chen</span></div>
+        <div class="detail-row"><span class="dr-key">Payer Fax</span><span class="dr-val">(800) 445-9100</span></div>
+        <div class="detail-row"><span class="dr-key">Conf. Number</span><span class="dr-val">PRV-00481</span></div>
+      </div>
+
+    </div><!-- /sidebar -->
+  </div><!-- /content-grid -->
+
+</main>
+</body>
+</html>
