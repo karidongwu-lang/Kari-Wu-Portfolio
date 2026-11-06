@@ -26,18 +26,24 @@
       flex-direction: column;
       justify-content: flex-start;
       position: relative;
-      padding-top: calc(var(--nav-height) + var(--space-16));
-      padding-bottom: 180px;
+      padding-top: var(--nav-height);
+      padding-bottom: 4vh;
+      box-sizing: border-box;
+    }
+
+    .hero > .container {
+      position: relative;
     }
 
     .hero-line1 {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 4.2rem);
+      font-size: clamp(1.3rem, 4.4vh, 4.2rem);
       font-weight: 400;
       line-height: 1.05;
       letter-spacing: -0.02em;
       color: var(--color-ink);
       max-width: 42vw;
+      margin-left: clamp(1rem, 8vw, 8rem);
       opacity: 0;
       animation: fadeIn 0.7s ease 0.1s forwards;
     }
@@ -52,12 +58,13 @@
 
     .hero-line2 {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 4.2rem);
+      font-size: clamp(1.3rem, 4.4vh, 4.2rem);
       font-weight: 400;
       line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--color-ink);
       max-width: 42vw;
+      margin-left: clamp(1rem, 8vw, 8rem);
       margin-top: 0;
       opacity: 0;
       animation: fadeIn 0.7s ease 0.3s forwards;
@@ -65,9 +72,10 @@
 
     .hero-doodle {
       position: absolute;
-      right: 100px;
-      top: calc(var(--nav-height) + var(--space-12));
-      width: clamp(380px, 80vw, 820px);
+      right: clamp(24px, 5vw, 100px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(240px, 58vh, 820px);
       aspect-ratio: 1920 / 1080;
       pointer-events: none;
       opacity: 0;
@@ -89,9 +97,10 @@
     /* night doodle — hidden by default, shown when dark */
     .hero-doodle-night {
       position: absolute;
-      right: 100px;
-      top: calc(var(--nav-height) + var(--space-12));
-      width: clamp(380px, 80vw, 820px);
+      right: clamp(24px, 5vw, 100px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(240px, 58vh, 820px);
       aspect-ratio: 1920 / 1080;
       pointer-events: none;
       display: none;
@@ -175,34 +184,6 @@
 
     @keyframes fadeIn {
       to { opacity: 1; }
-    }
-
-    .hero-scroll-hint {
-      display: flex;
-      align-items: center;
-      gap: 0.4em;
-      margin-top: var(--space-8);
-      opacity: 0;
-      animation: fadeIn 0.7s ease 0.8s forwards;
-    }
-
-    .hero-scroll-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-    }
-
-    .hero-scroll-arrow {
-      font-size: 0.75rem;
-      color: var(--color-muted);
-      display: inline-block;
-      animation: scrollBounce 2s ease-in-out 1.5s infinite;
-    }
-
-    @keyframes scrollBounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(4px); }
     }
 
     /* ─── SCRIBBLY DIVIDER ───────────────────────────────────────────────────── */
@@ -368,8 +349,8 @@
     #work { position: relative; }
     #work > .container { position: relative; z-index: 1; }
 
-    .work-grid-bg { color: var(--color-accent); opacity: 0.7; }
-    body.is-dark .work-grid-bg { color: #ffcb58; }
+    .work-grid-bg { color: var(--color-accent); opacity: 0.22; }
+    body.is-dark .work-grid-bg { color: #ffcb58; opacity: 0.16; }
 
     .work-grid-rect {
       animation: boil-seed-2 0.6s steps(1) infinite;
@@ -487,7 +468,6 @@
     }
 
     .view-all-link:hover { color: var(--color-ink); }
-    body.is-dark .view-all-link { color: var(--color-ink); }
 
     .view-all-link span {
       display: inline-block;
@@ -587,10 +567,6 @@
       <div class="container">
         <p class="hero-line1">Hello! I'm <span class="hero-kari">Kari</span></p>
         <p class="hero-line2">– a designer and illustrator<br>making digital spaces feel a<br>little more personal</p>
-        <div class="hero-scroll-hint" id="scroll-hint" style="cursor:pointer;">
-          <span class="hero-scroll-label">scroll for more :)</span>
-          <span class="hero-scroll-arrow">↓</span>
-        </div>
         <div class="hero-doodle" aria-hidden="true">
           <img src="images/doodles/daydoodlev2.svg" alt="" />
           <img src="images/doodles/lightbulb.svg" class="hero-lightbulb" id="lightbulb-btn" alt="" />
@@ -612,23 +588,21 @@
     </div>
 
     <!-- ─── SELECTED WORK ─────────────────────────────────────────────────────── -->
-    <section id="work" style="position: relative; padding-bottom: 96px; overflow: hidden;">
-      <svg class="work-grid-bg" aria-hidden="true" style="
+    <section id="work" style="position: relative; padding-bottom: 96px;">
+      <svg class="work-grid-bg" id="work-grid-svg" aria-hidden="true" style="
         position: absolute; inset: 0; width: 100%; height: 100%;
-        pointer-events: none; z-index: 0; overflow: hidden;
+        pointer-events: none; z-index: 0;
       ">
         <defs>
           <pattern id="grid-pat" width="48" height="48" patternUnits="userSpaceOnUse">
-            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1"/>
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="currentColor" stroke-width="1.75"/>
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid-pat)" class="work-grid-rect"/>
-        <line x1="0" y1="100%" x2="100%" y2="100%" stroke="currentColor" stroke-width="1" class="work-grid-rect"/>
+        <line x1="0" y1="100%" x2="100%" y2="100%" stroke="currentColor" stroke-width="1.75" class="work-grid-rect"/>
       </svg>
       <div class="container">
-        <p class="sec-label reveal">selected work</p>
         <div class="proj-list" id="proj-list"></div>
-        <a href="art.html" class="view-all-link" style="display:flex; justify-content:flex-end;">check out some of my art <span>&#8599;</span></a>
       </div>
     </section>
 
@@ -656,7 +630,7 @@
       var list = document.getElementById('proj-list');
       if (!list || !window.PROJECTS) return;
 
-      var ids = ['previa', 'smart-pill-dispenser', 'build-our-bridges', '3miu', 'blink'];
+      var ids = ['previa', 'smart-pill-dispenser', 'build-our-bridges'];
       var selected = ids.map(function (id) {
         return window.PROJECTS.find(function (p) { return p.id === id; });
       }).filter(Boolean);
@@ -715,23 +689,9 @@
       renderProjects();
       renderPlay();
 
-      // Use polaroid cover for Preva card in this preview
+      // Polaroid cover treatment for the Preva card on the homepage grid
       var previaCard = document.querySelector('.proj-card[href="preva.html"] .proj-card-img img');
       if (previaCard) previaCard.src = 'images/work/UI projects/Preva/polaroidcoverfinal.webp';
-
-      var blinkCard = document.querySelector('.proj-card[href="case-study.html?id=blink"] .proj-card-img img');
-      if (blinkCard) blinkCard.src = 'images/work/Branding Concepts/blink/image 20.webp';
-
-      // Redirect logo link back to this preview file
-      var navPlaceholder = document.getElementById('nav-placeholder');
-      new MutationObserver(function (_, obs) {
-        var logo = document.querySelector('.nav-wordmark');
-        if (logo) { logo.href = 'index-cards.html'; obs.disconnect(); }
-      }).observe(navPlaceholder, { childList: true, subtree: true });
-
-      document.getElementById('scroll-hint').addEventListener('click', function () {
-        document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
-      });
 
       document.getElementById('lightbulb-btn').addEventListener('click', function () {
         document.body.classList.add('is-dark');
