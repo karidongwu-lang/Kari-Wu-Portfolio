@@ -87,11 +87,12 @@
       .prv-section { padding: 48px 0; }
       .prv-section:not(:last-of-type)::after { margin-top: 48px; }
       .prv-page h2 { font-size: 22px; }
-      .prv-decisions { gap: 20px; }
       .prv-next { text-align: left; }
       .prv-hero-summary { font-size: 15px; }
       .prv-screen-item { padding: 0 20px !important; }
       .prv-iter-details { grid-template-columns: 1fr !important; }
+      .prv-iter-row { grid-template-columns: 1fr !important; }
+      .prv-quotes-grid { grid-template-columns: 1fr; }
     }
 
     /* ── Layout ── */
@@ -139,7 +140,7 @@
     .prv-browser img { width: 100%; display: block; }
 
     /* HMW callout */
-    .prv-hmw { margin: 32px 0; }
+    .prv-hmw { margin: 28px 0 20px; }
     .prv-hmw p {
       font-family: 'EB Garamond', Georgia, serif;
       font-size: 22px; font-style: italic; font-weight: 400;
@@ -155,23 +156,9 @@
     /* Standalone images */
     .prv-img { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--cs-border); box-shadow: 0 4px 24px rgba(0,0,0,0.06); margin-top: 32px; }
 
-    /* Decisions */
-    .prv-decisions { margin-top: 32px; display: flex; flex-direction: column; gap: 28px; }
-    .prv-decision { display: flex; flex-direction: column; gap: 6px; padding-left: 16px; border-left: 2px solid var(--cs-border); }
-    .prv-decision h4 { font-size: 13px; font-weight: 700; color: var(--cs-navy); font-family: 'Andale Mono', 'Courier New', monospace; letter-spacing: 0.2px; }
-    .prv-decision p { font-size: 14px; color: #3a4a6a; margin: 0; max-width: none; line-height: 1.6; }
-
-    /* Next list */
-    .prv-next-list { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
-    .prv-next-item { display: flex; gap: 12px; align-items: flex-start; }
-    .prv-next-arrow { color: var(--cs-accent); font-weight: 700; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
-    .prv-next-text { font-size: 14px; color: #3a4a6a; line-height: 1.5; }
-    .prv-next-text strong { color: var(--cs-navy); font-weight: 700; font-family: 'Andale Mono', 'Courier New', monospace; font-size: 13px; }
-
     /* Back + Next */
     .prv-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); padding: 48px 0 0; transition: color 0.15s; }
     .prv-back:hover { color: var(--color-ink); }
-
     .prv-next { margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--cs-border); text-align: right; }
     .prv-next-label { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 8px; max-width: none; }
     .prv-next-link { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 400; letter-spacing: -0.01em; color: var(--cs-navy); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3em; transition: color 0.15s; }
@@ -185,71 +172,54 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       margin: 28px 0 6px;
     }
-    .prv-quotes-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--cs-muted); margin: 40px 0 16px;
-    }
+    .prv-quotes-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cs-muted); margin: 40px 0 16px; }
     .prv-quotes-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
     .prv-quote-card { display: flex; flex-direction: column; gap: 16px; padding: 20px; border: 1px solid var(--cs-border); border-radius: 8px; }
     .prv-quote-text { font-size: 15px; color: var(--cs-navy); line-height: 1.55; margin: 0; }
     .prv-quote-theme { font-size: 12px; color: var(--cs-muted); margin-top: auto; }
     .prv-page .prv-research-note { font-size: 11px; color: #8a96aa; margin-top: 16px; font-style: italic; font-weight: 300; max-width: none; }
-    @media (max-width: 700px) { .prv-quotes-grid { grid-template-columns: 1fr; } }
     body.is-dark .prv-research-h4 { color: #f0ede7; }
     body.is-dark .prv-quote-text { color: #f0ede7; }
     body.is-dark .prv-quote-card { border-color: var(--cs-border); }
 
-    /* ── Design Process iterations ── */
+    /* ── Design Approach ── */
+    .prv-principle { margin-top: 20px; padding: 14px 18px; border-left: 3px solid var(--cs-accent); background: rgba(201,58,44,0.04); border-radius: 0 6px 6px 0; }
+    .prv-principle p { font-size: 14px; font-style: italic; color: var(--cs-navy); margin: 0; max-width: none; line-height: 1.6; }
+    body.is-dark .prv-principle { background: rgba(255,203,88,0.06); border-color: #ffcb58; }
+    body.is-dark .prv-principle p { color: #f0ede7; }
+
+    .prv-subsec { margin-top: 56px; }
+    .prv-subsec-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 8px; display: block; }
+    .prv-subsec h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 24px; font-weight: 400; color: var(--cs-navy); margin-bottom: 12px; }
+    body.is-dark .prv-subsec h3 { color: #f0ede7; }
+
+    /* ── Design Iterations ── */
     .prv-iter-block { margin-top: 48px; }
     .prv-iter-tag {
       display: inline-block;
       font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
       color: var(--cs-accent); border: 1px solid var(--cs-accent); border-radius: 3px; padding: 3px 8px; margin-bottom: 8px;
     }
-    .prv-iter-title {
-      font-size: 17px; font-weight: 600; color: var(--cs-navy); margin: 0 0 14px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-    .prv-iter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0; }
+    .prv-iter-title { font-size: 17px; font-weight: 600; color: var(--cs-navy); margin: 0 0 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .prv-iter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .prv-iter-row .prv-browser { margin-top: 0; }
-    @media (max-width: 700px) { .prv-iter-row { grid-template-columns: 1fr; } }
     .prv-iter-details { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
-    .prv-iter-detail-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
-      color: var(--cs-muted); margin-bottom: 5px; display: block;
-    }
+    .prv-iter-detail-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 5px; display: block; }
     .prv-iter-detail-box { padding: 14px 16px; background: #f5f7fb; border-radius: 6px; border: 1px solid var(--cs-border); }
     .prv-iter-detail-box p { font-size: 13px; color: #3a4a6a; margin: 0; line-height: 1.55; max-width: none; }
-    .prv-iter-connector {
-      display: flex; align-items: center; justify-content: center;
-      margin: 28px 0 0; gap: 12px; color: var(--cs-muted); font-size: 13px;
-    }
+    .prv-iter-connector { display: flex; align-items: center; justify-content: center; margin: 28px 0 0; gap: 12px; color: var(--cs-muted); font-size: 13px; }
     .prv-iter-connector-line { flex: 1; height: 1px; background: var(--cs-border); max-width: 120px; }
+
+    /* Final direction callout */
+    .prv-final-dir { margin: 48px 0 0; padding: 20px 24px; background: var(--cs-gray); border-radius: 8px; border: 1px solid var(--cs-border); }
+    .prv-final-dir-title { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cs-accent); margin-bottom: 6px; display: block; }
+    .prv-final-dir p { font-size: 14px; color: #3a4a6a; margin: 0; max-width: none; line-height: 1.6; }
+
     body.is-dark .prv-iter-title { color: #f0ede7; }
     body.is-dark .prv-iter-detail-box { background: rgba(255,255,255,0.04); border-color: var(--cs-border); }
     body.is-dark .prv-iter-detail-box p { color: #c8c4d8; }
-
-    /* ── Subsection within a section ── */
-    .prv-subsec { margin-top: 64px; }
-    .prv-subsec-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--cs-muted); margin-bottom: 8px; display: block; }
-    .prv-subsec h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 24px; font-weight: 400; color: var(--cs-navy); margin-bottom: 12px; }
-    body.is-dark .prv-subsec h3 { color: #f0ede7; }
-
-    /* ── Design principle callout ── */
-    .prv-principle { margin-top: 20px; padding: 14px 18px 14px 18px; border-left: 3px solid var(--cs-accent); background: rgba(201,58,44,0.04); border-radius: 0 6px 6px 0; }
-    .prv-principle p { font-size: 14px; font-style: italic; color: var(--cs-navy); margin: 0; max-width: none; line-height: 1.6; }
-    body.is-dark .prv-principle { background: rgba(255,203,88,0.06); border-color: #ffcb58; }
-    body.is-dark .prv-principle p { color: #f0ede7; }
-
-    /* ── Screen prototype link ── */
-    .prv-screen-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
-      color: var(--cs-muted); text-decoration: none; margin-top: 10px;
-      font-family: 'Andale Mono', 'Courier New', monospace;
-      transition: color 0.15s;
-    }
-    .prv-screen-link:hover { color: var(--cs-navy); }
+    body.is-dark .prv-final-dir { background: rgba(255,255,255,0.04); border-color: var(--cs-border); }
+    body.is-dark .prv-final-dir p { color: #c8c4d8; }
 
     /* ── Automation demo trigger ── */
     .prv-demo-trigger {
@@ -264,6 +234,11 @@
     body.is-dark .prv-demo-trigger { color: #ffcb58; border-color: #ffcb58; }
     body.is-dark .prv-demo-trigger:hover { background: rgba(255,203,88,0.08); }
 
+    /* ── Reflection subsection ── */
+    .prv-reflection { margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--cs-accent); }
+    .prv-reflection h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 26px; font-weight: 400; color: var(--cs-navy); margin-bottom: 16px; }
+    body.is-dark .prv-reflection h3 { color: #f0ede7; }
+
     /* ── Video modal ── */
     .prv-modal-overlay {
       display: none; position: fixed; inset: 0;
@@ -271,24 +246,12 @@
       align-items: center; justify-content: center; padding: 20px;
     }
     .prv-modal-overlay.is-open { display: flex; }
-    .prv-modal-box {
-      background: #fff; border-radius: 14px; overflow: hidden;
-      max-width: 900px; width: 100%; position: relative;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
-    }
-    .prv-modal-head {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      padding: 16px 20px; gap: 16px; border-bottom: 1px solid var(--cs-border);
-    }
+    .prv-modal-box { background: #fff; border-radius: 14px; overflow: hidden; max-width: 900px; width: 100%; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.35); }
+    .prv-modal-head { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px; gap: 16px; border-bottom: 1px solid var(--cs-border); }
     .prv-modal-head-text { display: flex; flex-direction: column; gap: 3px; }
     .prv-modal-head-title { font-size: 14px; font-weight: 700; color: var(--cs-navy); }
     .prv-modal-head-desc { font-size: 12px; color: var(--cs-muted); }
-    .prv-modal-close {
-      background: none; border: 1.5px solid var(--cs-border); border-radius: 6px;
-      cursor: pointer; font-size: 16px; color: var(--cs-muted);
-      padding: 4px 9px; line-height: 1; flex-shrink: 0;
-      transition: border-color 0.15s, color 0.15s;
-    }
+    .prv-modal-close { background: none; border: 1.5px solid var(--cs-border); border-radius: 6px; cursor: pointer; font-size: 16px; color: var(--cs-muted); padding: 4px 9px; line-height: 1; flex-shrink: 0; transition: border-color 0.15s, color 0.15s; }
     .prv-modal-close:hover { color: var(--cs-navy); border-color: var(--cs-navy); }
     .prv-modal-video { width: 100%; display: block; background: #000; max-height: 58vh; }
     body.is-dark .prv-modal-box { background: #2e2c42; }
@@ -326,7 +289,8 @@
       <a href="#hero" class="active">Overview</a>
       <a href="#problem">Problem</a>
       <a href="#research">User Research</a>
-      <a href="#process">Design Process</a>
+      <a href="#approach">Design Approach</a>
+      <a href="#iterations">Iterations</a>
       <a href="#final">Final Design</a>
       <a href="#reflection">Reflection</a>
     </nav>
@@ -399,30 +363,48 @@
       </div>
     </section>
 
-    <!-- 03 Design Process -->
-    <section id="process" class="prv-section">
+    <!-- 03 Design Approach -->
+    <section id="approach" class="prv-section">
       <div class="prv-container">
-        <div class="prv-section-num">03 — Design Process</div>
+        <div class="prv-section-num">03 — Design Approach</div>
         <h2>From manual tasks to supervised AI automation</h2>
 
         <div class="prv-hmw">
-          <p>How might we reduce repetitive authorization work while keeping clinic staff informed and in control?</p>
+          <p>How might we automate repetitive authorization work while keeping clinic staff informed and in control?</p>
         </div>
 
-        <p>I explored different dashboard layouts and AI workflows, refining how staff prioritize requests, monitor automation, and review AI-generated outputs.</p>
+        <p>I designed Preva around three principles: prioritize urgent work, make AI actions transparent, and require human approval for critical decisions.</p>
+
+        <div class="prv-subsec">
+          <span class="prv-subsec-label">Human–AI collaboration</span>
+          <h3>Defining human–AI responsibilities</h3>
+          <p>I mapped each task by risk to determine what AI could automate and where staff review or approval was needed.</p>
+          <div class="prv-principle">
+            <p>Automate repetitive preparation, but keep critical decisions under human control.</p>
+          </div>
+          <img class="prv-img" src="images/work/UI projects/Preva/matrixrn.jpg" alt="Human–Agent Responsibility Matrix — tasks mapped by risk level and ownership">
+          <img class="prv-img" src="images/work/UI projects/Preva/agentflowrn.jpg" alt="Agentic Authorization Flow — how the AI agent moves through each stage of prior authorization">
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Design Iterations -->
+    <section id="iterations" class="prv-section">
+      <div class="prv-container">
+        <div class="prv-section-num">04 — Design Iterations</div>
+        <h2>Three iterations toward a more actionable, trustworthy experience</h2>
       </div>
 
-      <!-- Iterations -->
-      <div class="prv-container-wide" style="margin-top: 8px;">
+      <div class="prv-container-wide" style="margin-top: 0;">
 
         <!-- Iteration 01 -->
         <div class="prv-iter-block">
           <span class="prv-iter-tag">Iteration 01</span>
-          <p class="prv-iter-title">Simplifying information hierarchy</p>
+          <p class="prv-iter-title">Exploring information hierarchy</p>
           <div class="prv-iter-row">
             <div class="prv-browser">
               <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">Torrent — Prior Authorizations</div></div>
-              <img src="images/iterations/iter1-1.png" alt="Iteration 1 — Authorization list view with dense information">
+              <img src="images/iterations/iter1-1.png" alt="Iteration 1 — Authorization list view with status tables">
             </div>
             <div class="prv-browser">
               <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">Torrent — Dashboard</div></div>
@@ -431,12 +413,12 @@
           </div>
           <div class="prv-iter-details">
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Challenge</span>
-              <p>Early dashboards displayed too much information at once, making urgent tasks difficult to identify quickly.</p>
+              <span class="prv-iter-detail-label">Context</span>
+              <p>Early layouts combined status tables, action cards, and calendars, making urgent work harder to identify.</p>
             </div>
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Decision</span>
-              <p>Reduce visual clutter and prioritize essential information — shift from comprehensive views to action-oriented ones.</p>
+              <span class="prv-iter-detail-label">Change</span>
+              <p>Simplified the dashboard to emphasize essential information.</p>
             </div>
           </div>
         </div>
@@ -451,7 +433,7 @@
         <!-- Iteration 02 -->
         <div class="prv-iter-block">
           <span class="prv-iter-tag">Iteration 02</span>
-          <p class="prv-iter-title">From status tracking to action prioritization</p>
+          <p class="prv-iter-title">Prioritizing actions over statuses</p>
           <div class="prv-iter-row">
             <div class="prv-browser">
               <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">Dashboard — Action Required</div></div>
@@ -464,12 +446,12 @@
           </div>
           <div class="prv-iter-details">
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Challenge</span>
-              <p>Status-focused lists showed progress but didn't clearly communicate what staff needed to do next.</p>
+              <span class="prv-iter-detail-label">Context</span>
+              <p>Status summaries showed progress but didn't clearly communicate what staff should do next.</p>
             </div>
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Decision</span>
-              <p>Surface cases requiring attention with clear actions — group by urgency rather than submission state.</p>
+              <span class="prv-iter-detail-label">Change</span>
+              <p>Organized cases around urgency and required actions.</p>
             </div>
           </div>
         </div>
@@ -484,7 +466,7 @@
         <!-- Iteration 03 -->
         <div class="prv-iter-block">
           <span class="prv-iter-tag">Iteration 03</span>
-          <p class="prv-iter-title">Making AI automation transparent</p>
+          <p class="prv-iter-title">Making AI activity visible</p>
           <div class="prv-iter-row">
             <div class="prv-browser">
               <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">Preva — Priority Dashboard</div></div>
@@ -497,46 +479,41 @@
           </div>
           <div class="prv-iter-details">
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Challenge</span>
-              <p>AI activity needed to feel understandable and reviewable — not just automated in the background.</p>
+              <span class="prv-iter-detail-label">Context</span>
+              <p>As Preva evolved into an AI-assisted workflow, staff needed visibility into the agent's work.</p>
             </div>
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Decision</span>
-              <p>Introduce AI progress indicators, confidence scores, and human review checkpoints — making automation visible and inspectable.</p>
+              <span class="prv-iter-detail-label">Change</span>
+              <p>Added AI activity, confidence indicators, and case-level review controls.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Final direction -->
+        <div class="prv-container" style="padding-top: 0; padding-bottom: 0; max-width: 100%;">
+          <div class="prv-final-dir">
+            <span class="prv-final-dir-title">Final Direction — Supervised AI Workflow</span>
+            <p>An actionable dashboard, transparent AI activity, and human-controlled decisions.</p>
           </div>
         </div>
 
       </div><!-- /container-wide -->
-
-      <!-- Human–AI Responsibility Matrix -->
-      <div class="prv-container">
-        <div class="prv-subsec">
-          <span class="prv-subsec-label">Human–AI collaboration</span>
-          <h3>Defining human–AI responsibilities</h3>
-          <p>I mapped tasks by risk to determine when AI could act independently and when staff approval was required.</p>
-          <div class="prv-principle">
-            <p>Automate repetitive preparation, but keep critical decisions under human control.</p>
-          </div>
-          <img class="prv-img" src="images/work/UI projects/Preva/matrixrn.jpg" alt="Human–Agent Responsibility Matrix — tasks mapped by risk level, AI vs. human ownership">
-        </div>
-      </div>
     </section>
 
-    <!-- 04 Final Design -->
+    <!-- 05 Final Design & Reflection -->
     <section id="final" class="prv-section">
       <div class="prv-container-wide">
         <div class="prv-container" style="padding-bottom: 0;">
-          <div class="prv-section-num">04 — Final Design</div>
+          <div class="prv-section-num">05 — Final Design &amp; Reflection</div>
           <h2>Designing for clarity, action, and trust</h2>
-          <p>The following screens cover the core workflow — from the morning dashboard to post-submission tracking. Each screen is designed around a specific staff need: knowing what's urgent, reviewing AI work with confidence, and resolving exceptions quickly.</p>
+          <p>The final screens cover the full prior authorization workflow — from identifying urgent cases to resolving denials and reviewing AI activity.</p>
         </div>
 
         <!-- Dashboard -->
         <div class="prv-screen-item">
-          <h3>Dashboard — Know what needs attention</h3>
-          <p>Color-coded statuses, prioritized cases, and AI activity help staff quickly identify their next actions.</p>
-          <button class="prv-demo-trigger" onclick="document.getElementById('prevaModal').classList.add('is-open')">
+          <h3>Dashboard — Prioritize what matters</h3>
+          <p>Urgency-based cases and AI activity help staff identify their next actions.</p>
+          <button class="prv-demo-trigger" onclick="document.getElementById('prevaModal').classList.add('is-open')" aria-label="Open AI Automation Replay video">
             ▶ View AI Automation Replay
           </button>
           <div class="prv-browser">
@@ -547,8 +524,8 @@
 
         <!-- Case Detail -->
         <div class="prv-screen-item">
-          <h3>Case Detail — Understand and review</h3>
-          <p>Centralized patient information, payer requirements, and AI-generated insights help staff review each request with confidence.</p>
+          <h3>Case Detail — Review with confidence</h3>
+          <p>Centralized information, documentation checks, and AI recommendations support informed decisions.</p>
           <div class="prv-browser">
             <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url"><a href="preva-detail.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">preva.com — Case Detail ↗</a></div></div>
             <img src="images/iterations/final-2.png" alt="Case detail — Preva AI recommendation panel with confidence score and Approve and Submit action">
@@ -558,7 +535,7 @@
         <!-- Submitted -->
         <div class="prv-screen-item">
           <h3>Submitted — Track progress</h3>
-          <p>Clear submission status and AI activity make it easier to monitor requests after they've been sent to the payer.</p>
+          <p>Submission status and activity history make authorization requests easier to monitor.</p>
           <div class="prv-browser">
             <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url"><a href="preva-submitted.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">preva.com — Submitted ↗</a></div></div>
             <img src="images/work/UI projects/Preva/post-submission.png" alt="Submitted — Awaiting payer decision with AI monitoring and submission timeline">
@@ -567,51 +544,52 @@
 
         <!-- Approved -->
         <div class="prv-screen-item">
-          <h3>Approved — Confirm outcomes</h3>
-          <p>Approval details and authorization dates help staff confirm outcomes and move forward with patient care.</p>
+          <h3>Approved — Confirm the outcome</h3>
+          <p>Clear approval details and authorization dates help staff move forward with patient care.</p>
           <div class="prv-browser">
             <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url"><a href="preva-approved.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">preva.com — Approved ↗</a></div></div>
-            <img src="images/iterations/final-3.png" alt="Authorization approved — confirmation with visit count, validity dates, and all checklist items accepted">
+            <img src="images/iterations/final-3.png" alt="Authorization approved — confirmation with visit count, validity dates, and accepted documentation">
           </div>
         </div>
 
         <!-- Denied -->
         <div class="prv-screen-item">
-          <h3>Denied — Resolve exceptions</h3>
-          <p>AI-assisted recommendations and clear next steps help staff understand denials and prepare follow-up actions.</p>
+          <h3>Denied — Take the next step</h3>
+          <p>Denial reasons, required evidence, and AI-assisted appeal preparation guide staff toward resolution. Appeal probability shown is simulated prototype data.</p>
           <div class="prv-browser">
             <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url"><a href="preva-denied.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">preva.com — Denied ↗</a></div></div>
             <img src="images/iterations/final-4.png" alt="Authorization denied — denial code, appeal window, what Aetna cited, and Preva appeal package ready">
           </div>
         </div>
 
-      </div>
-    </section>
-
-    <!-- 05 Reflection -->
-    <section id="reflection" class="prv-section">
-      <div class="prv-container">
-        <div class="prv-section-num">05 — Reflection</div>
-        <h2>What I learned</h2>
-
-        <p>Designing for agentic AI isn't just about automation — it's about building trust. Through Preva, I learned to balance efficiency with transparency, giving users visibility into AI actions and control over critical decisions.</p>
-
-        <p>The most valuable design decision was defining the boundary between what the AI does automatically and what requires human approval. That boundary isn't just a technical constraint — it's the core of the user experience.</p>
-
-        <div class="prv-decisions" style="margin-top: 28px;">
-          <div class="prv-decision">
-            <h4>Next step</h4>
-            <p>Validate the workflow with clinic staff through usability testing and refine the AI review experience based on feedback.</p>
+        <!-- Agent Replay -->
+        <div class="prv-screen-item">
+          <h3>Agent Replay — Make automation transparent</h3>
+          <p>Staff can review how Preva extracts information and prepares authorization forms.</p>
+          <div class="prv-browser">
+            <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">preva.com — Agent Replay</div></div>
+            <img src="images/iterations/final-5.png" alt="Agent Replay modal — video of Preva extracting EMR data and populating the authorization form">
           </div>
         </div>
 
-        <a href="index.html#work" class="prv-back">← Back to work</a>
+        <!-- Reflection -->
+        <div id="reflection" class="prv-container" style="padding-bottom: 0;">
+          <div class="prv-reflection">
+            <div class="prv-section-num">06 — Reflection</div>
+            <h3>Designing AI experiences around trust</h3>
+            <p>Preva taught me that effective AI design isn't just about automating tasks — it's about helping users understand, supervise, and trust the system.</p>
+            <p><strong>What's next:</strong> Test the workflow with clinic staff and explore how user feedback can improve AI accuracy and transparency.</p>
 
-        <div class="prv-next">
-          <p class="prv-next-label">Next project</p>
-          <a href="case-study.html?id=smart-pill-dispenser" class="prv-next-link">Smart Pill Dispenser <span>↗</span></a>
+            <a href="index.html#work" class="prv-back">← Back to work</a>
+
+            <div class="prv-next">
+              <p class="prv-next-label">Next project</p>
+              <a href="case-study.html?id=smart-pill-dispenser" class="prv-next-link">Smart Pill Dispenser <span>↗</span></a>
+            </div>
+          </div>
         </div>
-      </div>
+
+      </div><!-- /container-wide -->
     </section>
 
   </div><!-- /prv-page -->
@@ -642,7 +620,7 @@
   <script>
     /* Sidebar scroll spy */
     (function () {
-      var sectionIds = ['hero','problem','research','process','final','reflection'];
+      var sectionIds = ['hero','problem','research','approach','iterations','final','reflection'];
       var navLinks = Array.from(document.querySelectorAll('.prv-sidebar a'));
 
       function update() {
