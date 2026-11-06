@@ -525,6 +525,119 @@
   }
   .view-all-link:hover { text-decoration: underline; }
 
+  /* ─── PRIORITY ACTION BAND ────────────────────────── */
+  .priority-band {
+    background: #1e293b;
+    border-radius: 14px;
+    margin: 0 0 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+  }
+  .priority-band-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #94a3b8;
+    white-space: nowrap;
+    padding: 14px 18px;
+    border-right: 1px solid #334155;
+    flex-shrink: 0;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+  }
+  .priority-band-label svg {
+    transform: rotate(180deg);
+  }
+  .priority-band-items {
+    display: flex;
+    flex: 1;
+  }
+  .priority-band-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-right: 1px solid #334155;
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .priority-band-item:last-child { border-right: none; }
+  .priority-band-item:hover { background: rgba(255,255,255,.04); }
+  .pbi-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pbi-dot-red { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,.22); }
+  .pbi-dot-amber { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,.22); }
+  .pbi-content { flex: 1; min-width: 0; }
+  .pbi-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f1f5f9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+  .pbi-desc {
+    font-size: 11.5px;
+    color: #94a3b8;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pbi-btn {
+    flex-shrink: 0;
+    padding: 6px 13px;
+    border-radius: 20px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity .15s, transform .1s;
+    font-family: 'Inter', sans-serif;
+  }
+  .pbi-btn:hover { opacity: .88; transform: translateY(-1px); }
+  .pbi-btn-red   { background: #ef4444; color: white; }
+  .pbi-btn-amber { background: #f59e0b; color: white; }
+  .pbi-btn-blue  { background: #1d4fa4; color: white; }
+
+  /* ─── INLINE ROW ACTIONS ──────────────────────────── */
+  .action-cell { white-space: nowrap; }
+  .row-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 11px;
+    border-radius: 6px;
+    border: 1px solid;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    background: white;
+    transition: background .1s;
+    font-family: 'Inter', sans-serif;
+  }
+  .row-btn-submit  { color: #1d4fa4; border-color: #93c5fd; }
+  .row-btn-submit:hover  { background: #eff6ff; }
+  .row-btn-appeal  { color: #b91c1c; border-color: #fca5a5; }
+  .row-btn-appeal:hover  { background: #fef2f2; }
+  .row-btn-docs    { color: #92400e; border-color: #fcd34d; }
+  .row-btn-docs:hover    { background: #fffbeb; }
+  .row-btn-signoff { color: #6d28d9; border-color: #c4b5fd; }
+  .row-btn-signoff:hover { background: #f5f3ff; }
+  .row-btn-waiting { color: #64748b; border-color: #e2e8f0; cursor: default; }
+
   /* ─── CARD VIEW ───────────────────────────────────── */
   .card-grid {
     display: none;
@@ -908,6 +1021,40 @@
     </div>
   </div>
 
+  <!-- PRIORITY ACTION BAND -->
+  <div class="priority-band">
+    <div class="priority-band-label">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5.5 1v3M5.5 7v3M1 5.5h9"/><circle cx="5.5" cy="5.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      Needs Action
+    </div>
+    <div class="priority-band-items">
+      <div class="priority-band-item" onclick="location.href='preva-detail.html'">
+        <div class="pbi-dot pbi-dot-red"></div>
+        <div class="pbi-content">
+          <div class="pbi-name">Maria Gonzalez</div>
+          <div class="pbi-desc">Renewal Due · Aetna · <strong style="color:#fca5a5">Due Nov 08</strong></div>
+        </div>
+        <button class="pbi-btn pbi-btn-red" onclick="event.stopPropagation(); location.href='preva-detail.html'">Submit Renewal →</button>
+      </div>
+      <div class="priority-band-item" onclick="location.href='preva-denied.html'">
+        <div class="pbi-dot pbi-dot-red"></div>
+        <div class="pbi-content">
+          <div class="pbi-name">James Carter</div>
+          <div class="pbi-desc">Denied · CO-197 · <strong style="color:#fca5a5">Appeal Due Nov 08</strong></div>
+        </div>
+        <button class="pbi-btn pbi-btn-red" onclick="event.stopPropagation(); location.href='preva-denied.html'">File Appeal →</button>
+      </div>
+      <div class="priority-band-item">
+        <div class="pbi-dot pbi-dot-amber"></div>
+        <div class="pbi-content">
+          <div class="pbi-name">Lucas Martinez</div>
+          <div class="pbi-desc">Docs Missing · Humana · <strong style="color:#fcd34d">Due Nov 09</strong></div>
+        </div>
+        <button class="pbi-btn pbi-btn-amber" onclick="event.stopPropagation()">Upload Docs →</button>
+      </div>
+    </div>
+  </div>
+
   <!-- CONTENT GRID -->
   <div class="content-grid">
 
@@ -956,6 +1103,7 @@
             <th style="width:140px">Confidence</th>
             <th style="width:68px">Payer</th>
             <th style="width:112px">Alert Date</th>
+            <th style="width:130px">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -972,6 +1120,7 @@
             </td>
             <td class="payer-text">Aetna</td>
             <td class="date-text">Nov 08, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-submit" onclick="event.stopPropagation(); location.href='preva-detail.html'">Submit →</button></td>
           </tr>
           <tr class="row-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
             <td><span class="sc sc-denied">Denied</span></td>
@@ -986,6 +1135,7 @@
             </td>
             <td class="payer-text">UHC</td>
             <td class="date-text">Nov 09, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-appeal" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button></td>
           </tr>
           <tr class="row-med">
             <td><span class="sc sc-pending">Pending</span></td>
@@ -1000,6 +1150,7 @@
             </td>
             <td class="payer-text">BCBS</td>
             <td class="date-text">Nov 10, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-signoff" onclick="event.stopPropagation()">Request →</button></td>
           </tr>
           <tr class="row-high">
             <td><span class="sc sc-docs">Docs Missing</span></td>
@@ -1014,6 +1165,7 @@
             </td>
             <td class="payer-text">Humana</td>
             <td class="date-text">Nov 09, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-docs" onclick="event.stopPropagation()">Upload →</button></td>
           </tr>
           <tr class="row-med">
             <td><span class="sc sc-docs">Docs Missing</span></td>
@@ -1028,6 +1180,7 @@
             </td>
             <td class="payer-text">Cigna</td>
             <td class="date-text">Nov 12, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-docs" onclick="event.stopPropagation()">Upload →</button></td>
           </tr>
           <tr class="row-low">
             <td><span class="sc sc-submitted">Submitted</span></td>
@@ -1042,6 +1195,7 @@
             </td>
             <td class="payer-text">Aetna</td>
             <td class="date-text">Nov 14, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-waiting">Awaiting</button></td>
           </tr>
           <tr class="row-med">
             <td><span class="sc sc-docs">Docs Missing</span></td>
@@ -1056,6 +1210,7 @@
             </td>
             <td class="payer-text">BCBS</td>
             <td class="date-text">Nov 11, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-docs" onclick="event.stopPropagation()">Upload →</button></td>
           </tr>
           <tr class="row-high" onclick="location.href='preva-denied.html'" style="cursor:pointer;">
             <td><span class="sc sc-denied">Denied</span></td>
@@ -1070,6 +1225,7 @@
             </td>
             <td class="payer-text">UHC</td>
             <td class="date-text">Nov 08, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-appeal" onclick="event.stopPropagation(); location.href='preva-denied.html'">Appeal →</button></td>
           </tr>
           <tr class="row-low">
             <td><span class="sc sc-submitted">Submitted</span></td>
@@ -1084,6 +1240,7 @@
             </td>
             <td class="payer-text">Cigna</td>
             <td class="date-text">Nov 13, 2026</td>
+            <td class="action-cell"><button class="row-btn row-btn-waiting">Awaiting</button></td>
           </tr>
         </tbody>
       </table>
