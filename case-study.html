@@ -404,7 +404,7 @@
       }
 
       /* ── Next project ── */
-      var allProjects  = window.PROJECTS || [];
+      var allProjects  = (window.PROJECTS || []).filter(function(x) { return x.id !== '3miu' && x.id !== 'blink'; });
       var currentIndex = allProjects.findIndex(function(x) { return x.id === p.id; });
       var nextProject  = allProjects[(currentIndex + 1) % allProjects.length];
       var nextLink     = nextProject
