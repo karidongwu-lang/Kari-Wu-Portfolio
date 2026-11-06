@@ -292,7 +292,6 @@
       <a href="#approach">Design Approach</a>
       <a href="#iterations">Iterations</a>
       <a href="#final">Final Design</a>
-      <a href="#reflection">Reflection</a>
     </nav>
 
     <!-- 00 Hero / Overview -->
@@ -373,14 +372,19 @@
           <p>How might we automate repetitive authorization work while keeping clinic staff informed and in control?</p>
         </div>
 
-        <p>I designed Preva around three principles: prioritize urgent work, make AI actions transparent, and require human approval for critical decisions.</p>
+        <p>I designed Preva around three principles:</p>
+        <ol style="margin: 0 0 16px; padding-left: 24px; max-width: 660px;">
+          <li style="font-size:15px; color:#3a4a6a; line-height:1.7; margin-bottom:6px;">Prioritize urgent work.</li>
+          <li style="font-size:15px; color:#3a4a6a; line-height:1.7; margin-bottom:6px;">Make AI actions transparent.</li>
+          <li style="font-size:15px; color:#3a4a6a; line-height:1.7;">Keep critical decisions under human control.</li>
+        </ol>
 
         <div class="prv-subsec">
           <span class="prv-subsec-label">Human–AI collaboration</span>
           <h3>Defining human–AI responsibilities</h3>
           <p>I mapped each task by risk to determine what AI could automate and where staff review or approval was needed.</p>
           <div class="prv-principle">
-            <p>Automate repetitive preparation, but keep critical decisions under human control.</p>
+            <p>Automate repetitive preparation while keeping people in control of critical decisions.</p>
           </div>
           <img class="prv-img" src="images/work/UI projects/Preva/matrixrn.jpg" alt="Human–Agent Responsibility Matrix — tasks mapped by risk level and ownership">
           <img class="prv-img" src="images/work/UI projects/Preva/agentflowrn.jpg" alt="Agentic Authorization Flow — how the AI agent moves through each stage of prior authorization">
@@ -414,11 +418,11 @@
           <div class="prv-iter-details">
             <div class="prv-iter-detail-box">
               <span class="prv-iter-detail-label">Context</span>
-              <p>Early layouts combined status tables, action cards, and calendars, making urgent work harder to identify.</p>
+              <p>Explored list, card, and calendar layouts to understand how staff navigate authorization requests.</p>
             </div>
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Change</span>
-              <p>Simplified the dashboard to emphasize essential information.</p>
+              <span class="prv-iter-detail-label">Design decision</span>
+              <p>Focus the dashboard on essential information rather than displaying everything at once.</p>
             </div>
           </div>
         </div>
@@ -433,7 +437,7 @@
         <!-- Iteration 02 -->
         <div class="prv-iter-block">
           <span class="prv-iter-tag">Iteration 02</span>
-          <p class="prv-iter-title">Prioritizing actions over statuses</p>
+          <p class="prv-iter-title">Prioritizing actions</p>
           <div class="prv-iter-row">
             <div class="prv-browser">
               <div class="prv-browser-bar"><div class="prv-browser-dots"><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div><div class="prv-browser-dot"></div></div><div class="prv-browser-url">Dashboard — Action Required</div></div>
@@ -447,11 +451,11 @@
           <div class="prv-iter-details">
             <div class="prv-iter-detail-box">
               <span class="prv-iter-detail-label">Context</span>
-              <p>Status summaries showed progress but didn't clearly communicate what staff should do next.</p>
+              <p>Simplified the dashboard to help staff identify urgent cases and required next steps.</p>
             </div>
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Change</span>
-              <p>Organized cases around urgency and required actions.</p>
+              <span class="prv-iter-detail-label">Design decision</span>
+              <p>Replace competing widgets with an action-focused layout.</p>
             </div>
           </div>
         </div>
@@ -480,11 +484,11 @@
           <div class="prv-iter-details">
             <div class="prv-iter-detail-box">
               <span class="prv-iter-detail-label">Context</span>
-              <p>As Preva evolved into an AI-assisted workflow, staff needed visibility into the agent's work.</p>
+              <p>Introduced AI activity, case summaries, and confidence indicators to support supervised automation.</p>
             </div>
             <div class="prv-iter-detail-box">
-              <span class="prv-iter-detail-label">Change</span>
-              <p>Added AI activity, confidence indicators, and case-level review controls.</p>
+              <span class="prv-iter-detail-label">Design decision</span>
+              <p>Make AI actions transparent and keep staff in control of critical decisions.</p>
             </div>
           </div>
         </div>
@@ -504,7 +508,7 @@
     <section id="final" class="prv-section">
       <div class="prv-container-wide">
         <div class="prv-container" style="padding-bottom: 0;">
-          <div class="prv-section-num">05 — Final Design &amp; Reflection</div>
+          <div class="prv-section-num">05 — Final Design</div>
           <h2>Designing for clarity, action, and trust</h2>
           <p>The final screens cover the full prior authorization workflow — from identifying urgent cases to resolving denials and reviewing AI activity.</p>
         </div>
@@ -575,10 +579,10 @@
         <!-- Reflection -->
         <div id="reflection" class="prv-container" style="padding-bottom: 0;">
           <div class="prv-reflection">
-            <div class="prv-section-num">06 — Reflection</div>
+            <span class="prv-subsec-label">Reflection</span>
             <h3>Designing AI experiences around trust</h3>
             <p>Preva taught me that effective AI design isn't just about automating tasks — it's about helping users understand, supervise, and trust the system.</p>
-            <p><strong>What's next:</strong> Test the workflow with clinic staff and explore how user feedback can improve AI accuracy and transparency.</p>
+            <p><strong>What's next:</strong> Validate the workflow with clinic staff through usability testing and refine the AI review experience based on feedback.</p>
 
             <a href="index.html#work" class="prv-back">← Back to work</a>
 
@@ -620,7 +624,7 @@
   <script>
     /* Sidebar scroll spy */
     (function () {
-      var sectionIds = ['hero','problem','research','approach','iterations','final','reflection'];
+      var sectionIds = ['hero','problem','research','approach','iterations','final'];
       var navLinks = Array.from(document.querySelectorAll('.prv-sidebar a'));
 
       function update() {
