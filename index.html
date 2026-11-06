@@ -293,6 +293,17 @@
       transform: scale(1.04);
     }
 
+    /* Smart Pill Dispenser thumbnail: zoom in to crop out a thin white edge
+       baked into the bottom of the source photo, and show the product bigger. */
+    .proj-card[href*="smart-pill-dispenser"] .proj-card-img img {
+      transform: scale(1.35);
+      transform-origin: center 46%;
+    }
+
+    .proj-card[href*="smart-pill-dispenser"]:hover .proj-card-img img {
+      transform: scale(1.4);
+    }
+
     .proj-card-body {
       padding: 0 4px;
       display: flex;
